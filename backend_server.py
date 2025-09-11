@@ -502,6 +502,73 @@ async def get_logs(limit: int = 100):
         raise HTTPException(status_code=500, detail=f"Failed to get logs: {str(e)}")
 
 
+@app.post("/plus/login")
+async def login_to_plus(force_login: bool = False):
+    """Login to PLUS system using stored credentials."""
+    global bot_instance
+    
+    try:
+        if not bot_instance:
+            # Initialize bot if not already done
+            bot_instance = SmartWebBot()
+            if not bot_instance.initialize():
+                raise HTTPException(status_code=500, detail="Failed to initialize bot")
+        
+        # Perform PLUS login
+        success, message = await bot_instance.login_to_plus(force_login)
+        
+        return {
+            "success": success,
+            "message": message,
+            "timestamp": datetime.now().isoformat(),
+            "login_status": bot_instance.get_plus_login_status()
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"PLUS login failed: {str(e)}")
+
+
+@app.get("/plus/status")
+async def get_plus_status():
+    """Get PLUS login status."""
+    global bot_instance
+    
+    try:
+        if not bot_instance:
+            return {
+                "error": "Bot not initialized",
+                "is_logged_in": False
+            }
+        
+        status = bot_instance.get_plus_login_status()
+        return status
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to get PLUS status: {str(e)}")
+
+
+@app.post("/plus/logout")
+async def logout_from_plus():
+    """Logout from PLUS system."""
+    global bot_instance
+    
+    try:
+        if not bot_instance:
+            return {
+                "success": True,
+                "message": "Bot not initialized - no active session"
+            }
+        
+        success, message = bot_instance.logout_from_plus()
+        
+        return {
+            "success": success,
+            "message": message,
+            "timestamp": datetime.now().isoformat()
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"PLUS logout failed: {str(e)}")
 
 
 # WebSocket endpoint

@@ -18,6 +18,7 @@ import PlusIntegrationWidget from './widgets/PlusIntegrationWidget';
 import RmaProcessingWidget from './widgets/RmaProcessingWidget';
 import NotificationWidget from './widgets/NotificationWidget';
 import PerformanceWidget from './widgets/PerformanceWidget';
+import PlusLoginTester from '../../components/PlusLoginTester';
 
 const Settings = ({ isDarkMode = true }) => {
   const [activeTab, setActiveTab] = useState(0);
@@ -60,6 +61,9 @@ const Settings = ({ isDarkMode = true }) => {
         <Box sx={{ p: 3 }}>
           <TabPanel value={activeTab} index={0}>
             <PlusIntegrationWidget isDarkMode={isDarkMode} />
+            <Box sx={{ mt: 4 }}>
+              <PlusLoginTester />
+            </Box>
           </TabPanel>
 
           <TabPanel value={activeTab} index={1}>

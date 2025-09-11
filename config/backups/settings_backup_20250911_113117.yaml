@@ -17,15 +17,17 @@ performance:
   task_timeout: 300
 plus_integration:
   api_key: ''
-  base_url: https://plus.reconext.com
+  base_url: !!python/object:pydantic.networks.HttpUrl
+    _url: !!python/object/new:pydantic_core._pydantic_core.Url
+    - https://plus.reconext.com/
   enabled: true
-  password: ''
+  password: Microwave18.
   retry_attempts: 3
   timeout: 30
-  username: ''
+  username: raed.jah
 rma_processing:
   auto_processing: true
-  batch_size: 50
+  batch_size: 100
   error_retry_count: 3
   label_generation: true
   max_processing_time: 30

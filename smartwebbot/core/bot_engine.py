@@ -6,7 +6,7 @@ This is the primary interface for the intelligent web automation system.
 
 import time
 import asyncio
-from typing import Dict, List, Optional, Any, Union, Callable
+from typing import Dict, List, Optional, Any, Union, Callable, Tuple
 from pathlib import Path
 from contextlib import contextmanager
 
@@ -18,6 +18,7 @@ from ..automation.form_handler import FormHandler
 from ..automation.navigation_manager import NavigationManager
 from ..data.extractor import DataExtractor
 from ..data.exporter import DataExporter
+from ..integrations.plus_integration import PlusIntegration
 from ..utils.config_manager import get_config_manager
 from ..utils.logger import BotLogger, log_performance, log_error
 
@@ -60,6 +61,7 @@ class SmartWebBot(BaseComponent):
         self.navigation_manager = None
         self.data_extractor = None
         self.data_exporter = None
+        self.plus_integration = None
         
         # Bot state
         self.current_task = None
@@ -111,6 +113,7 @@ class SmartWebBot(BaseComponent):
             
             # Cleanup components in reverse order
             components = [
+                self.plus_integration,
                 self.data_exporter,
                 self.data_extractor,
                 self.navigation_manager,
@@ -195,6 +198,15 @@ class SmartWebBot(BaseComponent):
             if not self.data_exporter.initialize():
                 self.logger.error("Failed to initialize data exporter")
                 return False
+            
+            # PLUS Integration
+            self.plus_integration = PlusIntegration(
+                self.web_controller,
+                self.form_handler,
+                config=self.config.get('plus_integration', {})
+            )
+            if not self.plus_integration.initialize():
+                self.logger.warning("PLUS integration not available (settings may be incomplete)")
             
             # Credential Manager removed
             
@@ -442,6 +454,60 @@ class SmartWebBot(BaseComponent):
             log_error("smartwebbot", e, {"operation": "screenshot"})
             return ""
     
+    async def login_to_plus(self, force_login: bool = False) -> Tuple[bool, str]:
+        """
+        Login to PLUS system using stored credentials.
+        
+        Args:
+            force_login: Force login even if already logged in
+            
+        Returns:
+            Tuple of (success: bool, message: str)
+        """
+        try:
+            if not self.plus_integration:
+                return False, "PLUS integration not available"
+            
+            return await self.plus_integration.login_to_plus(force_login)
+            
+        except Exception as e:
+            log_error("smartwebbot", e, {"operation": "plus_login"})
+            return False, f"PLUS login error: {str(e)}"
+    
+    def get_plus_login_status(self) -> Dict[str, Any]:
+        """
+        Get PLUS login status information.
+        
+        Returns:
+            Dict containing login status
+        """
+        try:
+            if not self.plus_integration:
+                return {'error': 'PLUS integration not available'}
+            
+            return self.plus_integration.get_login_status()
+            
+        except Exception as e:
+            log_error("smartwebbot", e, {"operation": "plus_status"})
+            return {'error': str(e)}
+    
+    def logout_from_plus(self) -> Tuple[bool, str]:
+        """
+        Logout from PLUS system.
+        
+        Returns:
+            Tuple of (success: bool, message: str)
+        """
+        try:
+            if not self.plus_integration:
+                return False, "PLUS integration not available"
+            
+            return self.plus_integration.logout_from_plus()
+            
+        except Exception as e:
+            log_error("smartwebbot", e, {"operation": "plus_logout"})
+            return False, f"PLUS logout error: {str(e)}"
+
     def get_performance_report(self) -> Dict[str, Any]:
         """
         Get comprehensive performance report.
@@ -458,7 +524,8 @@ class SmartWebBot(BaseComponent):
                 ('decision_engine', self.decision_engine),
                 ('form_handler', self.form_handler),
                 ('navigation_manager', self.navigation_manager),
-                ('data_extractor', self.data_extractor)
+                ('data_extractor', self.data_extractor),
+                ('plus_integration', self.plus_integration)
             ]:
                 if component:
                     component_metrics[name] = component.get_state()
@@ -473,10 +540,14 @@ class SmartWebBot(BaseComponent):
                 'average_task_duration': sum(task['duration'] for task in self.task_history) / len(self.task_history) if self.task_history else 0
             }
             
+            # PLUS status
+            plus_status = self.get_plus_login_status() if self.plus_integration else None
+            
             return {
                 'component_metrics': component_metrics,
                 'browser_performance': browser_performance,
                 'task_summary': task_summary,
+                'plus_status': plus_status,
                 'system_metrics': self.get_state()
             }
             
@@ -674,11 +745,9 @@ class SmartWebBot(BaseComponent):
                 self.logger.error("Browser is not active")
                 return False
             
-            # Test navigation
-            test_url = "https://httpbin.org/html"
-            if not self.navigate_to(test_url):
-                self.logger.error("Navigation test failed")
-                return False
+            # Skip navigation test during validation to avoid unwanted navigation
+            # The bot will navigate when actually used
+            self.logger.info("Skipping navigation test during initialization")
             
             self.logger.info("System validation passed")
             return True
