@@ -571,6 +571,30 @@ async def logout_from_plus():
         raise HTTPException(status_code=500, detail=f"PLUS logout failed: {str(e)}")
 
 
+@app.post("/plus/navigate/unit-receiving")
+async def navigate_to_unit_receiving():
+    """Navigate to Unit Receiving ADT page in PLUS."""
+    global bot_instance
+    
+    try:
+        if not bot_instance:
+            # Initialize bot if not already done
+            bot_instance = SmartWebBot()
+            if not bot_instance.initialize():
+                raise HTTPException(status_code=500, detail="Failed to initialize bot")
+        
+        # Perform navigation
+        result = await bot_instance.navigate_to_unit_receiving_adt()
+        
+        return {
+            **result,
+            "timestamp": datetime.now().isoformat()
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Navigation failed: {str(e)}")
+
+
 # WebSocket endpoint
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):

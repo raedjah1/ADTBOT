@@ -975,3 +975,57 @@ class PlusIntegration(BaseComponent):
             
         except Exception as e:
             return False, f"Logout error: {str(e)}"
+    
+    async def navigate_to_unit_receiving_adt(self) -> Dict[str, Any]:
+        """
+        Navigate to the Unit Receiving ADT page.
+        Ensures user is logged in before attempting navigation.
+        
+        Returns:
+            Dict: Navigation result with success status and details
+        """
+        try:
+            self.logger.info("=== STARTING UNIT RECEIVING ADT NAVIGATION ===")
+            
+            # Step 1: Verify login status
+            login_status = self.get_login_status()
+            if not login_status.get('is_logged_in'):
+                self.logger.warning("User not logged in, attempting login first")
+                
+                # Attempt login
+                login_success, login_message = await self.login_to_plus()
+                if not login_success:
+                    return {
+                        "success": False,
+                        "message": f"Login required but failed: {login_message}",
+                        "current_url": self.web_controller.driver.current_url if self.web_controller and self.web_controller.driver else None
+                    }
+                
+                self.logger.info("Login successful, proceeding with navigation")
+            else:
+                self.logger.info("User already logged in, proceeding with navigation")
+            
+            # Step 2: Import and use the navigation module
+            from .plus_navigation import PlusPageNavigator
+            
+            # Step 3: Create navigator and perform navigation
+            page_navigator = PlusPageNavigator(self.web_controller, self.logger)
+            result = page_navigator.navigate_to_unit_receiving_adt()
+            
+            # Step 4: Log the result
+            if result.get("success"):
+                self.logger.info(f"SUCCESS: Navigation successful: {result.get('message')}")
+            else:
+                self.logger.error(f"FAILED: Navigation failed: {result.get('message')}")
+            
+            return result
+            
+        except Exception as e:
+            self.logger.error(f"Error in navigate_to_unit_receiving_adt: {e}")
+            import traceback
+            self.logger.error(f"Traceback: {traceback.format_exc()}")
+            return {
+                "success": False,
+                "message": f"Navigation error: {str(e)}",
+                "current_url": self.web_controller.driver.current_url if self.web_controller and self.web_controller.driver else None
+            }

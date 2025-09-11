@@ -507,6 +507,32 @@ class SmartWebBot(BaseComponent):
         except Exception as e:
             log_error("smartwebbot", e, {"operation": "plus_logout"})
             return False, f"PLUS logout error: {str(e)}"
+    
+    async def navigate_to_unit_receiving_adt(self) -> Dict[str, Any]:
+        """
+        Navigate to the Unit Receiving ADT page in PLUS.
+        Automatically handles login if not already logged in.
+        
+        Returns:
+            Dict: Navigation result with success status and details
+        """
+        try:
+            if not self.plus_integration:
+                return {
+                    "success": False,
+                    "message": "PLUS integration not available",
+                    "current_url": None
+                }
+            
+            return await self.plus_integration.navigate_to_unit_receiving_adt()
+            
+        except Exception as e:
+            log_error("smartwebbot", e, {"operation": "plus_navigation_unit_receiving"})
+            return {
+                "success": False,
+                "message": f"Navigation error: {str(e)}",
+                "current_url": None
+            }
 
     def get_performance_report(self) -> Dict[str, Any]:
         """

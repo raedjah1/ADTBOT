@@ -39,14 +39,33 @@ const usePlusStatus = () => {
         return;
       }
 
-      // If logged in, proceed with unit receiving (placeholder for now)
-      setStatusMessage('PLUS connection verified. Ready to begin unit receiving...');
+      // If logged in, navigate to Unit Receiving ADT page
+      setStatusMessage('PLUS connection verified. Navigating to Unit Receiving ADT page...');
       
-      // TODO: Add actual unit receiving logic here
+      try {
+        const navResponse = await fetch('http://localhost:8000/plus/navigate/unit-receiving', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        
+        const navResult = await navResponse.json();
+        
+        if (navResult.success) {
+          setStatusMessage('✓ Successfully navigated to Unit Receiving ADT page!');
+          // Additional success logic can be added here
+        } else {
+          setStatusMessage(`✗ Navigation failed: ${navResult.message}`);
+        }
+      } catch (navError) {
+        setStatusMessage('✗ Failed to navigate to Unit Receiving page. Please try again.');
+        console.error('Navigation error:', navError);
+      }
+      
       setTimeout(() => {
-        setStatusMessage('Unit receiving process ready to start!');
         setIsLoading(false);
-      }, 2000);
+      }, 3000);
 
     } catch (error) {
       setStatusMessage('Error checking PLUS connection. Please try again.');
