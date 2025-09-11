@@ -21,14 +21,42 @@ const RmaProcessingWidget = ({ isDarkMode = true }) => {
   const [trackingValidation, setTrackingValidation] = useState(true);
   const [labelGeneration, setLabelGeneration] = useState(true);
   const [qualityChecks, setQualityChecks] = useState(true);
+  const [loading, setLoading] = useState(false);
+
+  // Load existing settings on component mount
+  React.useEffect(() => {
+    loadSettings();
+  }, []);
+
+  const loadSettings = async () => {
+    try {
+      const response = await fetch('http://localhost:8000/api/rma/settings');
+      if (response.ok) {
+        const settings = await response.json();
+        setAutoProcessing(settings.auto_processing !== false);
+        setBatchSize(settings.batch_size || 100);
+        setTrackingValidation(settings.tracking_validation !== false);
+        setLabelGeneration(settings.label_generation !== false);
+        setQualityChecks(settings.quality_checks !== false);
+      } else {
+        console.error('Failed to load RMA settings:', response.status, response.statusText);
+      }
+    } catch (error) {
+      console.error('Failed to load RMA settings:', error);
+    }
+  };
 
   const handleSaveSettings = async () => {
+    setLoading(true);
     const loadingToast = toast.loading('Saving RMA settings...');
     
     try {
-      const response = await fetch('/api/rma/save-settings', {
+      const response = await fetch('http://localhost:8000/api/rma/save-settings', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
         body: JSON.stringify({
           auto_processing: autoProcessing,
           batch_size: batchSize,
@@ -42,11 +70,15 @@ const RmaProcessingWidget = ({ isDarkMode = true }) => {
       
       if (response.ok && result.success) {
         toast.success('✅ RMA settings saved successfully!', { id: loadingToast });
+        // Reload settings to confirm they were saved
+        await loadSettings();
       } else {
         toast.error(`❌ Failed to save: ${result.message || 'Unknown error'}`, { id: loadingToast });
       }
     } catch (error) {
       toast.error(`❌ Save error: ${error.message}`, { id: loadingToast });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -157,8 +189,9 @@ const RmaProcessingWidget = ({ isDarkMode = true }) => {
             variant="contained" 
             startIcon={<SaveIcon />}
             onClick={handleSaveSettings}
+            disabled={loading}
           >
-            Save Processing Settings
+            {loading ? 'Saving...' : 'Save Processing Settings'}
           </Button>
         </Box>
       </Paper>

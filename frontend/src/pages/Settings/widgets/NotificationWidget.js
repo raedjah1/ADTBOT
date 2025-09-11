@@ -33,9 +33,12 @@ const NotificationWidget = ({ isDarkMode = true }) => {
     const loadingToast = toast.loading('Saving notification settings...');
     
     try {
-      const response = await fetch('/api/notifications/save-settings', {
+      const response = await fetch('http://localhost:8000/api/notifications/save-settings', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
         body: JSON.stringify({
           email_notifications: emailNotifications,
           sms_notifications: smsNotifications,

@@ -19,12 +19,12 @@ plus_integration:
   api_key: ''
   base_url: !!python/object:pydantic.networks.HttpUrl
     _url: !!python/object/new:pydantic_core._pydantic_core.Url
-    - https://plus.reconext.com/
+    - https://test.com/
   enabled: true
-  password: ''
+  password: test
   retry_attempts: 3
   timeout: 30
-  username: ''
+  username: test
 rma_processing:
   auto_processing: true
   batch_size: 100

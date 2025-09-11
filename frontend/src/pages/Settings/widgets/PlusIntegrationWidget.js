@@ -28,6 +28,43 @@ const PlusIntegrationWidget = ({ isDarkMode = true }) => {
   const [timeout, setTimeout] = useState(30);
   const [retryAttempts, setRetryAttempts] = useState(3);
   const [enabled, setEnabled] = useState(true);
+  const [loading, setLoading] = useState(false);
+
+  // Load existing settings on component mount
+  React.useEffect(() => {
+    loadSettings();
+  }, []);
+
+  const loadSettings = async () => {
+    console.log('📥 Loading PLUS settings from API...');
+    try {
+      const response = await fetch('http://localhost:8000/api/plus/settings');
+      console.log('📡 Settings response:', {
+        status: response.status,
+        statusText: response.statusText,
+        ok: response.ok
+      });
+      
+      if (response.ok) {
+        const settings = await response.json();
+        console.log('📋 Loaded settings:', settings);
+        setBaseUrl(settings.base_url || 'https://plus.reconext.com');
+        setUsername(settings.username || '');
+        setPassword(settings.password || '');
+        setApiKey(settings.api_key || '');
+        setTimeout(settings.timeout || 30);
+        setRetryAttempts(settings.retry_attempts || 3);
+        setEnabled(settings.enabled !== false);
+        console.log('✅ Settings loaded and state updated');
+      } else {
+        console.error('❌ Failed to load settings:', response.status, response.statusText);
+        const errorText = await response.text();
+        console.error('❌ Error response:', errorText);
+      }
+    } catch (error) {
+      console.error('💥 Failed to load PLUS settings:', error);
+    }
+  };
 
   const handleTestConnection = async () => {
     if (!baseUrl || !username || !password) {
@@ -35,13 +72,22 @@ const PlusIntegrationWidget = ({ isDarkMode = true }) => {
       return;
     }
 
+    setLoading(true);
     const loadingToast = toast.loading('Testing PLUS connection...');
     
     try {
-      const response = await fetch('/api/plus/test-connection', {
+      const response = await fetch('http://localhost:8000/api/plus/test-connection', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ baseUrl, username, password, apiKey }),
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({ 
+          base_url: baseUrl, 
+          username, 
+          password, 
+          api_key: apiKey 
+        }),
       });
       
       const result = await response.json();
@@ -53,28 +99,95 @@ const PlusIntegrationWidget = ({ isDarkMode = true }) => {
       }
     } catch (error) {
       toast.error(`❌ Connection error: ${error.message}`, { id: loadingToast });
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleSaveSettings = async () => {
+    console.log('🔥 SAVE BUTTON CLICKED - Starting save process');
+    console.log('📋 Current form data:', {
+      baseUrl,
+      username: username ? '***' : '(empty)',
+      password: password ? '***' : '(empty)', 
+      apiKey: apiKey ? '***' : '(empty)',
+      timeout,
+      retryAttempts,
+      enabled
+    });
+
+    setLoading(true);
     const loadingToast = toast.loading('Saving settings...');
     
+    const requestData = { 
+      base_url: baseUrl, 
+      username, 
+      password, 
+      api_key: apiKey,
+      timeout,
+      retry_attempts: retryAttempts,
+      enabled
+    };
+
+    console.log('🚀 Making API request to /api/plus/save-credentials');
+    console.log('📤 Request payload:', {
+      ...requestData,
+      username: requestData.username ? '***' : '(empty)',
+      password: requestData.password ? '***' : '(empty)',
+      api_key: requestData.api_key ? '***' : '(empty)'
+    });
+    
     try {
-      const response = await fetch('/api/plus/save-credentials', {
+      const response = await fetch('http://localhost:8000/api/plus/save-credentials', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ baseUrl, username, password, apiKey }),
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(requestData),
       });
       
-      const result = await response.json();
+      console.log('📥 Response received:', {
+        status: response.status,
+        statusText: response.statusText,
+        ok: response.ok,
+        headers: Object.fromEntries(response.headers.entries())
+      });
+
+      const responseText = await response.text();
+      console.log('📄 Raw response text:', responseText);
+
+      let result;
+      try {
+        result = JSON.parse(responseText);
+        console.log('✅ Parsed JSON result:', result);
+      } catch (parseError) {
+        console.error('❌ Failed to parse JSON response:', parseError);
+        console.error('📄 Response text that failed to parse:', responseText);
+        throw new Error(`Invalid JSON response: ${responseText.substring(0, 100)}...`);
+      }
       
       if (response.ok && result.success) {
+        console.log('🎉 Save successful!');
         toast.success('✅ Settings saved successfully!', { id: loadingToast });
+        // Reload settings to confirm they were saved
+        console.log('🔄 Reloading settings to confirm save...');
+        await loadSettings();
       } else {
+        console.error('❌ Save failed:', result);
         toast.error(`❌ Failed to save: ${result.message || 'Unknown error'}`, { id: loadingToast });
       }
     } catch (error) {
+      console.error('💥 Save error occurred:', error);
+      console.error('🔍 Error details:', {
+        name: error.name,
+        message: error.message,
+        stack: error.stack
+      });
       toast.error(`❌ Save error: ${error.message}`, { id: loadingToast });
+    } finally {
+      setLoading(false);
+      console.log('🏁 Save process completed');
     }
   };
 
@@ -203,9 +316,13 @@ const PlusIntegrationWidget = ({ isDarkMode = true }) => {
         <Button 
           variant="contained" 
           startIcon={<SaveIcon />}
-          onClick={handleSaveSettings}
+          onClick={() => {
+            console.log('🖱️ Save button clicked!');
+            handleSaveSettings();
+          }}
+          disabled={loading}
         >
-          Save Settings
+          {loading ? 'Saving...' : 'Save Settings'}
         </Button>
       </Box>
     </Box>

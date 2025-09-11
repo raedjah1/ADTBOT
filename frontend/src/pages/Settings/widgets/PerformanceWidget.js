@@ -36,9 +36,12 @@ const PerformanceWidget = ({ isDarkMode = true }) => {
     const loadingToast = toast.loading('Saving performance settings...');
     
     try {
-      const response = await fetch('/api/performance/save-settings', {
+      const response = await fetch('http://localhost:8000/api/performance/save-settings', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
         body: JSON.stringify({
           enable_caching: enableCaching,
           enable_logging: enableLogging,

@@ -2,7 +2,7 @@
 Pydantic models for settings validation and type safety.
 """
 
-from typing import Optional, Literal
+from typing import Optional, Literal, Union
 from pydantic import BaseModel, Field, validator, HttpUrl
 from enum import Enum
 
@@ -24,13 +24,20 @@ class NotificationLevel(str, Enum):
 
 class PlusIntegrationSettings(BaseModel):
     """PLUS system integration settings."""
-    base_url: HttpUrl = Field(default="https://plus.reconext.com", description="PLUS system base URL")
+    base_url: Union[HttpUrl, str] = Field(default="https://plus.reconext.com", description="PLUS system base URL")
     username: str = Field(default="", description="PLUS username")
     password: str = Field(default="", description="PLUS password")
     api_key: Optional[str] = Field(default="", description="Optional API key")
     timeout: int = Field(default=30, ge=5, le=300, description="Connection timeout in seconds")
     retry_attempts: int = Field(default=3, ge=0, le=10, description="Number of retry attempts")
     enabled: bool = Field(default=True, description="Enable PLUS integration")
+    
+    @validator('base_url', pre=True)
+    def validate_base_url(cls, v):
+        """Allow both string and HttpUrl types."""
+        if isinstance(v, str):
+            return v
+        return str(v)
     
     class Config:
         json_schema_extra = {
@@ -149,10 +156,17 @@ class SystemSettings(BaseModel):
 # Request/Response models for API endpoints
 class PlusConnectionTestRequest(BaseModel):
     """Request model for testing PLUS connection."""
-    base_url: HttpUrl
+    base_url: Union[HttpUrl, str]
     username: str
     password: str
     api_key: Optional[str] = ""
+    
+    @validator('base_url', pre=True)
+    def validate_base_url(cls, v):
+        """Allow both string and HttpUrl types."""
+        if isinstance(v, str):
+            return v
+        return str(v)
 
 
 class PlusConnectionTestResponse(BaseModel):
