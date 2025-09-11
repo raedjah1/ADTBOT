@@ -61,7 +61,7 @@ const menuItems = [
     label: 'Settings',
     icon: SettingsIcon,
     path: '/settings',
-    description: 'PLUS Integration'
+    description: 'Professional UI'
   },
 ];
 

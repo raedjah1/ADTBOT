@@ -10,7 +10,7 @@ import TopBar from './components/TopBar/TopBar';
 import Dashboard from './pages/Dashboard/Dashboard';
 import TaskBuilder from './pages/TaskBuilder/TaskBuilder';
 import LiveMonitor from './pages/LiveMonitor/LiveMonitor';
-import Settings from './pages/Settings/Settings';
+import Settings from './pages/Settings/SettingsTwo';
 import Results from './pages/Results/Results';
 
 // Services

@@ -806,6 +806,99 @@ async def get_security_status():
     }
 
 
+# PLUS System Integration Endpoints
+class PlusConnectionTest(BaseModel):
+    baseUrl: str
+    username: str
+    password: str
+    apiKey: Optional[str] = None
+
+
+@app.post("/api/plus/test-connection")
+async def test_plus_connection(request: PlusConnectionTest):
+    """Test connection to PLUS system with provided credentials."""
+    global bot_instance
+    
+    try:
+        # Initialize bot if not already running
+        if not bot_instance:
+            bot_instance = SmartWebBot(config_path="config.yaml")
+            bot_instance.initialize()
+        
+        # Start browser session for testing
+        success = bot_instance.web_controller.start_browser()
+        if not success:
+            raise Exception("Failed to start browser for connection test")
+        
+        # Navigate to PLUS system
+        if not bot_instance.navigate_to(request.baseUrl):
+            raise Exception(f"Failed to navigate to {request.baseUrl}")
+        
+        # Try to find login elements and test login
+        login_result = bot_instance.fill_form_intelligently({
+            "username": request.username,
+            "password": request.password
+        })
+        
+        if login_result and login_result.get('success'):
+            # Take a screenshot for verification
+            screenshot_path = bot_instance.take_screenshot("plus_connection_test")
+            
+            return {
+                "success": True,
+                "message": "Successfully connected to PLUS system",
+                "screenshot": screenshot_path,
+                "timestamp": datetime.now().isoformat()
+            }
+        else:
+            return {
+                "success": False,
+                "message": "Login failed - please check your credentials",
+                "timestamp": datetime.now().isoformat()
+            }
+            
+    except Exception as e:
+        return {
+            "success": False,
+            "message": f"Connection test failed: {str(e)}",
+            "timestamp": datetime.now().isoformat()
+        }
+    
+    finally:
+        # Clean up browser session after test
+        try:
+            if bot_instance and bot_instance.web_controller:
+                bot_instance.web_controller.cleanup()
+        except:
+            pass
+
+
+@app.post("/api/plus/save-credentials")
+async def save_plus_credentials(request: PlusConnectionTest):
+    """Save PLUS credentials securely."""
+    try:
+        config_manager = get_config_manager()
+        
+        # Store credentials securely (they'll be encrypted)
+        config_manager.set("plus.baseUrl", request.baseUrl)
+        config_manager.set("plus.username", request.username)
+        config_manager.set("plus.password", request.password)
+        if request.apiKey:
+            config_manager.set("plus.apiKey", request.apiKey)
+        
+        # Save configuration
+        config_manager.save_configuration()
+        
+        return {
+            "success": True,
+            "message": "PLUS credentials saved successfully",
+            "timestamp": datetime.now().isoformat()
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to save credentials: {str(e)}")
+
+
 # WebSocket endpoint
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
