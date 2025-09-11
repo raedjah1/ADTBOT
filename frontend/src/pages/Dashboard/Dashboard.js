@@ -611,6 +611,7 @@ const Dashboard = ({ backendStatus, botStatus, isDarkMode }) => {
             onTaskSuggestion={handleAITaskSuggestion}
             onSecurityAdvice={handleSecurityAdvice}
             onActionGenerate={() => {}}
+            isDarkMode={isDarkMode}
           />
         </DialogContent>
       </Dialog>
@@ -637,6 +638,7 @@ const Dashboard = ({ backendStatus, botStatus, isDarkMode }) => {
           <GuidedWorkflow 
             onWorkflowComplete={handleWorkflowComplete}
             userLevel={userLevel}
+            isDarkMode={isDarkMode}
           />
         </DialogContent>
       </Dialog>

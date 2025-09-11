@@ -20,7 +20,7 @@ function TabPanel({ children, value, index, ...other }) {
   );
 }
 
-const Results = () => {
+const Results = ({ isDarkMode = true }) => {
   const [tabValue, setTabValue] = useState(0);
 
   const handleTabChange = (event, newValue) => {

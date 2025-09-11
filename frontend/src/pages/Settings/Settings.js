@@ -40,7 +40,7 @@ import {
 } from '@mui/icons-material';
 import toast from 'react-hot-toast';
 
-const Settings = () => {
+const Settings = ({ isDarkMode = true }) => {
   const [activeTab, setActiveTab] = useState(0);
   const [settings, setSettings] = useState({
     plusSystem: {

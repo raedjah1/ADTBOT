@@ -942,6 +942,15 @@ function App() {
   const [backendStatus, setBackendStatus] = useState('connecting');
   const [currentPage, setCurrentPage] = useState('dashboard');
   const [isDarkMode, setIsDarkMode] = useState(true);
+  
+  // Initialize theme class on mount
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.remove('light-mode');
+    } else {
+      document.documentElement.classList.add('light-mode');
+    }
+  }, []);
   const [botStatus, setBotStatus] = useState({
     isRunning: false,
     currentTask: null,
@@ -1053,8 +1062,8 @@ function App() {
                 <Route path="/monitor" element={
                   <LiveMonitor botStatus={botStatus} />
                 } />
-                <Route path="/settings" element={<Settings />} />
-                <Route path="/results" element={<Results />} />
+                <Route path="/settings" element={<Settings isDarkMode={isDarkMode} />} />
+                <Route path="/results" element={<Results isDarkMode={isDarkMode} />} />
               </Routes>
             </Box>
           </Box>
