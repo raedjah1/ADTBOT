@@ -22,6 +22,7 @@ import {
   LightMode as LightModeIcon,
   DarkMode as DarkModeIcon,
   Assignment as RMAIcon,
+  Inventory as InventoryIcon,
 } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -62,6 +63,13 @@ const menuItems = [
     icon: SettingsIcon,
     path: '/settings',
     description: 'Professional UI'
+  },
+  {
+    id: 'unit-receiving',
+    label: 'Unit Receiving ADT',
+    icon: InventoryIcon,
+    path: '/unit-receiving',
+    description: 'ADT Unit Processing'
   },
 ];
 

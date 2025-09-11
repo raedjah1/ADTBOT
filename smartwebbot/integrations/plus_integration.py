@@ -167,7 +167,9 @@ class PlusIntegration(BaseComponent):
             if self.login_attempts > self.max_login_attempts:
                 return False, f"Maximum login attempts ({self.max_login_attempts}) exceeded"
             
-            # Load credentials
+            # Load credentials (refresh from settings)
+            self.plus_settings = self._load_plus_settings()
+            
             if not self.plus_settings:
                 return False, "PLUS settings not configured"
             
@@ -175,8 +177,15 @@ class PlusIntegration(BaseComponent):
             password = self.plus_settings.get('password')
             base_url = self.plus_settings.get('base_url')
             
+            # Debug logging to help diagnose the issue
+            self.logger.info(f"Loaded PLUS settings: username={username[:3]}..., password={'*' * len(password) if password else 'MISSING'}, base_url={base_url}")
+            
             if not all([username, password, base_url]):
-                return False, "PLUS credentials incomplete (missing username, password, or URL)"
+                missing_fields = []
+                if not username: missing_fields.append('username')
+                if not password: missing_fields.append('password')
+                if not base_url: missing_fields.append('base_url')
+                return False, f"PLUS credentials incomplete (missing: {', '.join(missing_fields)})"
             
             # Step 1: Navigate to PLUS login page
             login_url = self._get_login_url(base_url)
@@ -852,16 +861,42 @@ class PlusIntegration(BaseComponent):
     def _load_plus_settings(self) -> Optional[Dict[str, Any]]:
         """Load PLUS settings from settings service."""
         try:
+            if not self.settings_service:
+                self.logger.error("Settings service not initialized")
+                return None
+                
             all_settings = self.settings_service.get_all_settings()
+            if not all_settings:
+                self.logger.error("Could not load any settings")
+                return None
+                
             plus_settings = all_settings.plus_integration.dict()
+            
+            # Debug logging
+            self.logger.info(f"Raw PLUS settings loaded: {plus_settings}")
+            
+            # Additional detailed logging
+            if plus_settings:
+                self.logger.info(f"PLUS settings details:")
+                self.logger.info(f"  - enabled: {plus_settings.get('enabled')}")
+                self.logger.info(f"  - base_url: {plus_settings.get('base_url')}")
+                self.logger.info(f"  - username: {'[SET]' if plus_settings.get('username') else '[EMPTY]'}")
+                self.logger.info(f"  - password: {'[SET]' if plus_settings.get('password') else '[EMPTY]'}")
+                self.logger.info(f"  - api_key: {'[SET]' if plus_settings.get('api_key') else '[EMPTY]'}")
+            else:
+                self.logger.error("PLUS settings is None or empty")
             
             if plus_settings.get('enabled', True):
                 return plus_settings
+            else:
+                self.logger.warning("PLUS integration is disabled in settings")
             
             return None
             
         except Exception as e:
             self.logger.error(f"Failed to load PLUS settings: {e}")
+            import traceback
+            self.logger.error(f"Full traceback: {traceback.format_exc()}")
             return None
     
     def _save_session_data(self):

@@ -1,5 +1,5 @@
 notifications:
-  email_address: raedjah8@gmail.com
+  email_address: ''
   email_notifications: true
   notification_level: !!python/object/apply:smartwebbot.settings.models.NotificationLevel
   - important
@@ -19,10 +19,10 @@ plus_integration:
   api_key: ''
   base_url: https://plus.reconext.com
   enabled: true
-  password: ''
+  password: Microwave18.
   retry_attempts: 3
   timeout: 30
-  username: ''
+  username: raed.jah
 rma_processing:
   auto_processing: true
   batch_size: 100
