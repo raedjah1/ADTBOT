@@ -24,7 +24,6 @@ from webdriver_manager.firefox import GeckoDriverManager
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from ..core.base_component import BaseComponent
 from ..utils.config_manager import get_config_manager
-from ..security.stealth_operations import STEALTH_ENGINE, activate_maximum_stealth
 
 
 class WebController(BaseComponent):
@@ -79,11 +78,7 @@ class WebController(BaseComponent):
             # Create necessary directories
             self._create_directories()
             
-            # Initialize stealth operations if enabled
-            if self.maximum_stealth or self.ghost_mode:
-                self.logger.info("🥷 ACTIVATING MAXIMUM STEALTH OPERATIONS")
-                self.stealth_operations = activate_maximum_stealth()
-                self.stealth_profile = self.stealth_operations['stealth_profile']
+            # Stealth operations removed
             
             # Initialize browser
             if not self.start_browser():
@@ -156,10 +151,7 @@ class WebController(BaseComponent):
             if self.stealth_mode:
                 self._apply_stealth_measures()
             
-            # Apply maximum stealth if enabled
-            if self.maximum_stealth or self.ghost_mode:
-                self.logger.info("💉 INJECTING MAXIMUM STEALTH PAYLOAD")
-                STEALTH_ENGINE.execute_stealth_injection(self.driver)
+            # Stealth injection removed
             
             self.logger.info(f"Browser {browser_type} started successfully")
             self.update_metrics("start_browser", True)
@@ -191,10 +183,7 @@ class WebController(BaseComponent):
             options.add_argument('--disable-plugins')
             options.add_argument('--disable-images')  # Faster loading
         
-        # Maximum stealth configuration
-        if self.maximum_stealth or self.ghost_mode:
-            self.logger.info("🌫️ CONFIGURING PHANTOM BROWSER - MAXIMUM STEALTH")
-            STEALTH_ENGINE.configure_phantom_browser(options)
+            # Maximum stealth configuration removed
         
         # User agent
         if self.browser_config.user_agent:
@@ -334,44 +323,20 @@ class WebController(BaseComponent):
     
     def activate_ghost_mode(self) -> bool:
         """
-        🥷 ACTIVATE GHOST MODE 🥷
-        Enable maximum stealth for invisible operations
+        Ghost mode functionality removed
         """
-        try:
-            self.logger.info("👻 ACTIVATING GHOST MODE - MAXIMUM STEALTH ENGAGED")
-            
-            # Activate stealth operations
-            if not self.stealth_operations:
-                self.stealth_operations = activate_maximum_stealth()
-                self.stealth_profile = self.stealth_operations['stealth_profile']
-            
-            # Apply stealth injection to current browser
-            if self.driver:
-                STEALTH_ENGINE.execute_stealth_injection(self.driver)
-            
-            self.ghost_mode = True
-            self.maximum_stealth = True
-            
-            self.logger.info("✅ GHOST MODE ACTIVE - OPERATING IN MAXIMUM STEALTH")
-            return True
-            
-        except Exception as e:
-            self.logger.error(f"Failed to activate ghost mode: {e}")
-            return False
+        self.logger.warning("Ghost mode functionality has been removed")
+        return False
     
     def get_stealth_report(self) -> Dict[str, Any]:
         """
-        📊 GET STEALTH REPORT 📊
-        Generate comprehensive stealth operations report
+        Stealth report functionality removed
         """
-        if self.stealth_operations:
-            return STEALTH_ENGINE.generate_operational_report()
-        else:
-            return {
-                'operational_status': 'BASIC STEALTH',
-                'stealth_level': 'STANDARD',
-                'capabilities': 'LIMITED'
-            }
+        return {
+            'operational_status': 'BASIC',
+            'stealth_level': 'NONE',
+            'capabilities': 'STANDARD'
+        }
     
     def stop_browser(self) -> bool:
         """Stop the browser and clean up."""

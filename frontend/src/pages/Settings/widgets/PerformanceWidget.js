@@ -36,11 +36,29 @@ const PerformanceWidget = ({ isDarkMode = true }) => {
     const loadingToast = toast.loading('Saving performance settings...');
     
     try {
-      // Simulate API call - replace with actual endpoint
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      toast.success('✅ Performance settings saved successfully!', { id: loadingToast });
+      const response = await fetch('/api/performance/save-settings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          enable_caching: enableCaching,
+          enable_logging: enableLogging,
+          log_level: logLevel,
+          max_concurrent_tasks: maxConcurrentTasks,
+          task_timeout: taskTimeout,
+          cache_size: cacheSize,
+          memory_threshold: memoryThreshold
+        }),
+      });
+      
+      const result = await response.json();
+      
+      if (response.ok && result.success) {
+        toast.success('✅ Performance settings saved successfully!', { id: loadingToast });
+      } else {
+        toast.error(`❌ Failed to save: ${result.message || 'Unknown error'}`, { id: loadingToast });
+      }
     } catch (error) {
-      toast.error(`❌ Failed to save settings: ${error.message}`, { id: loadingToast });
+      toast.error(`❌ Save error: ${error.message}`, { id: loadingToast });
     }
   };
 

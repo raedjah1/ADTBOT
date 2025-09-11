@@ -33,11 +33,28 @@ const NotificationWidget = ({ isDarkMode = true }) => {
     const loadingToast = toast.loading('Saving notification settings...');
     
     try {
-      // Simulate API call - replace with actual endpoint
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      toast.success('✅ Notification settings saved successfully!', { id: loadingToast });
+      const response = await fetch('/api/notifications/save-settings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email_notifications: emailNotifications,
+          sms_notifications: smsNotifications,
+          push_notifications: pushNotifications,
+          email_address: emailAddress,
+          phone_number: phoneNumber,
+          notification_level: notificationLevel
+        }),
+      });
+      
+      const result = await response.json();
+      
+      if (response.ok && result.success) {
+        toast.success('✅ Notification settings saved successfully!', { id: loadingToast });
+      } else {
+        toast.error(`❌ Failed to save: ${result.message || 'Unknown error'}`, { id: loadingToast });
+      }
     } catch (error) {
-      toast.error(`❌ Failed to save settings: ${error.message}`, { id: loadingToast });
+      toast.error(`❌ Save error: ${error.message}`, { id: loadingToast });
     }
   };
 

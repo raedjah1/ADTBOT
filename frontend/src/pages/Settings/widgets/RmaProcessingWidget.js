@@ -26,11 +26,27 @@ const RmaProcessingWidget = ({ isDarkMode = true }) => {
     const loadingToast = toast.loading('Saving RMA settings...');
     
     try {
-      // Simulate API call - replace with actual endpoint
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      toast.success('✅ RMA settings saved successfully!', { id: loadingToast });
+      const response = await fetch('/api/rma/save-settings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          auto_processing: autoProcessing,
+          batch_size: batchSize,
+          tracking_validation: trackingValidation,
+          label_generation: labelGeneration,
+          quality_checks: qualityChecks
+        }),
+      });
+      
+      const result = await response.json();
+      
+      if (response.ok && result.success) {
+        toast.success('✅ RMA settings saved successfully!', { id: loadingToast });
+      } else {
+        toast.error(`❌ Failed to save: ${result.message || 'Unknown error'}`, { id: loadingToast });
+      }
     } catch (error) {
-      toast.error(`❌ Failed to save settings: ${error.message}`, { id: loadingToast });
+      toast.error(`❌ Save error: ${error.message}`, { id: loadingToast });
     }
   };
 

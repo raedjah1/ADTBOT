@@ -18,7 +18,6 @@ from ..automation.form_handler import FormHandler
 from ..automation.navigation_manager import NavigationManager
 from ..data.extractor import DataExtractor
 from ..data.exporter import DataExporter
-from ..security.credential_manager import CredentialManager
 from ..utils.config_manager import get_config_manager
 from ..utils.logger import BotLogger, log_performance, log_error
 
@@ -61,7 +60,6 @@ class SmartWebBot(BaseComponent):
         self.navigation_manager = None
         self.data_extractor = None
         self.data_exporter = None
-        self.credential_manager = None
         
         # Bot state
         self.current_task = None
@@ -113,7 +111,6 @@ class SmartWebBot(BaseComponent):
             
             # Cleanup components in reverse order
             components = [
-                self.credential_manager,
                 self.data_exporter,
                 self.data_extractor,
                 self.navigation_manager,
@@ -199,11 +196,7 @@ class SmartWebBot(BaseComponent):
                 self.logger.error("Failed to initialize data exporter")
                 return False
             
-            # Credential Manager
-            self.credential_manager = CredentialManager(self.config.get('credential_manager', {}))
-            if not self.credential_manager.initialize():
-                self.logger.error("Failed to initialize credential manager")
-                return False
+            # Credential Manager removed
             
             self.logger.info("All components initialized successfully")
             return True

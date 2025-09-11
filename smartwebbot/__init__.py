@@ -18,7 +18,6 @@ from .automation.form_handler import FormHandler
 from .automation.navigation_manager import NavigationManager
 from .data.extractor import DataExtractor
 from .data.exporter import DataExporter
-from .security.credential_manager import CredentialManager
 from .utils.logger import BotLogger
 from .utils.config_manager import ConfigManager
 
@@ -38,7 +37,6 @@ __all__ = [
     "NavigationManager",
     "DataExtractor",
     "DataExporter",
-    "CredentialManager",
     "BotLogger",
     "ConfigManager"
 ]
