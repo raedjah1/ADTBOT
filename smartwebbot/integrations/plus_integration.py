@@ -469,8 +469,8 @@ class PlusIntegration(BaseComponent):
         try:
             self.logger.info("=== CHECKING FOR DATABASE SELECTION PAGE ===")
             
-            # Wait a moment for page to load after login
-            time.sleep(3)
+            # Wait briefly for page to load after login
+            time.sleep(1)
             
             # Check if we're on the database selection page
             from selenium.webdriver.common.by import By
@@ -497,7 +497,7 @@ class PlusIntegration(BaseComponent):
                     database_select = Select(database_dropdown)
                     database_select.select_by_value("PROD")
                     self.logger.info("SUCCESS: Database PROD selected")
-                    time.sleep(1)  # Wait for any dynamic updates
+                    time.sleep(0.5)  # Brief wait for any dynamic updates
                 except Exception as e:
                     self.logger.error(f"Failed to select database: {e}")
                     return False, f"Database selection failed: {e}"
@@ -509,7 +509,7 @@ class PlusIntegration(BaseComponent):
                     site_select = Select(site_dropdown)
                     site_select.select_by_value("MEMPHIS")
                     self.logger.info("SUCCESS: Site MEMPHIS selected")
-                    time.sleep(1)  # Wait for any dynamic updates
+                    time.sleep(0.5)  # Brief wait for any dynamic updates
                 except Exception as e:
                     self.logger.error(f"Failed to select site: {e}")
                     return False, f"Site selection failed: {e}"
@@ -535,16 +535,22 @@ class PlusIntegration(BaseComponent):
                             selected_program = program_select.first_selected_option.get_attribute("value")
                             self.logger.info(f"SUCCESS: Program {selected_program} selected (ADT not available)")
                     
-                    time.sleep(1)  # Wait for any dynamic updates
+                    time.sleep(0.5)  # Brief wait for any dynamic updates
                 except Exception as e:
                     self.logger.error(f"Failed to select program: {e}")
                     return False, f"Program selection failed: {e}"
                 
-                # Step 4: Click Request Access button to proceed
-                self.logger.info("=== CLICKING REQUEST ACCESS BUTTON ===")
+                # Step 4: Click OK/Request Access button to proceed
+                self.logger.info("=== CLICKING OK/REQUEST ACCESS BUTTON ===")
                 try:
-                    # Try multiple selectors for the Request Access button
-                    request_access_selectors = [
+                    # Try multiple selectors for both OK and Request Access buttons
+                    access_button_selectors = [
+                        # OK button selectors (newer form)
+                        'input[id="ctl00_LoginMainContent_btnAccept_input"]',
+                        'input[name="ctl00$LoginMainContent$btnAccept_input"]',
+                        'input[value="Ok"]',
+                        '#ctl00_LoginMainContent_btnAccept_input',
+                        # Request Access button selectors (older form)
                         'input[id="ctl00_LoginMainContent_btnRequestAccess_input"]',
                         'input[name="ctl00$LoginMainContent$btnRequestAccess_input"]',
                         'input[value="Request Access"]',
@@ -552,41 +558,55 @@ class PlusIntegration(BaseComponent):
                     ]
                     
                     button_clicked = False
-                    for selector in request_access_selectors:
+                    for selector in access_button_selectors:
                         try:
                             button = self.web_controller.driver.find_element(By.CSS_SELECTOR, selector)
                             if button.is_displayed() and button.is_enabled():
                                 button.click()
-                                self.logger.info(f"SUCCESS: Request Access button clicked using selector: {selector}")
+                                self.logger.info(f"SUCCESS: Access button clicked using selector: {selector}")
                                 button_clicked = True
                                 break
                         except:
                             continue
                     
                     if not button_clicked:
-                        # Try JavaScript click as fallback
+                        # Try JavaScript click as fallback for both button types
                         try:
-                            self.web_controller.driver.execute_script("""
-                                var button = document.querySelector('input[value="Request Access"]');
-                                if (button) button.click();
+                            # Try OK button first, then Request Access
+                            js_result = self.web_controller.driver.execute_script("""
+                                var okButton = document.querySelector('input[value="Ok"]');
+                                var requestButton = document.querySelector('input[value="Request Access"]');
+                                
+                                if (okButton && okButton.offsetParent !== null) {
+                                    okButton.click();
+                                    return 'OK button clicked';
+                                } else if (requestButton && requestButton.offsetParent !== null) {
+                                    requestButton.click();
+                                    return 'Request Access button clicked';
+                                }
+                                return 'No button found';
                             """)
-                            self.logger.info("SUCCESS: Request Access button clicked using JavaScript")
-                            button_clicked = True
+                            
+                            if js_result and 'clicked' in js_result:
+                                self.logger.info(f"SUCCESS: {js_result} using JavaScript")
+                                button_clicked = True
+                            else:
+                                self.logger.warning(f"JavaScript result: {js_result}")
                         except Exception as js_error:
                             self.logger.error(f"JavaScript click failed: {js_error}")
                     
                     if not button_clicked:
-                        return False, "Could not find or click Request Access button"
+                        return False, "Could not find or click OK/Request Access button"
                     
-                    # Wait for page to process the request
-                    time.sleep(5)
+                    # Wait briefly for page to process the request
+                    time.sleep(2)
                     
                     self.logger.info("Database selection process completed successfully")
                     return True, "Database, Site, and Program selected successfully"
                     
                 except Exception as e:
-                    self.logger.error(f"Failed to click Request Access button: {e}")
-                    return False, f"Request Access button click failed: {e}"
+                    self.logger.error(f"Failed to click OK/Request Access button: {e}")
+                    return False, f"OK/Request Access button click failed: {e}"
                     
             except Exception as e:
                 # Database selection page not found - might already be logged in
@@ -643,35 +663,46 @@ class PlusIntegration(BaseComponent):
     async def _wait_for_login_response(self) -> Tuple[bool, str]:
         """Wait for login response and check for errors."""
         try:
-            # Wait for page to respond to login attempt
-            time.sleep(3)
+            # Use intelligent waiting instead of fixed sleep
+            self.logger.info("Waiting for login response...")
+            start_time = time.time()
+            initial_url = self.web_controller.driver.current_url
+            max_wait = 15  # Reduced from implicit long wait
             
-            # Check for error messages
-            error_message = self._check_for_login_errors()
-            if error_message:
-                return False, f"Login error detected: {error_message}"
+            # Smart polling loop instead of fixed waits
+            while time.time() - start_time < max_wait:
+                from selenium.webdriver.common.by import By
+                
+                current_url = self.web_controller.driver.current_url
+                
+                # Check if URL changed (successful login)
+                if current_url != initial_url:
+                    self.logger.info(f"URL changed from {initial_url} to {current_url}")
+                    return True, "Login successful - URL changed"
+                
+                # Check for database selection page (PLUS specific)
+                try:
+                    database_div = self.web_controller.driver.find_element(By.ID, "LoginMainContent_DatabaseProgramDiv")
+                    if database_div.is_displayed():
+                        self.logger.info("Database selection page detected")
+                        return True, "Login successful - database selection appeared"
+                except:
+                    pass
+                
+                # Check for error messages
+                error_message = self._check_for_login_errors()
+                if error_message:
+                    return False, f"Login error detected: {error_message}"
+                
+                # Brief pause before next check
+                time.sleep(0.5)  # Check every 500ms instead of long waits
             
-            # Check if URL changed (common after successful login)
-            current_url = self.web_controller.driver.current_url
-            if 'login' not in current_url.lower():
-                return True, "Login successful - redirected from login page"
-            
-            # Check for success indicators
-            success_indicators = [
-                'dashboard', 'home', 'main', 'welcome', 'profile', 'menu'
-            ]
-            
-            page_source = self.web_controller.driver.page_source.lower()
-            for indicator in success_indicators:
-                if indicator in page_source:
-                    return True, f"Login successful - found '{indicator}' indicator"
-            
-            # If still on login page, check if form is still visible
-            time.sleep(2)
-            if self._is_login_form_present():
-                return False, "Still on login page - credentials may be incorrect"
-            
-            return True, "Login appears successful"
+            # Timeout reached - check final state
+            final_url = self.web_controller.driver.current_url
+            if 'login' in final_url.lower() and final_url == initial_url:
+                return False, "Login timeout - still on same login page"
+            else:
+                return True, "Login completed (URL may have changed)"
             
         except Exception as e:
             return False, f"Login response check error: {str(e)}"
