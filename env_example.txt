@@ -1,0 +1,21 @@
+# Copy this file to .env and fill in your actual credentials
+
+# Email automation
+EMAIL_USERNAME=your_email@example.com
+EMAIL_PASSWORD=your_password
+
+# Social media
+TWITTER_USERNAME=your_twitter_handle
+TWITTER_PASSWORD=your_twitter_password
+
+# E-commerce
+AMAZON_EMAIL=your_amazon_email
+AMAZON_PASSWORD=your_amazon_password
+
+# Banking/Finance (use with extreme caution)
+BANK_USERNAME=your_bank_username
+BANK_PASSWORD=your_bank_password
+
+# Custom API keys
+OPENAI_API_KEY=your_openai_key
+GOOGLE_API_KEY=your_google_key

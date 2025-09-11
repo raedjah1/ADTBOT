@@ -1,0 +1,3750 @@
+{
+  "target_url": "https://www.w3schools.com/html/html_forms.asp",
+  "elements_discovered": 65,
+  "total_tests": 322,
+  "vulnerabilities_found": 8,
+  "test_results": [
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=' OR '1'='1",
+      "evidence": "No SQL injection detected with payload: ' OR '1'='1",
+      "timestamp": "2025-09-08T14:54:57.307187"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=' OR '1'='1",
+      "evidence": "No SQL injection detected with payload: ' OR '1'='1",
+      "timestamp": "2025-09-08T14:54:57.800381"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=' OR 1=1--",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1--",
+      "timestamp": "2025-09-08T14:54:58.272526"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=' OR 1=1--",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1--",
+      "timestamp": "2025-09-08T14:54:58.670210"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=' UNION SELECT null--",
+      "evidence": "No SQL injection detected with payload: ' UNION SELECT null--",
+      "timestamp": "2025-09-08T14:54:59.166694"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=' UNION SELECT null--",
+      "evidence": "No SQL injection detected with payload: ' UNION SELECT null--",
+      "timestamp": "2025-09-08T14:54:59.622645"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname='; DROP TABLE users--",
+      "evidence": "No SQL injection detected with payload: '; DROP TABLE users--",
+      "timestamp": "2025-09-08T14:55:00.105377"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname='; DROP TABLE users--",
+      "evidence": "No SQL injection detected with payload: '; DROP TABLE users--",
+      "timestamp": "2025-09-08T14:55:00.546432"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=' OR 1=1#",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1#",
+      "timestamp": "2025-09-08T14:55:01.059794"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=' OR 1=1#",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1#",
+      "timestamp": "2025-09-08T14:55:01.569473"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=admin'--",
+      "evidence": "No SQL injection detected with payload: admin'--",
+      "timestamp": "2025-09-08T14:55:02.135271"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=admin'--",
+      "evidence": "No SQL injection detected with payload: admin'--",
+      "timestamp": "2025-09-08T14:55:02.680093"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=' OR 'x'='x",
+      "evidence": "No SQL injection detected with payload: ' OR 'x'='x",
+      "timestamp": "2025-09-08T14:55:03.131524"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=' OR 'x'='x",
+      "evidence": "No SQL injection detected with payload: ' OR 'x'='x",
+      "timestamp": "2025-09-08T14:55:03.822120"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=') OR ('1'='1",
+      "evidence": "No SQL injection detected with payload: ') OR ('1'='1",
+      "timestamp": "2025-09-08T14:55:04.279349"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=') OR ('1'='1",
+      "evidence": "No SQL injection detected with payload: ') OR ('1'='1",
+      "timestamp": "2025-09-08T14:55:04.774506"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=1' OR '1'='1' /*",
+      "evidence": "No SQL injection detected with payload: 1' OR '1'='1' /*",
+      "timestamp": "2025-09-08T14:55:05.456259"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=1' OR '1'='1' /*",
+      "evidence": "No SQL injection detected with payload: 1' OR '1'='1' /*",
+      "timestamp": "2025-09-08T14:55:06.588103"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=' OR 1=1 LIMIT 1--",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1 LIMIT 1--",
+      "timestamp": "2025-09-08T14:55:07.493567"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=' OR 1=1 LIMIT 1--",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1 LIMIT 1--",
+      "timestamp": "2025-09-08T14:55:08.057685"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=<script>alert('XSS')</script>",
+      "evidence": "No XSS detected with payload: <script>alert('XSS')</script>",
+      "timestamp": "2025-09-08T14:55:08.840832"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=<script>alert('XSS')</script>",
+      "evidence": "No XSS detected with payload: <script>alert('XSS')</script>",
+      "timestamp": "2025-09-08T14:55:09.283031"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=<img src=x onerror=alert('XSS')>",
+      "evidence": "No XSS detected with payload: <img src=x onerror=alert('XSS')>",
+      "timestamp": "2025-09-08T14:55:09.688622"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=<img src=x onerror=alert('XSS')>",
+      "evidence": "No XSS detected with payload: <img src=x onerror=alert('XSS')>",
+      "timestamp": "2025-09-08T14:55:10.245403"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": true,
+      "severity": "HIGH",
+      "payload_used": "fname=javascript:alert('XSS')",
+      "evidence": "XSS payload directly reflected in response: javascript:alert('XSS')",
+      "timestamp": "2025-09-08T14:55:10.695872"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=<svg onload=alert('XSS')>",
+      "evidence": "No XSS detected with payload: <svg onload=alert('XSS')>",
+      "timestamp": "2025-09-08T14:55:11.221920"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=<svg onload=alert('XSS')>",
+      "evidence": "No XSS detected with payload: <svg onload=alert('XSS')>",
+      "timestamp": "2025-09-08T14:55:11.635229"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname='\"><script>alert('XSS')</script>",
+      "evidence": "No XSS detected with payload: '\"><script>alert('XSS')</script>",
+      "timestamp": "2025-09-08T14:55:12.079104"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname='\"><script>alert('XSS')</script>",
+      "evidence": "No XSS detected with payload: '\"><script>alert('XSS')</script>",
+      "timestamp": "2025-09-08T14:55:12.592396"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=<iframe src=javascript:alert('XSS')>",
+      "evidence": "No XSS detected with payload: <iframe src=javascript:alert('XSS')>",
+      "timestamp": "2025-09-08T14:55:13.140977"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=<iframe src=javascript:alert('XSS')>",
+      "evidence": "No XSS detected with payload: <iframe src=javascript:alert('XSS')>",
+      "timestamp": "2025-09-08T14:55:13.556196"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=<body onload=alert('XSS')>",
+      "evidence": "No XSS detected with payload: <body onload=alert('XSS')>",
+      "timestamp": "2025-09-08T14:55:14.088848"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=<body onload=alert('XSS')>",
+      "evidence": "No XSS detected with payload: <body onload=alert('XSS')>",
+      "timestamp": "2025-09-08T14:55:14.667240"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=<input onfocus=alert('XSS') autofocus>",
+      "evidence": "No XSS detected with payload: <input onfocus=alert('XSS') autofocus>",
+      "timestamp": "2025-09-08T14:55:15.170872"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=<input onfocus=alert('XSS') autofocus>",
+      "evidence": "No XSS detected with payload: <input onfocus=alert('XSS') autofocus>",
+      "timestamp": "2025-09-08T14:55:15.625943"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=<select onfocus=alert('XSS') autofocus>",
+      "evidence": "No XSS detected with payload: <select onfocus=alert('XSS') autofocus>",
+      "timestamp": "2025-09-08T14:55:16.095259"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=<select onfocus=alert('XSS') autofocus>",
+      "evidence": "No XSS detected with payload: <select onfocus=alert('XSS') autofocus>",
+      "timestamp": "2025-09-08T14:55:16.520251"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=<textarea onfocus=alert('XSS') autofocus>",
+      "evidence": "No XSS detected with payload: <textarea onfocus=alert('XSS') autofocus>",
+      "timestamp": "2025-09-08T14:55:17.054526"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=<textarea onfocus=alert('XSS') autofocus>",
+      "evidence": "No XSS detected with payload: <textarea onfocus=alert('XSS') autofocus>",
+      "timestamp": "2025-09-08T14:55:17.647018"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=' OR '1'='1",
+      "evidence": "No SQL injection detected with payload: ' OR '1'='1",
+      "timestamp": "2025-09-08T14:55:19.101137"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=' OR '1'='1",
+      "evidence": "No SQL injection detected with payload: ' OR '1'='1",
+      "timestamp": "2025-09-08T14:55:19.785322"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=' OR 1=1--",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1--",
+      "timestamp": "2025-09-08T14:55:20.476321"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=' OR 1=1--",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1--",
+      "timestamp": "2025-09-08T14:55:21.191525"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=' UNION SELECT null--",
+      "evidence": "No SQL injection detected with payload: ' UNION SELECT null--",
+      "timestamp": "2025-09-08T14:55:21.845923"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=' UNION SELECT null--",
+      "evidence": "No SQL injection detected with payload: ' UNION SELECT null--",
+      "timestamp": "2025-09-08T14:55:22.559002"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname='; DROP TABLE users--",
+      "evidence": "No SQL injection detected with payload: '; DROP TABLE users--",
+      "timestamp": "2025-09-08T14:55:23.221005"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname='; DROP TABLE users--",
+      "evidence": "No SQL injection detected with payload: '; DROP TABLE users--",
+      "timestamp": "2025-09-08T14:55:23.938591"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=' OR 1=1#",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1#",
+      "timestamp": "2025-09-08T14:55:24.791572"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=' OR 1=1#",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1#",
+      "timestamp": "2025-09-08T14:55:25.723957"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=admin'--",
+      "evidence": "No SQL injection detected with payload: admin'--",
+      "timestamp": "2025-09-08T14:55:26.494806"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=admin'--",
+      "evidence": "No SQL injection detected with payload: admin'--",
+      "timestamp": "2025-09-08T14:55:27.501018"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=' OR 'x'='x",
+      "evidence": "No SQL injection detected with payload: ' OR 'x'='x",
+      "timestamp": "2025-09-08T14:55:28.426552"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=' OR 'x'='x",
+      "evidence": "No SQL injection detected with payload: ' OR 'x'='x",
+      "timestamp": "2025-09-08T14:55:29.143592"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=') OR ('1'='1",
+      "evidence": "No SQL injection detected with payload: ') OR ('1'='1",
+      "timestamp": "2025-09-08T14:55:29.810912"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=') OR ('1'='1",
+      "evidence": "No SQL injection detected with payload: ') OR ('1'='1",
+      "timestamp": "2025-09-08T14:55:30.539165"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=1' OR '1'='1' /*",
+      "evidence": "No SQL injection detected with payload: 1' OR '1'='1' /*",
+      "timestamp": "2025-09-08T14:55:31.566635"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=1' OR '1'='1' /*",
+      "evidence": "No SQL injection detected with payload: 1' OR '1'='1' /*",
+      "timestamp": "2025-09-08T14:55:32.564771"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=' OR 1=1 LIMIT 1--",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1 LIMIT 1--",
+      "timestamp": "2025-09-08T14:55:33.214947"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=' OR 1=1 LIMIT 1--",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1 LIMIT 1--",
+      "timestamp": "2025-09-08T14:55:34.038148"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "xss_injection",
+      "success": true,
+      "severity": "HIGH",
+      "payload_used": "fname=<script>alert('XSS')</script>",
+      "evidence": "Partial XSS payload reflected: <script> from <script>alert('XSS')</script>",
+      "timestamp": "2025-09-08T14:55:34.709776"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=<img src=x onerror=alert('XSS')>",
+      "evidence": "No XSS detected with payload: <img src=x onerror=alert('XSS')>",
+      "timestamp": "2025-09-08T14:55:35.412091"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=<img src=x onerror=alert('XSS')>",
+      "evidence": "No XSS detected with payload: <img src=x onerror=alert('XSS')>",
+      "timestamp": "2025-09-08T14:55:36.201600"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=javascript:alert('XSS')",
+      "evidence": "No XSS detected with payload: javascript:alert('XSS')",
+      "timestamp": "2025-09-08T14:55:36.957282"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=javascript:alert('XSS')",
+      "evidence": "No XSS detected with payload: javascript:alert('XSS')",
+      "timestamp": "2025-09-08T14:55:37.747421"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=<svg onload=alert('XSS')>",
+      "evidence": "No XSS detected with payload: <svg onload=alert('XSS')>",
+      "timestamp": "2025-09-08T14:55:38.468335"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=<svg onload=alert('XSS')>",
+      "evidence": "No XSS detected with payload: <svg onload=alert('XSS')>",
+      "timestamp": "2025-09-08T14:55:39.128604"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "xss_injection",
+      "success": true,
+      "severity": "HIGH",
+      "payload_used": "fname='\"><script>alert('XSS')</script>",
+      "evidence": "Partial XSS payload reflected: <script> from '\"><script>alert('XSS')</script>",
+      "timestamp": "2025-09-08T14:55:39.812328"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=<iframe src=javascript:alert('XSS')>",
+      "evidence": "No XSS detected with payload: <iframe src=javascript:alert('XSS')>",
+      "timestamp": "2025-09-08T14:55:40.779924"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=<iframe src=javascript:alert('XSS')>",
+      "evidence": "No XSS detected with payload: <iframe src=javascript:alert('XSS')>",
+      "timestamp": "2025-09-08T14:55:41.396105"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=<body onload=alert('XSS')>",
+      "evidence": "No XSS detected with payload: <body onload=alert('XSS')>",
+      "timestamp": "2025-09-08T14:55:42.076944"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=<body onload=alert('XSS')>",
+      "evidence": "No XSS detected with payload: <body onload=alert('XSS')>",
+      "timestamp": "2025-09-08T14:55:42.899588"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=<input onfocus=alert('XSS') autofocus>",
+      "evidence": "No XSS detected with payload: <input onfocus=alert('XSS') autofocus>",
+      "timestamp": "2025-09-08T14:55:43.550293"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=<input onfocus=alert('XSS') autofocus>",
+      "evidence": "No XSS detected with payload: <input onfocus=alert('XSS') autofocus>",
+      "timestamp": "2025-09-08T14:55:44.297102"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=<select onfocus=alert('XSS') autofocus>",
+      "evidence": "No XSS detected with payload: <select onfocus=alert('XSS') autofocus>",
+      "timestamp": "2025-09-08T14:55:44.999333"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=<select onfocus=alert('XSS') autofocus>",
+      "evidence": "No XSS detected with payload: <select onfocus=alert('XSS') autofocus>",
+      "timestamp": "2025-09-08T14:55:45.716163"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=<textarea onfocus=alert('XSS') autofocus>",
+      "evidence": "No XSS detected with payload: <textarea onfocus=alert('XSS') autofocus>",
+      "timestamp": "2025-09-08T14:55:46.538487"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=<textarea onfocus=alert('XSS') autofocus>",
+      "evidence": "No XSS detected with payload: <textarea onfocus=alert('XSS') autofocus>",
+      "timestamp": "2025-09-08T14:55:47.332805"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "firstname=' OR '1'='1",
+      "evidence": "No SQL injection detected with payload: ' OR '1'='1",
+      "timestamp": "2025-09-08T14:55:48.325142"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lastname=' OR '1'='1",
+      "evidence": "No SQL injection detected with payload: ' OR '1'='1",
+      "timestamp": "2025-09-08T14:55:48.777153"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "firstname=' OR 1=1--",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1--",
+      "timestamp": "2025-09-08T14:55:50.240595"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lastname=' OR 1=1--",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1--",
+      "timestamp": "2025-09-08T14:55:50.723800"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "firstname=' UNION SELECT null--",
+      "evidence": "No SQL injection detected with payload: ' UNION SELECT null--",
+      "timestamp": "2025-09-08T14:55:51.171502"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lastname=' UNION SELECT null--",
+      "evidence": "No SQL injection detected with payload: ' UNION SELECT null--",
+      "timestamp": "2025-09-08T14:55:52.057896"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "firstname='; DROP TABLE users--",
+      "evidence": "No SQL injection detected with payload: '; DROP TABLE users--",
+      "timestamp": "2025-09-08T14:55:52.583277"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lastname='; DROP TABLE users--",
+      "evidence": "No SQL injection detected with payload: '; DROP TABLE users--",
+      "timestamp": "2025-09-08T14:55:54.372792"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "firstname=' OR 1=1#",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1#",
+      "timestamp": "2025-09-08T14:55:54.891473"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lastname=' OR 1=1#",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1#",
+      "timestamp": "2025-09-08T14:55:55.614207"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "firstname=admin'--",
+      "evidence": "No SQL injection detected with payload: admin'--",
+      "timestamp": "2025-09-08T14:55:56.060898"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lastname=admin'--",
+      "evidence": "No SQL injection detected with payload: admin'--",
+      "timestamp": "2025-09-08T14:55:56.473570"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "firstname=' OR 'x'='x",
+      "evidence": "No SQL injection detected with payload: ' OR 'x'='x",
+      "timestamp": "2025-09-08T14:55:56.861512"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lastname=' OR 'x'='x",
+      "evidence": "No SQL injection detected with payload: ' OR 'x'='x",
+      "timestamp": "2025-09-08T14:55:57.482514"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "firstname=') OR ('1'='1",
+      "evidence": "No SQL injection detected with payload: ') OR ('1'='1",
+      "timestamp": "2025-09-08T14:55:57.934932"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lastname=') OR ('1'='1",
+      "evidence": "No SQL injection detected with payload: ') OR ('1'='1",
+      "timestamp": "2025-09-08T14:55:58.407674"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "firstname=1' OR '1'='1' /*",
+      "evidence": "No SQL injection detected with payload: 1' OR '1'='1' /*",
+      "timestamp": "2025-09-08T14:55:58.798818"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lastname=1' OR '1'='1' /*",
+      "evidence": "No SQL injection detected with payload: 1' OR '1'='1' /*",
+      "timestamp": "2025-09-08T14:55:59.304910"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "firstname=' OR 1=1 LIMIT 1--",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1 LIMIT 1--",
+      "timestamp": "2025-09-08T14:55:59.717083"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lastname=' OR 1=1 LIMIT 1--",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1 LIMIT 1--",
+      "timestamp": "2025-09-08T14:56:00.161696"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "firstname=<script>alert('XSS')</script>",
+      "evidence": "No XSS detected with payload: <script>alert('XSS')</script>",
+      "timestamp": "2025-09-08T14:56:00.583012"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lastname=<script>alert('XSS')</script>",
+      "evidence": "No XSS detected with payload: <script>alert('XSS')</script>",
+      "timestamp": "2025-09-08T14:56:01.941447"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "firstname=<img src=x onerror=alert('XSS')>",
+      "evidence": "No XSS detected with payload: <img src=x onerror=alert('XSS')>",
+      "timestamp": "2025-09-08T14:56:02.499152"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lastname=<img src=x onerror=alert('XSS')>",
+      "evidence": "No XSS detected with payload: <img src=x onerror=alert('XSS')>",
+      "timestamp": "2025-09-08T14:56:03.011276"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": true,
+      "severity": "HIGH",
+      "payload_used": "firstname=javascript:alert('XSS')",
+      "evidence": "XSS payload directly reflected in response: javascript:alert('XSS')",
+      "timestamp": "2025-09-08T14:56:05.313893"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "firstname=<svg onload=alert('XSS')>",
+      "evidence": "No XSS detected with payload: <svg onload=alert('XSS')>",
+      "timestamp": "2025-09-08T14:56:05.740380"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lastname=<svg onload=alert('XSS')>",
+      "evidence": "No XSS detected with payload: <svg onload=alert('XSS')>",
+      "timestamp": "2025-09-08T14:56:06.275183"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "firstname='\"><script>alert('XSS')</script>",
+      "evidence": "No XSS detected with payload: '\"><script>alert('XSS')</script>",
+      "timestamp": "2025-09-08T14:56:06.697603"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lastname='\"><script>alert('XSS')</script>",
+      "evidence": "No XSS detected with payload: '\"><script>alert('XSS')</script>",
+      "timestamp": "2025-09-08T14:56:07.721425"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "firstname=<iframe src=javascript:alert('XSS')>",
+      "evidence": "No XSS detected with payload: <iframe src=javascript:alert('XSS')>",
+      "timestamp": "2025-09-08T14:56:08.180046"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lastname=<iframe src=javascript:alert('XSS')>",
+      "evidence": "No XSS detected with payload: <iframe src=javascript:alert('XSS')>",
+      "timestamp": "2025-09-08T14:56:08.661015"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "firstname=<body onload=alert('XSS')>",
+      "evidence": "No XSS detected with payload: <body onload=alert('XSS')>",
+      "timestamp": "2025-09-08T14:56:10.315687"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lastname=<body onload=alert('XSS')>",
+      "evidence": "No XSS detected with payload: <body onload=alert('XSS')>",
+      "timestamp": "2025-09-08T14:56:10.829230"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "firstname=<input onfocus=alert('XSS') autofocus>",
+      "evidence": "No XSS detected with payload: <input onfocus=alert('XSS') autofocus>",
+      "timestamp": "2025-09-08T14:56:11.251668"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lastname=<input onfocus=alert('XSS') autofocus>",
+      "evidence": "No XSS detected with payload: <input onfocus=alert('XSS') autofocus>",
+      "timestamp": "2025-09-08T14:56:11.741833"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "firstname=<select onfocus=alert('XSS') autofocus>",
+      "evidence": "No XSS detected with payload: <select onfocus=alert('XSS') autofocus>",
+      "timestamp": "2025-09-08T14:56:12.457717"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lastname=<select onfocus=alert('XSS') autofocus>",
+      "evidence": "No XSS detected with payload: <select onfocus=alert('XSS') autofocus>",
+      "timestamp": "2025-09-08T14:56:13.019224"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "firstname=<textarea onfocus=alert('XSS') autofocus>",
+      "evidence": "No XSS detected with payload: <textarea onfocus=alert('XSS') autofocus>",
+      "timestamp": "2025-09-08T14:56:13.455373"
+    },
+    {
+      "element_type": "form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lastname=<textarea onfocus=alert('XSS') autofocus>",
+      "evidence": "No XSS detected with payload: <textarea onfocus=alert('XSS') autofocus>",
+      "timestamp": "2025-09-08T14:56:14.212876"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_submit",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=' OR '1'='1",
+      "evidence": "No SQL injection detected with payload: ' OR '1'='1",
+      "timestamp": "2025-09-08T14:56:15.252343"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_submit",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=' OR 1=1--",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1--",
+      "timestamp": "2025-09-08T14:56:16.036705"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_submit",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=' UNION SELECT null--",
+      "evidence": "No SQL injection detected with payload: ' UNION SELECT null--",
+      "timestamp": "2025-09-08T14:56:16.649406"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_submit",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename='; DROP TABLE users--",
+      "evidence": "No SQL injection detected with payload: '; DROP TABLE users--",
+      "timestamp": "2025-09-08T14:56:17.144068"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_submit",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=' OR 1=1#",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1#",
+      "timestamp": "2025-09-08T14:56:17.860468"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_submit",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=admin'--",
+      "evidence": "No SQL injection detected with payload: admin'--",
+      "timestamp": "2025-09-08T14:56:18.330434"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_submit",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=' OR 'x'='x",
+      "evidence": "No SQL injection detected with payload: ' OR 'x'='x",
+      "timestamp": "2025-09-08T14:56:18.883912"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_submit",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=') OR ('1'='1",
+      "evidence": "No SQL injection detected with payload: ') OR ('1'='1",
+      "timestamp": "2025-09-08T14:56:19.409682"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_submit",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=1' OR '1'='1' /*",
+      "evidence": "No SQL injection detected with payload: 1' OR '1'='1' /*",
+      "timestamp": "2025-09-08T14:56:20.137206"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_submit",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=' OR 1=1 LIMIT 1--",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1 LIMIT 1--",
+      "timestamp": "2025-09-08T14:56:20.678247"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_text",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=' OR '1'='1",
+      "evidence": "No SQL injection detected with payload: ' OR '1'='1",
+      "timestamp": "2025-09-08T14:56:22.265233"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_text",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=' OR 1=1--",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1--",
+      "timestamp": "2025-09-08T14:56:22.806824"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_text",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=' UNION SELECT null--",
+      "evidence": "No SQL injection detected with payload: ' UNION SELECT null--",
+      "timestamp": "2025-09-08T14:56:23.366743"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_text",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename='; DROP TABLE users--",
+      "evidence": "No SQL injection detected with payload: '; DROP TABLE users--",
+      "timestamp": "2025-09-08T14:56:23.921364"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_text",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=' OR 1=1#",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1#",
+      "timestamp": "2025-09-08T14:56:24.440117"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_text",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=admin'--",
+      "evidence": "No SQL injection detected with payload: admin'--",
+      "timestamp": "2025-09-08T14:56:24.956402"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_text",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=' OR 'x'='x",
+      "evidence": "No SQL injection detected with payload: ' OR 'x'='x",
+      "timestamp": "2025-09-08T14:56:25.654830"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_text",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=') OR ('1'='1",
+      "evidence": "No SQL injection detected with payload: ') OR ('1'='1",
+      "timestamp": "2025-09-08T14:56:26.314593"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_text",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=1' OR '1'='1' /*",
+      "evidence": "No SQL injection detected with payload: 1' OR '1'='1' /*",
+      "timestamp": "2025-09-08T14:56:26.872769"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_text",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=' OR 1=1 LIMIT 1--",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1 LIMIT 1--",
+      "timestamp": "2025-09-08T14:56:27.419113"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_radio",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=' OR '1'='1",
+      "evidence": "No SQL injection detected with payload: ' OR '1'='1",
+      "timestamp": "2025-09-08T14:56:28.447336"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_radio",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=' OR 1=1--",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1--",
+      "timestamp": "2025-09-08T14:56:28.987284"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_radio",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=' UNION SELECT null--",
+      "evidence": "No SQL injection detected with payload: ' UNION SELECT null--",
+      "timestamp": "2025-09-08T14:56:29.534728"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_radio",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename='; DROP TABLE users--",
+      "evidence": "No SQL injection detected with payload: '; DROP TABLE users--",
+      "timestamp": "2025-09-08T14:56:30.113815"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_radio",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=' OR 1=1#",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1#",
+      "timestamp": "2025-09-08T14:56:30.663963"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_radio",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=admin'--",
+      "evidence": "No SQL injection detected with payload: admin'--",
+      "timestamp": "2025-09-08T14:56:31.202009"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_radio",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=' OR 'x'='x",
+      "evidence": "No SQL injection detected with payload: ' OR 'x'='x",
+      "timestamp": "2025-09-08T14:56:32.198130"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_radio",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=') OR ('1'='1",
+      "evidence": "No SQL injection detected with payload: ') OR ('1'='1",
+      "timestamp": "2025-09-08T14:56:32.709888"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_radio",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=1' OR '1'='1' /*",
+      "evidence": "No SQL injection detected with payload: 1' OR '1'='1' /*",
+      "timestamp": "2025-09-08T14:56:33.222716"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_radio",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=' OR 1=1 LIMIT 1--",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1 LIMIT 1--",
+      "timestamp": "2025-09-08T14:56:33.742605"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_input_checkbox",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=' OR '1'='1",
+      "evidence": "No SQL injection detected with payload: ' OR '1'='1",
+      "timestamp": "2025-09-08T14:56:34.780025"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_input_checkbox",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=' OR 1=1--",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1--",
+      "timestamp": "2025-09-08T14:56:35.294089"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_input_checkbox",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=' UNION SELECT null--",
+      "evidence": "No SQL injection detected with payload: ' UNION SELECT null--",
+      "timestamp": "2025-09-08T14:56:35.956872"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_input_checkbox",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename='; DROP TABLE users--",
+      "evidence": "No SQL injection detected with payload: '; DROP TABLE users--",
+      "timestamp": "2025-09-08T14:56:36.503879"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_input_checkbox",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=' OR 1=1#",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1#",
+      "timestamp": "2025-09-08T14:56:37.030410"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_input_checkbox",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=admin'--",
+      "evidence": "No SQL injection detected with payload: admin'--",
+      "timestamp": "2025-09-08T14:56:37.534755"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_input_checkbox",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=' OR 'x'='x",
+      "evidence": "No SQL injection detected with payload: ' OR 'x'='x",
+      "timestamp": "2025-09-08T14:56:38.040156"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_input_checkbox",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=') OR ('1'='1",
+      "evidence": "No SQL injection detected with payload: ') OR ('1'='1",
+      "timestamp": "2025-09-08T14:56:38.593105"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_input_checkbox",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=1' OR '1'='1' /*",
+      "evidence": "No SQL injection detected with payload: 1' OR '1'='1' /*",
+      "timestamp": "2025-09-08T14:56:39.262902"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_input_checkbox",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=' OR 1=1 LIMIT 1--",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1 LIMIT 1--",
+      "timestamp": "2025-09-08T14:56:40.128493"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_submit",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=' OR '1'='1",
+      "evidence": "No SQL injection detected with payload: ' OR '1'='1",
+      "timestamp": "2025-09-08T14:56:40.963228"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_submit",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=' OR 1=1--",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1--",
+      "timestamp": "2025-09-08T14:56:41.528537"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_submit",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=' UNION SELECT null--",
+      "evidence": "No SQL injection detected with payload: ' UNION SELECT null--",
+      "timestamp": "2025-09-08T14:56:42.049292"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_submit",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename='; DROP TABLE users--",
+      "evidence": "No SQL injection detected with payload: '; DROP TABLE users--",
+      "timestamp": "2025-09-08T14:56:42.551843"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_submit",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=' OR 1=1#",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1#",
+      "timestamp": "2025-09-08T14:56:43.016139"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_submit",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=admin'--",
+      "evidence": "No SQL injection detected with payload: admin'--",
+      "timestamp": "2025-09-08T14:56:44.003920"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_submit",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=' OR 'x'='x",
+      "evidence": "No SQL injection detected with payload: ' OR 'x'='x",
+      "timestamp": "2025-09-08T14:56:44.836971"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_submit",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=') OR ('1'='1",
+      "evidence": "No SQL injection detected with payload: ') OR ('1'='1",
+      "timestamp": "2025-09-08T14:56:45.088882"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_submit",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=1' OR '1'='1' /*",
+      "evidence": "No SQL injection detected with payload: 1' OR '1'='1' /*",
+      "timestamp": "2025-09-08T14:56:45.181342"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_submit",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=' OR 1=1 LIMIT 1--",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1 LIMIT 1--",
+      "timestamp": "2025-09-08T14:56:45.432825"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_submit_id",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=' OR '1'='1",
+      "evidence": "No SQL injection detected with payload: ' OR '1'='1",
+      "timestamp": "2025-09-08T14:56:46.503906"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_submit_id",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=' OR 1=1--",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1--",
+      "timestamp": "2025-09-08T14:56:46.980030"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_submit_id",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=' UNION SELECT null--",
+      "evidence": "No SQL injection detected with payload: ' UNION SELECT null--",
+      "timestamp": "2025-09-08T14:56:47.430763"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_submit_id",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename='; DROP TABLE users--",
+      "evidence": "No SQL injection detected with payload: '; DROP TABLE users--",
+      "timestamp": "2025-09-08T14:56:48.198791"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_submit_id",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=' OR 1=1#",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1#",
+      "timestamp": "2025-09-08T14:56:48.695143"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_submit_id",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=admin'--",
+      "evidence": "No SQL injection detected with payload: admin'--",
+      "timestamp": "2025-09-08T14:56:49.221231"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_submit_id",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=' OR 'x'='x",
+      "evidence": "No SQL injection detected with payload: ' OR 'x'='x",
+      "timestamp": "2025-09-08T14:56:50.015652"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_submit_id",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=') OR ('1'='1",
+      "evidence": "No SQL injection detected with payload: ') OR ('1'='1",
+      "timestamp": "2025-09-08T14:56:50.600800"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_submit_id",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=1' OR '1'='1' /*",
+      "evidence": "No SQL injection detected with payload: 1' OR '1'='1' /*",
+      "timestamp": "2025-09-08T14:56:51.079952"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_submit_id",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "filename=' OR 1=1 LIMIT 1--",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1 LIMIT 1--",
+      "timestamp": "2025-09-08T14:56:53.099127"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://profile.w3schools.com/log-in?redirect_url=https%3A%2F%2Fmy-learning.w3schools.com",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "redirect_url=' OR '1'='1",
+      "evidence": "No SQL injection detected with payload: ' OR '1'='1",
+      "timestamp": "2025-09-08T14:56:54.121180"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://profile.w3schools.com/log-in?redirect_url=https%3A%2F%2Fmy-learning.w3schools.com",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "redirect_url=' OR 1=1--",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1--",
+      "timestamp": "2025-09-08T14:56:54.330101"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://profile.w3schools.com/log-in?redirect_url=https%3A%2F%2Fmy-learning.w3schools.com",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "redirect_url=' UNION SELECT null--",
+      "evidence": "No SQL injection detected with payload: ' UNION SELECT null--",
+      "timestamp": "2025-09-08T14:56:55.249220"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://profile.w3schools.com/log-in?redirect_url=https%3A%2F%2Fmy-learning.w3schools.com",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "redirect_url='; DROP TABLE users--",
+      "evidence": "No SQL injection detected with payload: '; DROP TABLE users--",
+      "timestamp": "2025-09-08T14:56:55.454970"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://profile.w3schools.com/log-in?redirect_url=https%3A%2F%2Fmy-learning.w3schools.com",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "redirect_url=' OR 1=1#",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1#",
+      "timestamp": "2025-09-08T14:56:55.660575"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://profile.w3schools.com/log-in?redirect_url=https%3A%2F%2Fmy-learning.w3schools.com",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "redirect_url=admin'--",
+      "evidence": "No SQL injection detected with payload: admin'--",
+      "timestamp": "2025-09-08T14:56:55.887025"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://profile.w3schools.com/log-in?redirect_url=https%3A%2F%2Fmy-learning.w3schools.com",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "redirect_url=' OR 'x'='x",
+      "evidence": "No SQL injection detected with payload: ' OR 'x'='x",
+      "timestamp": "2025-09-08T14:56:56.086965"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://profile.w3schools.com/log-in?redirect_url=https%3A%2F%2Fmy-learning.w3schools.com",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "redirect_url=') OR ('1'='1",
+      "evidence": "No SQL injection detected with payload: ') OR ('1'='1",
+      "timestamp": "2025-09-08T14:56:56.341410"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://profile.w3schools.com/log-in?redirect_url=https%3A%2F%2Fmy-learning.w3schools.com",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "redirect_url=1' OR '1'='1' /*",
+      "evidence": "No SQL injection detected with payload: 1' OR '1'='1' /*",
+      "timestamp": "2025-09-08T14:56:56.597601"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://profile.w3schools.com/log-in?redirect_url=https%3A%2F%2Fmy-learning.w3schools.com",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "redirect_url=' OR 1=1 LIMIT 1--",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1 LIMIT 1--",
+      "timestamp": "2025-09-08T14:56:57.314844"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://profile.w3schools.com/log-in?redirect_url=https%3A%2F%2Fpathfinder.w3schools.com",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "redirect_url=' OR '1'='1",
+      "evidence": "No SQL injection detected with payload: ' OR '1'='1",
+      "timestamp": "2025-09-08T14:56:58.040193"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://profile.w3schools.com/log-in?redirect_url=https%3A%2F%2Fpathfinder.w3schools.com",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "redirect_url=' OR 1=1--",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1--",
+      "timestamp": "2025-09-08T14:56:58.260575"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://profile.w3schools.com/log-in?redirect_url=https%3A%2F%2Fpathfinder.w3schools.com",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "redirect_url=' UNION SELECT null--",
+      "evidence": "No SQL injection detected with payload: ' UNION SELECT null--",
+      "timestamp": "2025-09-08T14:56:58.495048"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://profile.w3schools.com/log-in?redirect_url=https%3A%2F%2Fpathfinder.w3schools.com",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "redirect_url='; DROP TABLE users--",
+      "evidence": "No SQL injection detected with payload: '; DROP TABLE users--",
+      "timestamp": "2025-09-08T14:56:58.741161"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://profile.w3schools.com/log-in?redirect_url=https%3A%2F%2Fpathfinder.w3schools.com",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "redirect_url=' OR 1=1#",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1#",
+      "timestamp": "2025-09-08T14:57:00.070292"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://profile.w3schools.com/log-in?redirect_url=https%3A%2F%2Fpathfinder.w3schools.com",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "redirect_url=admin'--",
+      "evidence": "No SQL injection detected with payload: admin'--",
+      "timestamp": "2025-09-08T14:57:00.256377"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://profile.w3schools.com/log-in?redirect_url=https%3A%2F%2Fpathfinder.w3schools.com",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "redirect_url=' OR 'x'='x",
+      "evidence": "No SQL injection detected with payload: ' OR 'x'='x",
+      "timestamp": "2025-09-08T14:57:00.496440"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://profile.w3schools.com/log-in?redirect_url=https%3A%2F%2Fpathfinder.w3schools.com",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "redirect_url=') OR ('1'='1",
+      "evidence": "No SQL injection detected with payload: ') OR ('1'='1",
+      "timestamp": "2025-09-08T14:57:00.695569"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://profile.w3schools.com/log-in?redirect_url=https%3A%2F%2Fpathfinder.w3schools.com",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "redirect_url=1' OR '1'='1' /*",
+      "evidence": "No SQL injection detected with payload: 1' OR '1'='1' /*",
+      "timestamp": "2025-09-08T14:57:00.901206"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://profile.w3schools.com/log-in?redirect_url=https%3A%2F%2Fpathfinder.w3schools.com",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "redirect_url=' OR 1=1 LIMIT 1--",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1 LIMIT 1--",
+      "timestamp": "2025-09-08T14:57:01.090219"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://profile.w3schools.com/sign-up?redirect_url=https%3A%2F%2Fpathfinder.w3schools.com",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "redirect_url=' OR '1'='1",
+      "evidence": "No SQL injection detected with payload: ' OR '1'='1",
+      "timestamp": "2025-09-08T14:57:01.861274"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://profile.w3schools.com/sign-up?redirect_url=https%3A%2F%2Fpathfinder.w3schools.com",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "redirect_url=' OR 1=1--",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1--",
+      "timestamp": "2025-09-08T14:57:02.101386"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://profile.w3schools.com/sign-up?redirect_url=https%3A%2F%2Fpathfinder.w3schools.com",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "redirect_url=' UNION SELECT null--",
+      "evidence": "No SQL injection detected with payload: ' UNION SELECT null--",
+      "timestamp": "2025-09-08T14:57:02.340957"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://profile.w3schools.com/sign-up?redirect_url=https%3A%2F%2Fpathfinder.w3schools.com",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "redirect_url='; DROP TABLE users--",
+      "evidence": "No SQL injection detected with payload: '; DROP TABLE users--",
+      "timestamp": "2025-09-08T14:57:02.580952"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://profile.w3schools.com/sign-up?redirect_url=https%3A%2F%2Fpathfinder.w3schools.com",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "redirect_url=' OR 1=1#",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1#",
+      "timestamp": "2025-09-08T14:57:02.821396"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://profile.w3schools.com/sign-up?redirect_url=https%3A%2F%2Fpathfinder.w3schools.com",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "redirect_url=admin'--",
+      "evidence": "No SQL injection detected with payload: admin'--",
+      "timestamp": "2025-09-08T14:57:03.061167"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://profile.w3schools.com/sign-up?redirect_url=https%3A%2F%2Fpathfinder.w3schools.com",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "redirect_url=' OR 'x'='x",
+      "evidence": "No SQL injection detected with payload: ' OR 'x'='x",
+      "timestamp": "2025-09-08T14:57:03.839389"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://profile.w3schools.com/sign-up?redirect_url=https%3A%2F%2Fpathfinder.w3schools.com",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "redirect_url=') OR ('1'='1",
+      "evidence": "No SQL injection detected with payload: ') OR ('1'='1",
+      "timestamp": "2025-09-08T14:57:04.036476"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://profile.w3schools.com/sign-up?redirect_url=https%3A%2F%2Fpathfinder.w3schools.com",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "redirect_url=1' OR '1'='1' /*",
+      "evidence": "No SQL injection detected with payload: 1' OR '1'='1' /*",
+      "timestamp": "2025-09-08T14:57:04.267990"
+    },
+    {
+      "element_type": "link",
+      "element_url": "https://profile.w3schools.com/sign-up?redirect_url=https%3A%2F%2Fpathfinder.w3schools.com",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "redirect_url=' OR 1=1 LIMIT 1--",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1 LIMIT 1--",
+      "timestamp": "2025-09-08T14:57:04.501413"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=' OR '1'='1",
+      "evidence": "No SQL injection detected with payload: ' OR '1'='1",
+      "timestamp": "2025-09-08T14:57:08.388827"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=' OR '1'='1",
+      "evidence": "No SQL injection detected with payload: ' OR '1'='1",
+      "timestamp": "2025-09-08T14:57:08.487679"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=' OR 1=1--",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1--",
+      "timestamp": "2025-09-08T14:57:08.583678"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=' OR 1=1--",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1--",
+      "timestamp": "2025-09-08T14:57:08.675895"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=' UNION SELECT null--",
+      "evidence": "No SQL injection detected with payload: ' UNION SELECT null--",
+      "timestamp": "2025-09-08T14:57:08.766735"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=' UNION SELECT null--",
+      "evidence": "No SQL injection detected with payload: ' UNION SELECT null--",
+      "timestamp": "2025-09-08T14:57:08.855195"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname='; DROP TABLE users--",
+      "evidence": "No SQL injection detected with payload: '; DROP TABLE users--",
+      "timestamp": "2025-09-08T14:57:08.936514"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname='; DROP TABLE users--",
+      "evidence": "No SQL injection detected with payload: '; DROP TABLE users--",
+      "timestamp": "2025-09-08T14:57:09.040840"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=' OR 1=1#",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1#",
+      "timestamp": "2025-09-08T14:57:09.122143"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=' OR 1=1#",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1#",
+      "timestamp": "2025-09-08T14:57:09.200010"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=admin'--",
+      "evidence": "No SQL injection detected with payload: admin'--",
+      "timestamp": "2025-09-08T14:57:09.279533"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=admin'--",
+      "evidence": "No SQL injection detected with payload: admin'--",
+      "timestamp": "2025-09-08T14:57:09.362777"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=' OR 'x'='x",
+      "evidence": "No SQL injection detected with payload: ' OR 'x'='x",
+      "timestamp": "2025-09-08T14:57:09.444970"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=' OR 'x'='x",
+      "evidence": "No SQL injection detected with payload: ' OR 'x'='x",
+      "timestamp": "2025-09-08T14:57:09.554037"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=') OR ('1'='1",
+      "evidence": "No SQL injection detected with payload: ') OR ('1'='1",
+      "timestamp": "2025-09-08T14:57:09.641780"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=') OR ('1'='1",
+      "evidence": "No SQL injection detected with payload: ') OR ('1'='1",
+      "timestamp": "2025-09-08T14:57:09.721800"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=1' OR '1'='1' /*",
+      "evidence": "No SQL injection detected with payload: 1' OR '1'='1' /*",
+      "timestamp": "2025-09-08T14:57:09.803129"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=1' OR '1'='1' /*",
+      "evidence": "No SQL injection detected with payload: 1' OR '1'='1' /*",
+      "timestamp": "2025-09-08T14:57:10.209819"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=' OR 1=1 LIMIT 1--",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1 LIMIT 1--",
+      "timestamp": "2025-09-08T14:57:10.289156"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=' OR 1=1 LIMIT 1--",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1 LIMIT 1--",
+      "timestamp": "2025-09-08T14:57:10.371476"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=<script>alert('XSS')</script>",
+      "evidence": "No XSS detected with payload: <script>alert('XSS')</script>",
+      "timestamp": "2025-09-08T14:57:10.450942"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=<script>alert('XSS')</script>",
+      "evidence": "No XSS detected with payload: <script>alert('XSS')</script>",
+      "timestamp": "2025-09-08T14:57:10.539143"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=<img src=x onerror=alert('XSS')>",
+      "evidence": "No XSS detected with payload: <img src=x onerror=alert('XSS')>",
+      "timestamp": "2025-09-08T14:57:10.626013"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=<img src=x onerror=alert('XSS')>",
+      "evidence": "No XSS detected with payload: <img src=x onerror=alert('XSS')>",
+      "timestamp": "2025-09-08T14:57:10.717234"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": true,
+      "severity": "HIGH",
+      "payload_used": "fname=javascript:alert('XSS')",
+      "evidence": "XSS payload directly reflected in response: javascript:alert('XSS')",
+      "timestamp": "2025-09-08T14:57:10.805039"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=<svg onload=alert('XSS')>",
+      "evidence": "No XSS detected with payload: <svg onload=alert('XSS')>",
+      "timestamp": "2025-09-08T14:57:10.896070"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=<svg onload=alert('XSS')>",
+      "evidence": "No XSS detected with payload: <svg onload=alert('XSS')>",
+      "timestamp": "2025-09-08T14:57:10.988845"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname='\"><script>alert('XSS')</script>",
+      "evidence": "No XSS detected with payload: '\"><script>alert('XSS')</script>",
+      "timestamp": "2025-09-08T14:57:11.067977"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname='\"><script>alert('XSS')</script>",
+      "evidence": "No XSS detected with payload: '\"><script>alert('XSS')</script>",
+      "timestamp": "2025-09-08T14:57:11.155329"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=<iframe src=javascript:alert('XSS')>",
+      "evidence": "No XSS detected with payload: <iframe src=javascript:alert('XSS')>",
+      "timestamp": "2025-09-08T14:57:11.227816"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=<iframe src=javascript:alert('XSS')>",
+      "evidence": "No XSS detected with payload: <iframe src=javascript:alert('XSS')>",
+      "timestamp": "2025-09-08T14:57:11.319586"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=<body onload=alert('XSS')>",
+      "evidence": "No XSS detected with payload: <body onload=alert('XSS')>",
+      "timestamp": "2025-09-08T14:57:11.419317"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=<body onload=alert('XSS')>",
+      "evidence": "No XSS detected with payload: <body onload=alert('XSS')>",
+      "timestamp": "2025-09-08T14:57:11.510770"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=<input onfocus=alert('XSS') autofocus>",
+      "evidence": "No XSS detected with payload: <input onfocus=alert('XSS') autofocus>",
+      "timestamp": "2025-09-08T14:57:11.597123"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=<input onfocus=alert('XSS') autofocus>",
+      "evidence": "No XSS detected with payload: <input onfocus=alert('XSS') autofocus>",
+      "timestamp": "2025-09-08T14:57:12.176349"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=<select onfocus=alert('XSS') autofocus>",
+      "evidence": "No XSS detected with payload: <select onfocus=alert('XSS') autofocus>",
+      "timestamp": "2025-09-08T14:57:12.278916"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=<select onfocus=alert('XSS') autofocus>",
+      "evidence": "No XSS detected with payload: <select onfocus=alert('XSS') autofocus>",
+      "timestamp": "2025-09-08T14:57:12.377757"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=<textarea onfocus=alert('XSS') autofocus>",
+      "evidence": "No XSS detected with payload: <textarea onfocus=alert('XSS') autofocus>",
+      "timestamp": "2025-09-08T14:57:12.454974"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=<textarea onfocus=alert('XSS') autofocus>",
+      "evidence": "No XSS detected with payload: <textarea onfocus=alert('XSS') autofocus>",
+      "timestamp": "2025-09-08T14:57:12.545524"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=' OR '1'='1",
+      "evidence": "No SQL injection detected with payload: ' OR '1'='1",
+      "timestamp": "2025-09-08T14:57:13.237653"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=' OR '1'='1",
+      "evidence": "No SQL injection detected with payload: ' OR '1'='1",
+      "timestamp": "2025-09-08T14:57:13.373130"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=' OR 1=1--",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1--",
+      "timestamp": "2025-09-08T14:57:13.525883"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=' OR 1=1--",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1--",
+      "timestamp": "2025-09-08T14:57:13.677722"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=' UNION SELECT null--",
+      "evidence": "No SQL injection detected with payload: ' UNION SELECT null--",
+      "timestamp": "2025-09-08T14:57:13.824910"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=' UNION SELECT null--",
+      "evidence": "No SQL injection detected with payload: ' UNION SELECT null--",
+      "timestamp": "2025-09-08T14:57:13.969258"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname='; DROP TABLE users--",
+      "evidence": "No SQL injection detected with payload: '; DROP TABLE users--",
+      "timestamp": "2025-09-08T14:57:14.498152"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname='; DROP TABLE users--",
+      "evidence": "No SQL injection detected with payload: '; DROP TABLE users--",
+      "timestamp": "2025-09-08T14:57:14.641755"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=' OR 1=1#",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1#",
+      "timestamp": "2025-09-08T14:57:14.772581"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=' OR 1=1#",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1#",
+      "timestamp": "2025-09-08T14:57:14.894613"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=admin'--",
+      "evidence": "No SQL injection detected with payload: admin'--",
+      "timestamp": "2025-09-08T14:57:15.020054"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=admin'--",
+      "evidence": "No SQL injection detected with payload: admin'--",
+      "timestamp": "2025-09-08T14:57:15.138420"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=' OR 'x'='x",
+      "evidence": "No SQL injection detected with payload: ' OR 'x'='x",
+      "timestamp": "2025-09-08T14:57:15.248027"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=' OR 'x'='x",
+      "evidence": "No SQL injection detected with payload: ' OR 'x'='x",
+      "timestamp": "2025-09-08T14:57:15.373256"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=') OR ('1'='1",
+      "evidence": "No SQL injection detected with payload: ') OR ('1'='1",
+      "timestamp": "2025-09-08T14:57:15.500714"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=') OR ('1'='1",
+      "evidence": "No SQL injection detected with payload: ') OR ('1'='1",
+      "timestamp": "2025-09-08T14:57:15.612460"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=1' OR '1'='1' /*",
+      "evidence": "No SQL injection detected with payload: 1' OR '1'='1' /*",
+      "timestamp": "2025-09-08T14:57:15.746825"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=1' OR '1'='1' /*",
+      "evidence": "No SQL injection detected with payload: 1' OR '1'='1' /*",
+      "timestamp": "2025-09-08T14:57:15.889493"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=' OR 1=1 LIMIT 1--",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1 LIMIT 1--",
+      "timestamp": "2025-09-08T14:57:17.146927"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=' OR 1=1 LIMIT 1--",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1 LIMIT 1--",
+      "timestamp": "2025-09-08T14:57:17.325453"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "xss_injection",
+      "success": true,
+      "severity": "HIGH",
+      "payload_used": "fname=<script>alert('XSS')</script>",
+      "evidence": "Partial XSS payload reflected: <script> from <script>alert('XSS')</script>",
+      "timestamp": "2025-09-08T14:57:17.431849"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=<img src=x onerror=alert('XSS')>",
+      "evidence": "No XSS detected with payload: <img src=x onerror=alert('XSS')>",
+      "timestamp": "2025-09-08T14:57:17.572573"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=<img src=x onerror=alert('XSS')>",
+      "evidence": "No XSS detected with payload: <img src=x onerror=alert('XSS')>",
+      "timestamp": "2025-09-08T14:57:17.676777"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=javascript:alert('XSS')",
+      "evidence": "No XSS detected with payload: javascript:alert('XSS')",
+      "timestamp": "2025-09-08T14:57:17.776645"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=javascript:alert('XSS')",
+      "evidence": "No XSS detected with payload: javascript:alert('XSS')",
+      "timestamp": "2025-09-08T14:57:17.887076"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=<svg onload=alert('XSS')>",
+      "evidence": "No XSS detected with payload: <svg onload=alert('XSS')>",
+      "timestamp": "2025-09-08T14:57:18.012036"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=<svg onload=alert('XSS')>",
+      "evidence": "No XSS detected with payload: <svg onload=alert('XSS')>",
+      "timestamp": "2025-09-08T14:57:18.134174"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "xss_injection",
+      "success": true,
+      "severity": "HIGH",
+      "payload_used": "fname='\"><script>alert('XSS')</script>",
+      "evidence": "Partial XSS payload reflected: <script> from '\"><script>alert('XSS')</script>",
+      "timestamp": "2025-09-08T14:57:18.248888"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=<iframe src=javascript:alert('XSS')>",
+      "evidence": "No XSS detected with payload: <iframe src=javascript:alert('XSS')>",
+      "timestamp": "2025-09-08T14:57:18.346994"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=<iframe src=javascript:alert('XSS')>",
+      "evidence": "No XSS detected with payload: <iframe src=javascript:alert('XSS')>",
+      "timestamp": "2025-09-08T14:57:18.475716"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=<body onload=alert('XSS')>",
+      "evidence": "No XSS detected with payload: <body onload=alert('XSS')>",
+      "timestamp": "2025-09-08T14:57:18.920831"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=<body onload=alert('XSS')>",
+      "evidence": "No XSS detected with payload: <body onload=alert('XSS')>",
+      "timestamp": "2025-09-08T14:57:19.051456"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=<input onfocus=alert('XSS') autofocus>",
+      "evidence": "No XSS detected with payload: <input onfocus=alert('XSS') autofocus>",
+      "timestamp": "2025-09-08T14:57:19.168505"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=<input onfocus=alert('XSS') autofocus>",
+      "evidence": "No XSS detected with payload: <input onfocus=alert('XSS') autofocus>",
+      "timestamp": "2025-09-08T14:57:19.317380"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=<select onfocus=alert('XSS') autofocus>",
+      "evidence": "No XSS detected with payload: <select onfocus=alert('XSS') autofocus>",
+      "timestamp": "2025-09-08T14:57:19.439550"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=<select onfocus=alert('XSS') autofocus>",
+      "evidence": "No XSS detected with payload: <select onfocus=alert('XSS') autofocus>",
+      "timestamp": "2025-09-08T14:57:19.577955"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "fname=<textarea onfocus=alert('XSS') autofocus>",
+      "evidence": "No XSS detected with payload: <textarea onfocus=alert('XSS') autofocus>",
+      "timestamp": "2025-09-08T14:57:19.704750"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/html/html_forms.asp",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lname=<textarea onfocus=alert('XSS') autofocus>",
+      "evidence": "No XSS detected with payload: <textarea onfocus=alert('XSS') autofocus>",
+      "timestamp": "2025-09-08T14:57:19.819154"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "firstname=' OR '1'='1",
+      "evidence": "No SQL injection detected with payload: ' OR '1'='1",
+      "timestamp": "2025-09-08T14:57:20.723718"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lastname=' OR '1'='1",
+      "evidence": "No SQL injection detected with payload: ' OR '1'='1",
+      "timestamp": "2025-09-08T14:57:20.805541"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "firstname=' OR 1=1--",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1--",
+      "timestamp": "2025-09-08T14:57:20.888848"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lastname=' OR 1=1--",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1--",
+      "timestamp": "2025-09-08T14:57:20.977626"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "firstname=' UNION SELECT null--",
+      "evidence": "No SQL injection detected with payload: ' UNION SELECT null--",
+      "timestamp": "2025-09-08T14:57:21.062714"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lastname=' UNION SELECT null--",
+      "evidence": "No SQL injection detected with payload: ' UNION SELECT null--",
+      "timestamp": "2025-09-08T14:57:21.154930"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "firstname='; DROP TABLE users--",
+      "evidence": "No SQL injection detected with payload: '; DROP TABLE users--",
+      "timestamp": "2025-09-08T14:57:21.243936"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lastname='; DROP TABLE users--",
+      "evidence": "No SQL injection detected with payload: '; DROP TABLE users--",
+      "timestamp": "2025-09-08T14:57:21.341713"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "firstname=' OR 1=1#",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1#",
+      "timestamp": "2025-09-08T14:57:21.437673"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lastname=' OR 1=1#",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1#",
+      "timestamp": "2025-09-08T14:57:21.547661"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "firstname=admin'--",
+      "evidence": "No SQL injection detected with payload: admin'--",
+      "timestamp": "2025-09-08T14:57:21.633411"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lastname=admin'--",
+      "evidence": "No SQL injection detected with payload: admin'--",
+      "timestamp": "2025-09-08T14:57:21.730905"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "firstname=' OR 'x'='x",
+      "evidence": "No SQL injection detected with payload: ' OR 'x'='x",
+      "timestamp": "2025-09-08T14:57:21.822343"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lastname=' OR 'x'='x",
+      "evidence": "No SQL injection detected with payload: ' OR 'x'='x",
+      "timestamp": "2025-09-08T14:57:21.906551"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "firstname=') OR ('1'='1",
+      "evidence": "No SQL injection detected with payload: ') OR ('1'='1",
+      "timestamp": "2025-09-08T14:57:21.994129"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lastname=') OR ('1'='1",
+      "evidence": "No SQL injection detected with payload: ') OR ('1'='1",
+      "timestamp": "2025-09-08T14:57:22.084608"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "firstname=1' OR '1'='1' /*",
+      "evidence": "No SQL injection detected with payload: 1' OR '1'='1' /*",
+      "timestamp": "2025-09-08T14:57:22.172608"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lastname=1' OR '1'='1' /*",
+      "evidence": "No SQL injection detected with payload: 1' OR '1'='1' /*",
+      "timestamp": "2025-09-08T14:57:23.530959"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "firstname=' OR 1=1 LIMIT 1--",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1 LIMIT 1--",
+      "timestamp": "2025-09-08T14:57:23.623507"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "sql_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lastname=' OR 1=1 LIMIT 1--",
+      "evidence": "No SQL injection detected with payload: ' OR 1=1 LIMIT 1--",
+      "timestamp": "2025-09-08T14:57:23.702655"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "firstname=<script>alert('XSS')</script>",
+      "evidence": "No XSS detected with payload: <script>alert('XSS')</script>",
+      "timestamp": "2025-09-08T14:57:23.798832"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lastname=<script>alert('XSS')</script>",
+      "evidence": "No XSS detected with payload: <script>alert('XSS')</script>",
+      "timestamp": "2025-09-08T14:57:23.886120"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "firstname=<img src=x onerror=alert('XSS')>",
+      "evidence": "No XSS detected with payload: <img src=x onerror=alert('XSS')>",
+      "timestamp": "2025-09-08T14:57:23.979975"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lastname=<img src=x onerror=alert('XSS')>",
+      "evidence": "No XSS detected with payload: <img src=x onerror=alert('XSS')>",
+      "timestamp": "2025-09-08T14:57:24.093704"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": true,
+      "severity": "HIGH",
+      "payload_used": "firstname=javascript:alert('XSS')",
+      "evidence": "XSS payload directly reflected in response: javascript:alert('XSS')",
+      "timestamp": "2025-09-08T14:57:24.184304"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "firstname=<svg onload=alert('XSS')>",
+      "evidence": "No XSS detected with payload: <svg onload=alert('XSS')>",
+      "timestamp": "2025-09-08T14:57:24.279360"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lastname=<svg onload=alert('XSS')>",
+      "evidence": "No XSS detected with payload: <svg onload=alert('XSS')>",
+      "timestamp": "2025-09-08T14:57:24.375150"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "firstname='\"><script>alert('XSS')</script>",
+      "evidence": "No XSS detected with payload: '\"><script>alert('XSS')</script>",
+      "timestamp": "2025-09-08T14:57:24.458234"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lastname='\"><script>alert('XSS')</script>",
+      "evidence": "No XSS detected with payload: '\"><script>alert('XSS')</script>",
+      "timestamp": "2025-09-08T14:57:24.575635"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "firstname=<iframe src=javascript:alert('XSS')>",
+      "evidence": "No XSS detected with payload: <iframe src=javascript:alert('XSS')>",
+      "timestamp": "2025-09-08T14:57:24.718217"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lastname=<iframe src=javascript:alert('XSS')>",
+      "evidence": "No XSS detected with payload: <iframe src=javascript:alert('XSS')>",
+      "timestamp": "2025-09-08T14:57:24.815093"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "firstname=<body onload=alert('XSS')>",
+      "evidence": "No XSS detected with payload: <body onload=alert('XSS')>",
+      "timestamp": "2025-09-08T14:57:24.912645"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lastname=<body onload=alert('XSS')>",
+      "evidence": "No XSS detected with payload: <body onload=alert('XSS')>",
+      "timestamp": "2025-09-08T14:57:25.607580"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "firstname=<input onfocus=alert('XSS') autofocus>",
+      "evidence": "No XSS detected with payload: <input onfocus=alert('XSS') autofocus>",
+      "timestamp": "2025-09-08T14:57:25.703887"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lastname=<input onfocus=alert('XSS') autofocus>",
+      "evidence": "No XSS detected with payload: <input onfocus=alert('XSS') autofocus>",
+      "timestamp": "2025-09-08T14:57:25.820134"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "firstname=<select onfocus=alert('XSS') autofocus>",
+      "evidence": "No XSS detected with payload: <select onfocus=alert('XSS') autofocus>",
+      "timestamp": "2025-09-08T14:57:25.945566"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lastname=<select onfocus=alert('XSS') autofocus>",
+      "evidence": "No XSS detected with payload: <select onfocus=alert('XSS') autofocus>",
+      "timestamp": "2025-09-08T14:57:26.087364"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "firstname=<textarea onfocus=alert('XSS') autofocus>",
+      "evidence": "No XSS detected with payload: <textarea onfocus=alert('XSS') autofocus>",
+      "timestamp": "2025-09-08T14:57:26.212612"
+    },
+    {
+      "element_type": "dynamic_form",
+      "element_url": "https://www.w3schools.com/action_page.php",
+      "vulnerability_type": "xss_injection",
+      "success": false,
+      "severity": "INFO",
+      "payload_used": "lastname=<textarea onfocus=alert('XSS') autofocus>",
+      "evidence": "No XSS detected with payload: <textarea onfocus=alert('XSS') autofocus>",
+      "timestamp": "2025-09-08T14:57:26.322658"
+    }
+  ],
+  "discovered_elements": [
+    {
+      "type": "form",
+      "id": "form_0",
+      "url": "https://www.w3schools.com/action_page.php",
+      "method": "GET",
+      "parameters": 3,
+      "context": "<form action=\"/action_page.php\" target=\"_blank\">\n<label for=\"fname\">First name:</label><br/>\n<input ..."
+    },
+    {
+      "type": "form",
+      "id": "form_1",
+      "url": "https://www.w3schools.com/html/html_forms.asp",
+      "method": "GET",
+      "parameters": 2,
+      "context": "<form>\nFirst name:<br/>\n<input name=\"fname\" type=\"text\"/><br/>\nLast name:<br/>\n<input name=\"lname\" t..."
+    },
+    {
+      "type": "form",
+      "id": "form_2",
+      "url": "https://www.w3schools.com/action_page.php",
+      "method": "GET",
+      "parameters": 3,
+      "context": "<form action=\"/action_page.php\" target=\"_blank\">\nFirst name:<br/>\n<input name=\"firstname\" type=\"text..."
+    },
+    {
+      "type": "link",
+      "id": "link_702",
+      "url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_submit",
+      "method": "GET",
+      "parameters": 1,
+      "context": "<a class=\"w3-btn w3-margin-top w3-margin-bottom\" href=\"tryit.asp?filename=tryhtml_form_submit\" targe..."
+    },
+    {
+      "type": "link",
+      "id": "link_705",
+      "url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_text",
+      "method": "GET",
+      "parameters": 1,
+      "context": "<a class=\"w3-btn w3-margin-bottom\" href=\"tryit.asp?filename=tryhtml_form_text\" target=\"_blank\">Try i..."
+    },
+    {
+      "type": "link",
+      "id": "link_706",
+      "url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_radio",
+      "method": "GET",
+      "parameters": 1,
+      "context": "<a class=\"w3-btn w3-margin-bottom\" href=\"tryit.asp?filename=tryhtml_form_radio\" target=\"_blank\">Try ..."
+    },
+    {
+      "type": "link",
+      "id": "link_707",
+      "url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_input_checkbox",
+      "method": "GET",
+      "parameters": 1,
+      "context": "<a class=\"w3-btn w3-margin-bottom\" href=\"tryit.asp?filename=tryhtml_input_checkbox\" target=\"_blank\">..."
+    },
+    {
+      "type": "link",
+      "id": "link_708",
+      "url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_submit",
+      "method": "GET",
+      "parameters": 1,
+      "context": "<a class=\"w3-btn w3-margin-bottom\" href=\"tryit.asp?filename=tryhtml_form_submit\" target=\"_blank\">Try..."
+    },
+    {
+      "type": "link",
+      "id": "link_709",
+      "url": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_submit_id",
+      "method": "GET",
+      "parameters": 1,
+      "context": "<a class=\"w3-btn w3-margin-bottom\" href=\"tryit.asp?filename=tryhtml_form_submit_id\" target=\"_blank\">..."
+    },
+    {
+      "type": "link",
+      "id": "link_713",
+      "url": "https://profile.w3schools.com/log-in?redirect_url=https%3A%2F%2Fmy-learning.w3schools.com",
+      "method": "GET",
+      "parameters": 1,
+      "context": "<a aria-label=\"Your W3Schools Profile\" class=\"user-profile-btn user-profile-bottom-btn ga-bottom ga-..."
+    },
+    {
+      "type": "link",
+      "id": "link_714",
+      "url": "https://profile.w3schools.com/log-in?redirect_url=https%3A%2F%2Fpathfinder.w3schools.com",
+      "method": "GET",
+      "parameters": 1,
+      "context": "<a aria-label=\"Login to your account\" class=\"-login-btn w3-btn bar-item-hover w3-right ws-light-gree..."
+    },
+    {
+      "type": "link",
+      "id": "link_715",
+      "url": "https://profile.w3schools.com/sign-up?redirect_url=https%3A%2F%2Fpathfinder.w3schools.com",
+      "method": "GET",
+      "parameters": 1,
+      "context": "<a aria-label=\"Sign Up to Improve Your Learning Experience\" class=\"-signup-btn w3-button w3-right ws..."
+    },
+    {
+      "type": "standalone_input",
+      "id": "input_0",
+      "url": "https://www.w3schools.com/html/html_forms.asp",
+      "method": "GET",
+      "parameters": 1,
+      "context": "<div id=\"tnb-google-search-inner-container\">\n<label class=\"tnb-soft-hide\" for=\"tnb-google-search-inp..."
+    },
+    {
+      "type": "standalone_input",
+      "id": "input_1",
+      "url": "https://www.w3schools.com/html/html_forms.asp",
+      "method": "GET",
+      "parameters": 1,
+      "context": "<div class=\"filter-input-inner-wrapper\">\n<label class=\"tnb-soft-hide\" for=\"filter-tutorials-input\">\n..."
+    },
+    {
+      "type": "standalone_input",
+      "id": "input_2",
+      "url": "https://www.w3schools.com/html/html_forms.asp",
+      "method": "GET",
+      "parameters": 1,
+      "context": "<div class=\"filter-input-inner-wrapper\">\n<label class=\"tnb-soft-hide\" for=\"filter-references-input\">..."
+    },
+    {
+      "type": "standalone_input",
+      "id": "input_3",
+      "url": "https://www.w3schools.com/html/html_forms.asp",
+      "method": "GET",
+      "parameters": 1,
+      "context": "<div class=\"filter-input-inner-wrapper\">\n<label class=\"tnb-soft-hide\" for=\"filter-exercises-input\">\n..."
+    },
+    {
+      "type": "standalone_input",
+      "id": "input_4",
+      "url": "https://www.w3schools.com/html/html_forms.asp",
+      "method": "GET",
+      "parameters": 1,
+      "context": "<div class=\"filter-input-inner-wrapper\">\n<label class=\"tnb-soft-hide\" for=\"filter-certified-input\">\n..."
+    },
+    {
+      "type": "standalone_input",
+      "id": "input_5",
+      "url": "https://www.w3schools.com/html/html_forms.asp",
+      "method": "GET",
+      "parameters": 1,
+      "context": "<div class=\"filter-input-inner-wrapper\">\n<label class=\"tnb-soft-hide\" for=\"filter-services-input\">\n ..."
+    },
+    {
+      "type": "dynamic_form",
+      "id": "selenium_form_0",
+      "url": "https://www.w3schools.com/action_page.php",
+      "method": "GET",
+      "parameters": 3,
+      "context": "<form action=\"/action_page.php\" target=\"_blank\">\n  <label for=\"fname\">First name:</label><br>\n  <inp..."
+    },
+    {
+      "type": "dynamic_form",
+      "id": "selenium_form_1",
+      "url": "https://www.w3schools.com/html/html_forms.asp",
+      "method": "GET",
+      "parameters": 2,
+      "context": "<form>\nFirst name:<br>\n<input type=\"text\" name=\"fname\"><br>\nLast name:<br>\n<input type=\"text\" name=\"..."
+    },
+    {
+      "type": "dynamic_form",
+      "id": "selenium_form_2",
+      "url": "https://www.w3schools.com/action_page.php",
+      "method": "GET",
+      "parameters": 3,
+      "context": "<form action=\"/action_page.php\" target=\"_blank\">\nFirst name:<br>\n<input type=\"text\" name=\"firstname\"..."
+    },
+    {
+      "type": "dynamic_form",
+      "id": "selenium_form_3",
+      "url": "https://www.w3schools.com/html/exercise.asp?x=xrcise_forms1",
+      "method": "POST",
+      "parameters": 1,
+      "context": "<form action=\"exercise.asp?x=xrcise_forms1\" method=\"post\" target=\"_blank\" rel=\"opener\"><div class=\"q..."
+    },
+    {
+      "type": "ajax_search",
+      "id": "ajax_search_0",
+      "url": "https://www.w3schools.com/html/html_forms.asp",
+      "method": "POST",
+      "parameters": 1,
+      "context": "<input id=\"tnb-google-search-input\" type=\"text\" placeholder=\"Search...\" autocomplete=\"off\" onkeydown..."
+    },
+    {
+      "type": "ajax_endpoint",
+      "id": "ajax_https:__btloader.com_tag?o=5658536637890560&upapi=true",
+      "url": "https://btloader.com/tag?o=5658536637890560&upapi=true",
+      "method": "POST",
+      "parameters": 1,
+      "context": "Found in https://www.w3schools.com/lib/uic_prov.js?v=1.3.3"
+    },
+    {
+      "type": "ajax_endpoint",
+      "id": "ajax__api_user_session",
+      "url": "https://www.w3schools.com/api/user/session",
+      "method": "POST",
+      "parameters": 1,
+      "context": "Found in https://www.w3schools.com/lib/user-session/main.js?v=1.0.40"
+    },
+    {
+      "type": "ajax_endpoint",
+      "id": "ajax__api_user_info-cookie",
+      "url": "https://www.w3schools.com/api/user/info-cookie",
+      "method": "POST",
+      "parameters": 1,
+      "context": "Found in https://www.w3schools.com/lib/user-session/main.js?v=1.0.40"
+    },
+    {
+      "type": "ajax_endpoint",
+      "id": "ajax__api_user_session",
+      "url": "https://www.w3schools.com/api/user/session",
+      "method": "POST",
+      "parameters": 1,
+      "context": "Found in https://www.w3schools.com/lib/user-session/main.js?v=1.0.40"
+    },
+    {
+      "type": "ajax_endpoint",
+      "id": "ajax__api_user_session",
+      "url": "https://www.w3schools.com/api/user/session",
+      "method": "POST",
+      "parameters": 1,
+      "context": "Found in https://www.w3schools.com/lib/user-session/main.js?v=1.0.40"
+    },
+    {
+      "type": "ajax_endpoint",
+      "id": "ajax__api_info",
+      "url": "https://www.w3schools.com/api/info",
+      "method": "POST",
+      "parameters": 1,
+      "context": "Found in https://www.w3schools.com/lib/user-session/main.js?v=1.0.40"
+    },
+    {
+      "type": "ajax_endpoint",
+      "id": "ajax_,\n  _apiBaseUrl: ",
+      "url": "https://www.w3schools.com/html/,  _apiBaseUrl: ",
+      "method": "POST",
+      "parameters": 1,
+      "context": "Found in https://www.w3schools.com/lib/my-learning/main.js?v=1.0.45"
+    },
+    {
+      "type": "ajax_endpoint",
+      "id": "ajax_, prs);\n  MyLearning._iframeParentPushLocation();\n};\nMyLearning._apiNameToPathMap = {\n  ",
+      "url": "https://www.w3schools.com/html/, prs);  MyLearning._iframeParentPushLocation();};MyLearning._apiNameToPathMap = {  ",
+      "method": "POST",
+      "parameters": 1,
+      "context": "Found in https://www.w3schools.com/lib/my-learning/main.js?v=1.0.45"
+    },
+    {
+      "type": "ajax_endpoint",
+      "id": "ajax__api_classic_get-set-topic-progress",
+      "url": "https://www.w3schools.com/api/classic/get-set-topic-progress",
+      "method": "POST",
+      "parameters": 1,
+      "context": "Found in https://www.w3schools.com/lib/my-learning/main.js?v=1.0.45"
+    },
+    {
+      "type": "ajax_endpoint",
+      "id": "ajax_api.exercise.get",
+      "url": "https://www.w3schools.com/html/api.exercise.get",
+      "method": "POST",
+      "parameters": 1,
+      "context": "Found in https://www.w3schools.com/lib/my-learning/main.js?v=1.0.45"
+    },
+    {
+      "type": "ajax_endpoint",
+      "id": "ajax__api_classic_get-exercises-progress",
+      "url": "https://www.w3schools.com/api/classic/get-exercises-progress",
+      "method": "POST",
+      "parameters": 1,
+      "context": "Found in https://www.w3schools.com/lib/my-learning/main.js?v=1.0.45"
+    },
+    {
+      "type": "ajax_endpoint",
+      "id": "ajax_api.exercise.set",
+      "url": "https://www.w3schools.com/html/api.exercise.set",
+      "method": "POST",
+      "parameters": 1,
+      "context": "Found in https://www.w3schools.com/lib/my-learning/main.js?v=1.0.45"
+    },
+    {
+      "type": "ajax_endpoint",
+      "id": "ajax__api_classic_set-exercises-progress",
+      "url": "https://www.w3schools.com/api/classic/set-exercises-progress",
+      "method": "POST",
+      "parameters": 1,
+      "context": "Found in https://www.w3schools.com/lib/my-learning/main.js?v=1.0.45"
+    },
+    {
+      "type": "ajax_endpoint",
+      "id": "ajax_api.v2.exercise.set",
+      "url": "https://www.w3schools.com/html/api.v2.exercise.set",
+      "method": "POST",
+      "parameters": 1,
+      "context": "Found in https://www.w3schools.com/lib/my-learning/main.js?v=1.0.45"
+    },
+    {
+      "type": "ajax_endpoint",
+      "id": "ajax__api_classic_v2_set-exercises-progress",
+      "url": "https://www.w3schools.com/api/classic/v2/set-exercises-progress",
+      "method": "POST",
+      "parameters": 1,
+      "context": "Found in https://www.w3schools.com/lib/my-learning/main.js?v=1.0.45"
+    },
+    {
+      "type": "ajax_endpoint",
+      "id": "ajax_api.quiz.set_score",
+      "url": "https://www.w3schools.com/html/api.quiz.set_score",
+      "method": "POST",
+      "parameters": 1,
+      "context": "Found in https://www.w3schools.com/lib/my-learning/main.js?v=1.0.45"
+    },
+    {
+      "type": "ajax_endpoint",
+      "id": "ajax__api_classic_set-quiz-progress",
+      "url": "https://www.w3schools.com/api/classic/set-quiz-progress",
+      "method": "POST",
+      "parameters": 1,
+      "context": "Found in https://www.w3schools.com/lib/my-learning/main.js?v=1.0.45"
+    },
+    {
+      "type": "ajax_endpoint",
+      "id": "ajax_api.bookmarks",
+      "url": "https://www.w3schools.com/html/api.bookmarks",
+      "method": "POST",
+      "parameters": 1,
+      "context": "Found in https://www.w3schools.com/lib/my-learning/main.js?v=1.0.45"
+    },
+    {
+      "type": "ajax_endpoint",
+      "id": "ajax__api_classic_bookmarks",
+      "url": "https://www.w3schools.com/api/classic/bookmarks",
+      "method": "POST",
+      "parameters": 1,
+      "context": "Found in https://www.w3schools.com/lib/my-learning/main.js?v=1.0.45"
+    },
+    {
+      "type": "ajax_endpoint",
+      "id": "ajax_, apiName);\n  return MyLearning._apiBaseUrl + this._apiNameToPathMap[apiName];\n};\n__ << classic\n\n__ < common\n\nMyLearning.uiFetchTemplate = function (fetchUrl, _callback) {\n  if (typeof MyLearning._uiTemplates[fetchUrl] !== ",
+      "url": "https://www.w3schools.com/html/, apiName);  return MyLearning._apiBaseUrl + this._apiNameToPathMap[apiName];};/ << classic/ < commonMyLearning.uiFetchTemplate = function (fetchUrl, _callback) {  if (typeof MyLearning._uiTemplates[fetchUrl] !== ",
+      "method": "POST",
+      "parameters": 1,
+      "context": "Found in https://www.w3schools.com/lib/my-learning/main.js?v=1.0.45"
+    },
+    {
+      "type": "ajax_endpoint",
+      "id": "ajax_api.bookmarks",
+      "url": "https://www.w3schools.com/html/api.bookmarks",
+      "method": "POST",
+      "parameters": 1,
+      "context": "Found in https://www.w3schools.com/lib/my-learning/main.js?v=1.0.45"
+    },
+    {
+      "type": "ajax_endpoint",
+      "id": "ajax_api.meta",
+      "url": "https://www.w3schools.com/html/api.meta",
+      "method": "POST",
+      "parameters": 1,
+      "context": "Found in https://www.w3schools.com/lib/my-learning/main.js?v=1.0.45"
+    },
+    {
+      "type": "ajax_endpoint",
+      "id": "ajax_api.meta",
+      "url": "https://www.w3schools.com/html/api.meta",
+      "method": "POST",
+      "parameters": 1,
+      "context": "Found in https://www.w3schools.com/lib/my-learning/main.js?v=1.0.45"
+    },
+    {
+      "type": "ajax_endpoint",
+      "id": "ajax_,\n    url: MyLearning._apiBaseUrl + ",
+      "url": "https://www.w3schools.com/html/,    url: MyLearning._apiBaseUrl + ",
+      "method": "POST",
+      "parameters": 1,
+      "context": "Found in https://www.w3schools.com/lib/my-learning/main.js?v=1.0.45"
+    },
+    {
+      "type": "ajax_endpoint",
+      "id": "ajax_api.v2.exercise.set",
+      "url": "https://www.w3schools.com/html/api.v2.exercise.set",
+      "method": "POST",
+      "parameters": 1,
+      "context": "Found in https://www.w3schools.com/lib/my-learning/main.js?v=1.0.45"
+    },
+    {
+      "type": "ajax_endpoint",
+      "id": "ajax_,\n  _myLearningApiBaseUrl: ",
+      "url": "https://www.w3schools.com/html/,  _myLearningApiBaseUrl: ",
+      "method": "POST",
+      "parameters": 1,
+      "context": "Found in https://www.w3schools.com/lib/topnav/main.js?v=1.0.64"
+    },
+    {
+      "type": "ajax_endpoint",
+      "id": "ajax_,\n  _groupsApiBaseUrl: ",
+      "url": "https://www.w3schools.com/html/,  _groupsApiBaseUrl: ",
+      "method": "POST",
+      "parameters": 1,
+      "context": "Found in https://www.w3schools.com/lib/topnav/main.js?v=1.0.64"
+    },
+    {
+      "type": "ajax_endpoint",
+      "id": "ajax_,\n  pathfinderApiBaseUrl: ",
+      "url": "https://www.w3schools.com/html/,  pathfinderApiBaseUrl: ",
+      "method": "POST",
+      "parameters": 1,
+      "context": "Found in https://www.w3schools.com/lib/topnav/main.js?v=1.0.64"
+    },
+    {
+      "type": "ajax_endpoint",
+      "id": "ajax_,\n        url: TopNavBar.pathfinderApiBaseUrl + ",
+      "url": "https://www.w3schools.com/html/,        url: TopNavBar.pathfinderApiBaseUrl + ",
+      "method": "POST",
+      "parameters": 1,
+      "context": "Found in https://www.w3schools.com/lib/topnav/main.js?v=1.0.64"
+    },
+    {
+      "type": "ajax_endpoint",
+      "id": "ajax_.concat(TopNavBar._myLearningApiBaseUrl, ",
+      "url": "https://www.w3schools.com/html/.concat(TopNavBar._myLearningApiBaseUrl, ",
+      "method": "POST",
+      "parameters": 1,
+      "context": "Found in https://www.w3schools.com/lib/topnav/main.js?v=1.0.64"
+    },
+    {
+      "type": "ajax_endpoint",
+      "id": "ajax_.concat(TopNavBar._groupsApiBaseUrl, ",
+      "url": "https://www.w3schools.com/html/.concat(TopNavBar._groupsApiBaseUrl, ",
+      "method": "POST",
+      "parameters": 1,
+      "context": "Found in https://www.w3schools.com/lib/topnav/main.js?v=1.0.64"
+    },
+    {
+      "type": "ajax_endpoint",
+      "id": "ajax__api_user_unset-is-first-login",
+      "url": "https://www.w3schools.com/api/user/unset-is-first-login",
+      "method": "POST",
+      "parameters": 1,
+      "context": "Found in https://www.w3schools.com/lib/topnav/main.js?v=1.0.64"
+    },
+    {
+      "type": "ajax_endpoint",
+      "id": "ajax__api_google_onetap",
+      "url": "https://www.w3schools.com/api/google/onetap",
+      "method": "POST",
+      "parameters": 1,
+      "context": "Found in https://www.w3schools.com/lib/topnav/main.js?v=1.0.64"
+    },
+    {
+      "type": "ajax_endpoint",
+      "id": "ajax_ autocapitalize=\\",
+      "url": "https://www.w3schools.com/html/autocapitalize=\\",
+      "method": "POST",
+      "parameters": 1,
+      "context": "Found in https://www.w3schools.com/lib/topnav/main.js?v=1.0.64"
+    },
+    {
+      "type": "ajax_endpoint",
+      "id": "ajax_ autocapitalize=\\",
+      "url": "https://www.w3schools.com/html/autocapitalize=\\",
+      "method": "POST",
+      "parameters": 1,
+      "context": "Found in https://www.w3schools.com/lib/topnav/main.js?v=1.0.64"
+    },
+    {
+      "type": "ajax_endpoint",
+      "id": "ajax_ autocapitalize=\\",
+      "url": "https://www.w3schools.com/html/autocapitalize=\\",
+      "method": "POST",
+      "parameters": 1,
+      "context": "Found in https://www.w3schools.com/lib/topnav/main.js?v=1.0.64"
+    },
+    {
+      "type": "ajax_endpoint",
+      "id": "ajax___recaptcha_api",
+      "url": "https://www.w3schools.com/html/__recaptcha_api",
+      "method": "POST",
+      "parameters": 1,
+      "context": "Found in https://www.google.com/recaptcha/api.js?render=explicit"
+    },
+    {
+      "type": "ajax_endpoint",
+      "id": "ajax_https:__www.google.com_recaptcha_api2_",
+      "url": "https://www.google.com/recaptcha/api2/",
+      "method": "POST",
+      "parameters": 1,
+      "context": "Found in https://www.google.com/recaptcha/api.js?render=explicit"
+    },
+    {
+      "type": "robots_path",
+      "id": "robots__images",
+      "url": "https://www.w3schools.com/images",
+      "method": "GET",
+      "parameters": 0,
+      "context": "Found in robots.txt: Disallow: /images"
+    },
+    {
+      "type": "robots_path",
+      "id": "robots__asp_demo_db_edit.asp",
+      "url": "https://www.w3schools.com/asp/demo_db_edit.asp",
+      "method": "GET",
+      "parameters": 0,
+      "context": "Found in robots.txt: Disallow: /asp/demo_db_edit.asp"
+    },
+    {
+      "type": "robots_path",
+      "id": "robots_*.aspx$",
+      "url": "https://www.w3schools.com/html/*.aspx$",
+      "method": "GET",
+      "parameters": 0,
+      "context": "Found in robots.txt: Disallow: *.aspx$"
+    },
+    {
+      "type": "robots_path",
+      "id": "robots__code_",
+      "url": "https://www.w3schools.com/code/",
+      "method": "GET",
+      "parameters": 0,
+      "context": "Found in robots.txt: Disallow: /code/"
+    }
+  ]
+}
