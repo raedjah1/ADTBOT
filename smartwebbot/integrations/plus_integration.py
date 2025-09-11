@@ -212,24 +212,30 @@ class PlusIntegration(BaseComponent):
             login_success, login_message = await self._perform_login_sequence(username, password)
             
             if login_success:
-                # Step 3: Validate successful login
-                validation_success, validation_message = self._validate_login_success()
+                # Step 4: Check for database/site/program selection page
+                database_step_success, database_message = await self._handle_database_selection()
                 
-                if validation_success:
-                    self.is_logged_in = True
-                    self.login_timestamp = time.time()
-                    self.login_attempts = 0  # Reset on success
+                if database_step_success:
+                    # Step 5: Validate final login success
+                    validation_success, validation_message = self._validate_login_success()
                     
-                    # Save session data
-                    self._save_session_data()
-                    
-                    duration = time.time() - start_time
-                    log_performance("plus_integration", "login", duration, success=True)
-                    
-                    self.logger.info(f"PLUS login successful in {duration:.2f}s")
-                    return True, f"Successfully logged in to PLUS ({validation_message})"
+                    if validation_success:
+                        self.is_logged_in = True
+                        self.login_timestamp = time.time()
+                        self.login_attempts = 0  # Reset on success
+                        
+                        # Save session data
+                        self._save_session_data()
+                        
+                        duration = time.time() - start_time
+                        log_performance("plus_integration", "login", duration, success=True)
+                        
+                        self.logger.info(f"PLUS login successful in {duration:.2f}s")
+                        return True, f"Successfully logged in to PLUS ({validation_message})"
+                    else:
+                        return False, f"Final login validation failed: {validation_message}"
                 else:
-                    return False, f"Login validation failed: {validation_message}"
+                    return False, f"Database selection failed: {database_message}"
             else:
                 return False, f"Login sequence failed: {login_message}"
                 
@@ -457,6 +463,139 @@ class PlusIntegration(BaseComponent):
             
         except Exception as e:
             return False, f"Debug analysis failed: {str(e)}"
+    
+    async def _handle_database_selection(self) -> Tuple[bool, str]:
+        """Handle the PLUS database/site/program selection step."""
+        try:
+            self.logger.info("=== CHECKING FOR DATABASE SELECTION PAGE ===")
+            
+            # Wait a moment for page to load after login
+            time.sleep(3)
+            
+            # Check if we're on the database selection page
+            from selenium.webdriver.common.by import By
+            from selenium.webdriver.support.ui import Select
+            from selenium.webdriver.support.ui import WebDriverWait
+            from selenium.webdriver.support import expected_conditions as EC
+            
+            try:
+                # Look for the database selection div
+                database_div = WebDriverWait(self.web_controller.driver, 10).until(
+                    EC.presence_of_element_located((By.ID, "LoginMainContent_DatabaseProgramDiv"))
+                )
+                
+                self.logger.info("Database selection page detected")
+                
+                # Take screenshot of database selection page
+                screenshot_path = self.web_controller.take_screenshot("plus_database_selection.png")
+                self.logger.info(f"Database selection screenshot: {screenshot_path}")
+                
+                # Step 1: Select Database (PROD)
+                self.logger.info("=== SELECTING DATABASE: PROD ===")
+                try:
+                    database_dropdown = self.web_controller.driver.find_element(By.ID, "LoginMainContent_ddlDatabase")
+                    database_select = Select(database_dropdown)
+                    database_select.select_by_value("PROD")
+                    self.logger.info("SUCCESS: Database PROD selected")
+                    time.sleep(1)  # Wait for any dynamic updates
+                except Exception as e:
+                    self.logger.error(f"Failed to select database: {e}")
+                    return False, f"Database selection failed: {e}"
+                
+                # Step 2: Select Site (MEMPHIS)
+                self.logger.info("=== SELECTING SITE: MEMPHIS ===")
+                try:
+                    site_dropdown = self.web_controller.driver.find_element(By.ID, "LoginMainContent_ddlSite")
+                    site_select = Select(site_dropdown)
+                    site_select.select_by_value("MEMPHIS")
+                    self.logger.info("SUCCESS: Site MEMPHIS selected")
+                    time.sleep(1)  # Wait for any dynamic updates
+                except Exception as e:
+                    self.logger.error(f"Failed to select site: {e}")
+                    return False, f"Site selection failed: {e}"
+                
+                # Step 3: Select Program (ADT)
+                self.logger.info("=== SELECTING PROGRAM: ADT ===")
+                try:
+                    program_dropdown = self.web_controller.driver.find_element(By.ID, "LoginMainContent_ddlProgram")
+                    program_select = Select(program_dropdown)
+                    
+                    # Check if ADT option exists
+                    program_options = [option.get_attribute("value") for option in program_select.options]
+                    self.logger.info(f"Available programs: {program_options}")
+                    
+                    if "ADT" in program_options:
+                        program_select.select_by_value("ADT")
+                        self.logger.info("SUCCESS: Program ADT selected")
+                    else:
+                        # If ADT is not available, log available options and use the first one
+                        self.logger.warning(f"ADT not found in programs: {program_options}. Using first available option.")
+                        if len(program_select.options) > 1:  # Skip empty option
+                            program_select.select_by_index(1)
+                            selected_program = program_select.first_selected_option.get_attribute("value")
+                            self.logger.info(f"SUCCESS: Program {selected_program} selected (ADT not available)")
+                    
+                    time.sleep(1)  # Wait for any dynamic updates
+                except Exception as e:
+                    self.logger.error(f"Failed to select program: {e}")
+                    return False, f"Program selection failed: {e}"
+                
+                # Step 4: Click Request Access button to proceed
+                self.logger.info("=== CLICKING REQUEST ACCESS BUTTON ===")
+                try:
+                    # Try multiple selectors for the Request Access button
+                    request_access_selectors = [
+                        'input[id="ctl00_LoginMainContent_btnRequestAccess_input"]',
+                        'input[name="ctl00$LoginMainContent$btnRequestAccess_input"]',
+                        'input[value="Request Access"]',
+                        '#ctl00_LoginMainContent_btnRequestAccess_input'
+                    ]
+                    
+                    button_clicked = False
+                    for selector in request_access_selectors:
+                        try:
+                            button = self.web_controller.driver.find_element(By.CSS_SELECTOR, selector)
+                            if button.is_displayed() and button.is_enabled():
+                                button.click()
+                                self.logger.info(f"SUCCESS: Request Access button clicked using selector: {selector}")
+                                button_clicked = True
+                                break
+                        except:
+                            continue
+                    
+                    if not button_clicked:
+                        # Try JavaScript click as fallback
+                        try:
+                            self.web_controller.driver.execute_script("""
+                                var button = document.querySelector('input[value="Request Access"]');
+                                if (button) button.click();
+                            """)
+                            self.logger.info("SUCCESS: Request Access button clicked using JavaScript")
+                            button_clicked = True
+                        except Exception as js_error:
+                            self.logger.error(f"JavaScript click failed: {js_error}")
+                    
+                    if not button_clicked:
+                        return False, "Could not find or click Request Access button"
+                    
+                    # Wait for page to process the request
+                    time.sleep(5)
+                    
+                    self.logger.info("Database selection process completed successfully")
+                    return True, "Database, Site, and Program selected successfully"
+                    
+                except Exception as e:
+                    self.logger.error(f"Failed to click Request Access button: {e}")
+                    return False, f"Request Access button click failed: {e}"
+                    
+            except Exception as e:
+                # Database selection page not found - might already be logged in
+                self.logger.info("Database selection page not found - assuming already past this step")
+                return True, "Database selection not required"
+                
+        except Exception as e:
+            self.logger.error(f"Database selection handler error: {e}")
+            return False, f"Database selection error: {str(e)}"
     
     async def _click_login_button(self) -> bool:
         """Find and click the login button."""
