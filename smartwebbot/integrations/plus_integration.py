@@ -440,11 +440,11 @@ class PlusIntegration(BaseComponent):
                 try:
                     username_field.clear()
                     username_field.send_keys("raed.jah")
-                    self.logger.info("✅ Username field filled manually")
+                    self.logger.info("SUCCESS: Username field filled manually")
                     
                     password_field.clear()
                     password_field.send_keys("Microwave18.")
-                    self.logger.info("✅ Password field filled manually")
+                    self.logger.info("SUCCESS: Password field filled manually")
                     
                     # Try to find and click submit button
                     for button in all_buttons:
@@ -452,14 +452,14 @@ class PlusIntegration(BaseComponent):
                             button_text = (button.text or button.get_attribute("value") or "").lower()
                             if any(keyword in button_text for keyword in ['login', 'sign in', 'submit']):
                                 button.click()
-                                self.logger.info(f"✅ Clicked login button: {button_text}")
+                                self.logger.info(f"SUCCESS: Clicked login button: {button_text}")
                                 return await self._wait_for_login_response()
                     
                     # If no obvious button, try the first visible submit button
                     for button in all_buttons:
                         if button.is_displayed() and button.get_attribute("type") == "submit":
                             button.click()
-                            self.logger.info("✅ Clicked first submit button")
+                            self.logger.info("SUCCESS: Clicked first submit button")
                             return await self._wait_for_login_response()
                     
                     return False, "Fields filled but could not find login button"
@@ -980,6 +980,7 @@ class PlusIntegration(BaseComponent):
         """
         Navigate to the Unit Receiving ADT page.
         Ensures user is logged in before attempting navigation.
+        Checks if already on the correct page to avoid unnecessary navigation.
         
         Returns:
             Dict: Navigation result with success status and details
@@ -1005,14 +1006,27 @@ class PlusIntegration(BaseComponent):
             else:
                 self.logger.info("User already logged in, proceeding with navigation")
             
-            # Step 2: Import and use the navigation module
+            # Step 2: Check if already on Unit Receiving ADT page
+            current_url = self.web_controller.driver.current_url
+            self.logger.info(f"Current URL: {current_url}")
+            
+            if "ScriptID=588" in current_url:
+                self.logger.info("Already on Unit Receiving ADT page, no navigation needed")
+                return {
+                    "success": True,
+                    "message": "Already on Unit Receiving ADT page - ready to proceed",
+                    "current_url": current_url
+                }
+            
+            # Step 3: Import and use the navigation module
             from .plus_navigation import PlusPageNavigator
             
-            # Step 3: Create navigator and perform navigation
+            # Step 4: Create navigator and perform navigation
+            self.logger.info("Not on Unit Receiving ADT page, performing navigation...")
             page_navigator = PlusPageNavigator(self.web_controller, self.logger)
             result = page_navigator.navigate_to_unit_receiving_adt()
             
-            # Step 4: Log the result
+            # Step 5: Log the result
             if result.get("success"):
                 self.logger.info(f"SUCCESS: Navigation successful: {result.get('message')}")
             else:
@@ -1028,4 +1042,93 @@ class PlusIntegration(BaseComponent):
                 "success": False,
                 "message": f"Navigation error: {str(e)}",
                 "current_url": self.web_controller.driver.current_url if self.web_controller and self.web_controller.driver else None
+            }
+    
+    async def fill_unit_receiving_form(self, form_data: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Fill the Unit Receiving ADT form with provided data.
+        Automatically navigates to the form if not already there.
+        
+        Args:
+            form_data: Dictionary containing form field values
+            
+        Returns:
+            Dict: Result with success status and details
+        """
+        try:
+            self.logger.info("=== STARTING UNIT RECEIVING FORM FILLING ===")
+            
+            # Ensure we're logged in
+            login_status = self.get_login_status()
+            if not login_status.get('is_logged_in'):
+                self.logger.info("Not logged in, attempting login first")
+                login_success, login_message = await self.login_to_plus()
+                if not login_success:
+                    return {
+                        "success": False,
+                        "message": f"Login required but failed: {login_message}",
+                        "current_url": None
+                    }
+            
+            # Navigate to Unit Receiving form if not already there
+            current_url = self.web_controller.driver.current_url
+            if "ScriptID=588" not in current_url:
+                self.logger.info("Not on Unit Receiving page, navigating...")
+                nav_result = await self.navigate_to_unit_receiving_adt()
+                if not nav_result.get("success"):
+                    return nav_result
+            
+            # Import and use form automation
+            from .plus_form_automation import PlusFormAutomator
+            
+            # Create form automator and fill the form
+            form_automator = PlusFormAutomator(self.web_controller, self.logger)
+            result = form_automator.fill_unit_receiving_form(form_data)
+            
+            if result.get("success"):
+                self.logger.info(f"SUCCESS: Form filled successfully: {result.get('message')}")
+            else:
+                self.logger.error(f"FAILED: Form filling failed: {result.get('message')}")
+            
+            return result
+            
+        except Exception as e:
+            self.logger.error(f"Error in fill_unit_receiving_form: {e}")
+            import traceback
+            self.logger.error(f"Traceback: {traceback.format_exc()}")
+            return {
+                "success": False,
+                "message": f"Form filling error: {str(e)}",
+                "current_url": self.web_controller.driver.current_url if self.web_controller and self.web_controller.driver else None
+            }
+    
+    async def submit_unit_receiving_form(self) -> Dict[str, Any]:
+        """
+        Submit the Unit Receiving ADT form.
+        
+        Returns:
+            Dict: Submission result
+        """
+        try:
+            self.logger.info("=== SUBMITTING UNIT RECEIVING FORM ===")
+            
+            # Import form automation
+            from .plus_form_automation import PlusFormAutomator
+            
+            # Create form automator and submit
+            form_automator = PlusFormAutomator(self.web_controller, self.logger)
+            result = form_automator.submit_form()
+            
+            if result.get("success"):
+                self.logger.info("SUCCESS: Form submitted successfully")
+            else:
+                self.logger.error(f"FAILED: Form submission failed: {result.get('message')}")
+            
+            return result
+            
+        except Exception as e:
+            self.logger.error(f"Error in submit_unit_receiving_form: {e}")
+            return {
+                "success": False,
+                "message": f"Form submission error: {str(e)}"
             }

@@ -127,7 +127,7 @@ class PlusNavigator:
         
         # Try to click search button
         if self._click_element_by_selectors(self.selectors["search_button"], "search button"):
-            time.sleep(1)  # Wait for dropdown to appear
+            time.sleep(0.5)  # Reduced wait time for dropdown to appear
             self._take_screenshot("plus_search_opened.png")
             return True
         
@@ -143,7 +143,7 @@ class PlusNavigator:
         """
         
         if self._javascript_click_fallback(js_code, "search button"):
-            time.sleep(1)
+            time.sleep(0.5)
             self._take_screenshot("plus_search_opened.png")
             return True
         
@@ -172,7 +172,7 @@ class PlusNavigator:
                 element.clear()
                 element.send_keys(search_term)
                 self.logger.info(f"SUCCESS: Search term entered using selector: {selector}")
-                time.sleep(1)  # Wait for dropdown options to appear
+                time.sleep(0.5)  # Reduced wait for dropdown options to appear
                 self._take_screenshot("plus_search_typed.png")
                 return True
             except Exception as e:
@@ -189,7 +189,7 @@ class PlusNavigator:
                 element.clear()
                 element.send_keys(search_term)
                 self.logger.info(f"SUCCESS: Search term entered using mobile selector: {selector}")
-                time.sleep(1)
+                time.sleep(0.5)
                 self._take_screenshot("plus_search_typed.png")
                 return True
             except Exception as e:
@@ -231,7 +231,7 @@ class PlusNavigator:
             
             if js_result:
                 self.logger.info("SUCCESS: Search term entered using JavaScript fallback")
-                time.sleep(2)  # Wait longer for dropdown to populate
+                time.sleep(1)  # Reduced wait for dropdown to populate
                 self._take_screenshot("plus_search_typed.png")
                 return True
             else:
@@ -254,14 +254,14 @@ class PlusNavigator:
         """
         self.logger.info(f"=== SELECTING OPTION: {option_text} ===")
         
-        # Try XPath approach first
+        # Try XPath approach first with shorter wait
         try:
-            option_element = WebDriverWait(self.web_controller.driver, 10).until(
+            option_element = WebDriverWait(self.web_controller.driver, 5).until(
                 EC.element_to_be_clickable((By.XPATH, f"//li[@class='rcbItem' and contains(text(), '{option_text}')]"))
             )
             option_element.click()
             self.logger.info(f"SUCCESS: {option_text} option clicked")
-            time.sleep(2)  # Wait for page navigation
+            time.sleep(1)  # Reduced wait for page navigation
             self._take_screenshot("plus_option_selected.png")
             return True
         except Exception as e:
@@ -280,7 +280,7 @@ class PlusNavigator:
         """
         
         if self._javascript_click_fallback(js_code, option_text):
-            time.sleep(2)
+            time.sleep(1)
             self._take_screenshot("plus_option_selected.png")
             return True
         

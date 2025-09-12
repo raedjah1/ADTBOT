@@ -31,8 +31,12 @@ const ActionWidget = ({
         {/* Status Message */}
         {statusMessage && (
           <Alert 
-            severity={statusMessage.includes('Error') ? 'error' : 
-                     statusMessage.includes('Redirecting') ? 'warning' : 'info'}
+            severity={
+              statusMessage.includes('✗') || statusMessage.includes('failed') || statusMessage.includes('error') ? 'error' : 
+              statusMessage.includes('Redirecting') ? 'warning' :
+              statusMessage.includes('✓') || statusMessage.includes('successful') ? 'success' :
+              'info'
+            }
             sx={{ mb: 3, maxWidth: 600, mx: 'auto' }}
           >
             {statusMessage}
@@ -62,12 +66,16 @@ const ActionWidget = ({
             },
           }}
         >
-          {isLoading ? 'Checking Status...' : 'Begin Unit Receiving'}
+          {isLoading ? (
+            statusMessage.includes('login') ? 'Logging in...' :
+            statusMessage.includes('Navigating') ? 'Navigating...' :
+            'Processing...'
+          ) : 'Begin Unit Receiving'}
         </Button>
 
         {/* Info Text */}
         <Typography variant="caption" color="text.secondary" sx={{ display: 'block', mt: 2 }}>
-          Requires active PLUS connection and ADT program access
+          Will automatically login to PLUS if needed, then navigate to Unit Receiving ADT
         </Typography>
       </CardContent>
     </Card>

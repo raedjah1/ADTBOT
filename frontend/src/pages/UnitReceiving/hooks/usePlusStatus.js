@@ -32,11 +32,39 @@ const usePlusStatus = () => {
       const currentStatus = await checkPlusStatus();
       
       if (!currentStatus?.is_logged_in) {
-        setStatusMessage('PLUS login required. Redirecting to settings...');
-        setTimeout(() => {
-          navigate('/settings');
-        }, 2000);
-        return;
+        setStatusMessage('PLUS login required. Attempting automatic login...');
+        
+        try {
+          // Attempt automatic login
+          const loginResponse = await fetch('http://localhost:8000/plus/login', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+          
+          const loginResult = await loginResponse.json();
+          
+          if (!loginResult.success) {
+            setStatusMessage('✗ Login failed. Please check your PLUS credentials in settings and try again.');
+            setTimeout(() => {
+              navigate('/settings');
+            }, 3000);
+            return;
+          }
+          
+          setStatusMessage('✓ PLUS login successful! Proceeding to Unit Receiving...');
+          // Small delay to show success message
+          await new Promise(resolve => setTimeout(resolve, 1000));
+          
+        } catch (loginError) {
+          setStatusMessage('✗ Login error. Please check your PLUS credentials in settings and try again.');
+          console.error('Auto-login error:', loginError);
+          setTimeout(() => {
+            navigate('/settings');
+          }, 3000);
+          return;
+        }
       }
 
       // If logged in, navigate to Unit Receiving ADT page
@@ -53,7 +81,11 @@ const usePlusStatus = () => {
         const navResult = await navResponse.json();
         
         if (navResult.success) {
-          setStatusMessage('✓ Successfully navigated to Unit Receiving ADT page!');
+          if (navResult.message.includes('Already on Unit Receiving ADT page')) {
+            setStatusMessage('✓ Already on Unit Receiving ADT page - ready to proceed');
+          } else {
+            setStatusMessage('✓ Successfully navigated to Unit Receiving ADT page!');
+          }
           // Additional success logic can be added here
         } else {
           setStatusMessage(`✗ Navigation failed: ${navResult.message}`);

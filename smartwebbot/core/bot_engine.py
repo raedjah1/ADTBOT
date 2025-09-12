@@ -533,6 +533,57 @@ class SmartWebBot(BaseComponent):
                 "message": f"Navigation error: {str(e)}",
                 "current_url": None
             }
+    
+    async def fill_unit_receiving_form(self, form_data: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Fill the Unit Receiving ADT form in PLUS with provided data.
+        
+        Args:
+            form_data: Dictionary containing form field values
+            
+        Returns:
+            Dict: Form filling result with success status and details
+        """
+        try:
+            if not self.plus_integration:
+                return {
+                    "success": False,
+                    "message": "PLUS integration not available",
+                    "current_url": None
+                }
+            
+            return await self.plus_integration.fill_unit_receiving_form(form_data)
+            
+        except Exception as e:
+            log_error("smartwebbot", e, {"operation": "plus_form_fill_unit_receiving"})
+            return {
+                "success": False,
+                "message": f"Form filling error: {str(e)}",
+                "current_url": None
+            }
+    
+    async def submit_unit_receiving_form(self) -> Dict[str, Any]:
+        """
+        Submit the Unit Receiving ADT form in PLUS.
+        
+        Returns:
+            Dict: Form submission result
+        """
+        try:
+            if not self.plus_integration:
+                return {
+                    "success": False,
+                    "message": "PLUS integration not available"
+                }
+            
+            return await self.plus_integration.submit_unit_receiving_form()
+            
+        except Exception as e:
+            log_error("smartwebbot", e, {"operation": "plus_form_submit_unit_receiving"})
+            return {
+                "success": False,
+                "message": f"Form submission error: {str(e)}"
+            }
 
     def get_performance_report(self) -> Dict[str, Any]:
         """

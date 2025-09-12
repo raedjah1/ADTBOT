@@ -595,6 +595,51 @@ async def navigate_to_unit_receiving():
         raise HTTPException(status_code=500, detail=f"Navigation failed: {str(e)}")
 
 
+@app.post("/plus/fill-unit-receiving-form")
+async def fill_unit_receiving_form(form_data: Dict[str, Any]):
+    """Fill the Unit Receiving ADT form in PLUS."""
+    global bot_instance
+    
+    try:
+        if not bot_instance:
+            # Initialize bot if not already done
+            bot_instance = SmartWebBot()
+            if not bot_instance.initialize():
+                raise HTTPException(status_code=500, detail="Failed to initialize bot")
+        
+        # Fill the form
+        result = await bot_instance.fill_unit_receiving_form(form_data)
+        
+        return {
+            **result,
+            "timestamp": datetime.now().isoformat()
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Form filling failed: {str(e)}")
+
+
+@app.post("/plus/submit-unit-receiving-form")
+async def submit_unit_receiving_form():
+    """Submit the Unit Receiving ADT form in PLUS."""
+    global bot_instance
+    
+    try:
+        if not bot_instance:
+            raise HTTPException(status_code=500, detail="Bot not initialized")
+        
+        # Submit the form
+        result = await bot_instance.submit_unit_receiving_form()
+        
+        return {
+            **result,
+            "timestamp": datetime.now().isoformat()
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Form submission failed: {str(e)}")
+
+
 # WebSocket endpoint
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
