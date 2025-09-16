@@ -24,6 +24,9 @@ from smartwebbot.utils.logger import BotLogger
 # Import settings system
 from smartwebbot.settings import settings_router
 
+# Import AI routes
+from smartwebbot.api.ai_routes import router as ai_router
+
 
 # Pydantic models
 class TaskCreate(BaseModel):
@@ -67,6 +70,7 @@ app.add_middleware(
 
 # Include settings router
 app.include_router(settings_router)
+app.include_router(ai_router)
 
 # Global state
 bot_instance: Optional[SmartWebBot] = None

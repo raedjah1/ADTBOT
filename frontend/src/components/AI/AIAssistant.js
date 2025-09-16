@@ -16,7 +16,9 @@ import {
   ListItemText,
   Divider,
   IconButton,
-  Tooltip
+  Tooltip,
+  Alert,
+  Snackbar
 } from '@mui/material';
 import {
   SmartToy as AIIcon,
@@ -27,20 +29,27 @@ import {
   Send as SendIcon,
   Clear as ClearIcon,
   ContentCopy as CopyIcon,
-  PlayArrow as RunIcon
+  PlayArrow as RunIcon,
+  Error as ErrorIcon,
+  CheckCircle as SuccessIcon
 } from '@mui/icons-material';
+import aiService from '../../services/aiService';
+import toast from 'react-hot-toast';
 
 const AIAssistant = ({ onTaskSuggestion, onSecurityAdvice, onActionGenerate, isDarkMode = true }) => {
   const [messages, setMessages] = useState([
     {
       id: 1,
       type: 'ai',
-      content: "👋 Hi! I'm your AI Assistant. I can help you:\n\n• Build automation tasks with natural language\n• Suggest security tests for your targets\n• Generate smart actions and selectors\n• Provide ethical hacking guidance\n\nWhat would you like to do today?",
+      content: "👋 Hi! I'm your AI Assistant powered by Ollama. I can help you:\n\n• Build automation tasks with natural language\n• Suggest security tests for your targets\n• Generate smart actions and selectors\n• Provide ethical hacking guidance\n• Analyze websites and suggest improvements\n\nWhat would you like to do today?",
       timestamp: new Date()
     }
   ]);
   const [inputMessage, setInputMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [aiStatus, setAiStatus] = useState(null);
+  const [sessionId] = useState(`session_${Date.now()}`);
+  const [error, setError] = useState(null);
   const [suggestions] = useState([
     "Create a login automation task",
     "Generate a form filling workflow", 
@@ -50,8 +59,26 @@ const AIAssistant = ({ onTaskSuggestion, onSecurityAdvice, onActionGenerate, isD
     "Create a monitoring task"
   ]);
 
+  // Check AI status on component mount
+  useEffect(() => {
+    checkAIStatus();
+  }, []);
+
+  const checkAIStatus = async () => {
+    try {
+      const status = await aiService.getStatus();
+      setAiStatus(status);
+      if (!status.is_initialized) {
+        setError('AI service is not initialized. Please check if Ollama is running.');
+      }
+    } catch (error) {
+      console.error('Failed to check AI status:', error);
+      setError('Failed to connect to AI service. Please check if the backend is running.');
+    }
+  };
+
   const handleSendMessage = async () => {
-    if (!inputMessage.trim()) return;
+    if (!inputMessage.trim() || isLoading) return;
 
     const userMessage = {
       id: Date.now(),
@@ -61,15 +88,50 @@ const AIAssistant = ({ onTaskSuggestion, onSecurityAdvice, onActionGenerate, isD
     };
 
     setMessages(prev => [...prev, userMessage]);
+    const currentInput = inputMessage;
     setInputMessage('');
     setIsLoading(true);
+    setError(null);
 
-    // Simulate AI processing
-    setTimeout(() => {
-      const aiResponse = generateAIResponse(inputMessage);
+    try {
+      // Call real AI backend
+      const response = await aiService.chat(currentInput, sessionId);
+      
+      const aiResponse = {
+        id: Date.now(),
+        type: 'ai',
+        content: response.response || 'No response received',
+        timestamp: new Date(),
+        confidence: response.confidence || 0.0,
+        actions: response.actions || []
+      };
+
       setMessages(prev => [...prev, aiResponse]);
+      
+      // Show confidence level
+      if (response.confidence && response.confidence < 0.5) {
+        toast('AI response confidence is low. Please provide more details.', { 
+          icon: '⚠️',
+          duration: 3000 
+        });
+      }
+
+    } catch (error) {
+      console.error('AI chat failed:', error);
+      setError('Failed to get AI response. Please try again.');
+      
+      const errorResponse = {
+        id: Date.now(),
+        type: 'ai',
+        content: 'Sorry, I encountered an error. Please check if the AI service is running and try again.',
+        timestamp: new Date(),
+        isError: true
+      };
+      
+      setMessages(prev => [...prev, errorResponse]);
+    } finally {
       setIsLoading(false);
-    }, 1500);
+    }
   };
 
   const generateAIResponse = (userInput) => {
@@ -120,47 +182,81 @@ const AIAssistant = ({ onTaskSuggestion, onSecurityAdvice, onActionGenerate, isD
     };
   };
 
-  const handleActionClick = (action) => {
-    switch (action) {
-      case 'generate_login':
-        if (onTaskSuggestion) {
-          onTaskSuggestion({
-            name: 'Login Automation',
-            description: 'Automated login workflow with error handling',
-            actions: [
-              { type: 'navigate', url: 'https://example.com/login' },
-              { type: 'type', selector: '#username', value: 'your_username' },
-              { type: 'type', selector: '#password', value: 'your_password' },
-              { type: 'click', selector: 'button[type="submit"]' },
-              { type: 'wait', waitTime: 3 },
-              { type: 'screenshot', filename: 'login_success' }
-            ]
-          });
-        }
-        break;
-      case 'security_redirect':
-      case 'security_session':
-      case 'security_module':
-        // Redirect to security testing tab
-        toast.info('Please use the Security Testing tab for all security features.');
-        break;
-      case 'form_task':
-        if (onTaskSuggestion) {
-          onTaskSuggestion({
-            name: 'Smart Form Filler',
-            description: 'Intelligent form filling with validation',
-            actions: [
-              { type: 'navigate', url: 'https://example.com/contact' },
-              { type: 'type', selector: 'input[name="name"]', value: 'John Doe' },
-              { type: 'type', selector: 'input[name="email"]', value: 'john@example.com' },
-              { type: 'type', selector: 'textarea[name="message"]', value: 'Hello from AI Assistant!' },
-              { type: 'click', selector: 'button[type="submit"]' }
-            ]
-          });
-        }
-        break;
-      default:
-        console.log('Action:', action);
+  const handleActionClick = async (action) => {
+    try {
+      switch (action) {
+        case 'generate_login':
+          if (onTaskSuggestion) {
+            onTaskSuggestion({
+              name: 'Login Automation',
+              description: 'Automated login workflow with error handling',
+              actions: [
+                { type: 'navigate_to', url: 'https://example.com/login' },
+                { type: 'fill_form', selector: '#username', value: 'your_username' },
+                { type: 'fill_form', selector: '#password', value: 'your_password' },
+                { type: 'click_element', selector: 'button[type="submit"]' },
+                { type: 'wait', waitTime: 3 },
+                { type: 'take_screenshot', filename: 'login_success' }
+              ]
+            });
+          }
+          break;
+        case 'security_redirect':
+        case 'security_session':
+        case 'security_module':
+          toast.info('Please use the Security Testing tab for all security features.');
+          break;
+        case 'form_task':
+          if (onTaskSuggestion) {
+            onTaskSuggestion({
+              name: 'Smart Form Filler',
+              description: 'Intelligent form filling with validation',
+              actions: [
+                { type: 'navigate_to', url: 'https://example.com/contact' },
+                { type: 'fill_form', selector: 'input[name="name"]', value: 'John Doe' },
+                { type: 'fill_form', selector: 'input[name="email"]', value: 'john@example.com' },
+                { type: 'fill_form', selector: 'textarea[name="message"]', value: 'Hello from AI Assistant!' },
+                { type: 'click_element', selector: 'button[type="submit"]' }
+              ]
+            });
+          }
+          break;
+        case 'analyze_website':
+          const url = prompt('Enter website URL to analyze:');
+          if (url) {
+            try {
+              const analysis = await aiService.analyzeWebsite(url);
+              const analysisMessage = {
+                id: Date.now(),
+                type: 'ai',
+                content: `🔍 Website Analysis for ${url}:\n\n${analysis.analysis}`,
+                timestamp: new Date()
+              };
+              setMessages(prev => [...prev, analysisMessage]);
+            } catch (error) {
+              toast.error('Failed to analyze website');
+            }
+          }
+          break;
+        case 'suggest_task':
+          const description = prompt('Describe the task you want to create:');
+          if (description) {
+            try {
+              const suggestion = await aiService.suggestTask(description);
+              if (onTaskSuggestion) {
+                onTaskSuggestion(suggestion);
+              }
+            } catch (error) {
+              toast.error('Failed to generate task suggestion');
+            }
+          }
+          break;
+        default:
+          console.log('Action:', action);
+      }
+    } catch (error) {
+      console.error('Action failed:', error);
+      toast.error('Action failed. Please try again.');
     }
   };
 
@@ -179,15 +275,49 @@ const AIAssistant = ({ onTaskSuggestion, onSecurityAdvice, onActionGenerate, isD
           <Avatar sx={{ bgcolor: isDarkMode ? '#2196F3' : '#1976D2' }}>
             <AIIcon />
           </Avatar>
-          <Box>
+          <Box flexGrow={1}>
             <Typography variant="h6">AI Assistant</Typography>
             <Typography variant="body2" color="textSecondary">
-              Smart automation & security advisor
+              {aiStatus ? `${aiStatus.provider} (${aiStatus.model})` : 'Smart automation & security advisor'}
             </Typography>
+            {aiStatus && (
+              <Box display="flex" alignItems="center" gap={1} mt={0.5}>
+                {aiStatus.is_initialized ? (
+                  <Chip 
+                    size="small" 
+                    label="Connected" 
+                    color="success" 
+                    icon={<SuccessIcon />}
+                  />
+                ) : (
+                  <Chip 
+                    size="small" 
+                    label="Disconnected" 
+                    color="error" 
+                    icon={<ErrorIcon />}
+                  />
+                )}
+              </Box>
+            )}
           </Box>
         </Box>
 
         <Divider sx={{ mb: 2 }} />
+
+        {/* Error Display */}
+        {error && (
+          <Alert 
+            severity="error" 
+            sx={{ mb: 2 }}
+            action={
+              <Button color="inherit" size="small" onClick={checkAIStatus}>
+                Retry
+              </Button>
+            }
+          >
+            {error}
+          </Alert>
+        )}
 
         {/* Quick Suggestions */}
         <Box mb={2}>
@@ -202,8 +332,27 @@ const AIAssistant = ({ onTaskSuggestion, onSecurityAdvice, onActionGenerate, isD
                 size="small"
                 onClick={() => handleSuggestionClick(suggestion)}
                 sx={{ cursor: 'pointer' }}
+                disabled={!aiStatus?.is_initialized}
               />
             ))}
+            <Chip
+              label="Analyze Website"
+              size="small"
+              onClick={() => handleActionClick('analyze_website')}
+              sx={{ cursor: 'pointer' }}
+              disabled={!aiStatus?.is_initialized}
+              color="primary"
+              variant="outlined"
+            />
+            <Chip
+              label="Suggest Task"
+              size="small"
+              onClick={() => handleActionClick('suggest_task')}
+              sx={{ cursor: 'pointer' }}
+              disabled={!aiStatus?.is_initialized}
+              color="primary"
+              variant="outlined"
+            />
           </Box>
         </Box>
 
@@ -251,6 +400,54 @@ const AIAssistant = ({ onTaskSuggestion, onSecurityAdvice, onActionGenerate, isD
                     {message.content}
                   </Typography>
                   
+                  {/* Confidence Level */}
+                  {message.confidence !== undefined && (
+                    <Box mt={1} display="flex" alignItems="center" gap={1}>
+                      <Typography variant="caption" color="textSecondary">
+                        Confidence: {Math.round(message.confidence * 100)}%
+                      </Typography>
+                      <Box 
+                        sx={{ 
+                          width: 60, 
+                          height: 4, 
+                          bgcolor: 'grey.300', 
+                          borderRadius: 2,
+                          overflow: 'hidden'
+                        }}
+                      >
+                        <Box
+                          sx={{
+                            width: `${message.confidence * 100}%`,
+                            height: '100%',
+                            bgcolor: message.confidence > 0.7 ? 'success.main' : 
+                                    message.confidence > 0.4 ? 'warning.main' : 'error.main',
+                            transition: 'width 0.3s ease'
+                          }}
+                        />
+                      </Box>
+                    </Box>
+                  )}
+                  
+                  {/* AI Actions */}
+                  {message.actions && message.actions.length > 0 && (
+                    <Box mt={2}>
+                      <Typography variant="caption" color="textSecondary" gutterBottom>
+                        Suggested Actions:
+                      </Typography>
+                      <Box display="flex" gap={1} flexWrap="wrap" mt={1}>
+                        {message.actions.map((action, index) => (
+                          <Chip
+                            key={index}
+                            label={`${action.type}: ${action.selector || action.url || 'action'}`}
+                            size="small"
+                            variant="outlined"
+                            color="primary"
+                          />
+                        ))}
+                      </Box>
+                    </Box>
+                  )}
+                  
                   {/* Action Buttons */}
                   {message.actionButtons && (
                     <Box mt={2} display="flex" gap={1} flexWrap="wrap">
@@ -261,6 +458,7 @@ const AIAssistant = ({ onTaskSuggestion, onSecurityAdvice, onActionGenerate, isD
                           variant="outlined"
                           startIcon={button.icon}
                           onClick={() => handleActionClick(button.action)}
+                          disabled={!aiStatus?.is_initialized}
                           sx={{ 
                             borderColor: message.type === 'user' ? 'white' : 'primary.main',
                             color: message.type === 'user' ? 'white' : 'primary.main'
@@ -302,17 +500,23 @@ const AIAssistant = ({ onTaskSuggestion, onSecurityAdvice, onActionGenerate, isD
           <TextField
             fullWidth
             size="small"
-            placeholder="Ask me anything about automation or security..."
+            placeholder={
+              aiStatus?.is_initialized 
+                ? "Ask me anything about automation or security..." 
+                : "AI service not available. Please check connection."
+            }
             value={inputMessage}
             onChange={(e) => setInputMessage(e.target.value)}
-            onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+            onKeyPress={(e) => e.key === 'Enter' && !e.shiftKey && handleSendMessage()}
             multiline
             maxRows={3}
+            disabled={!aiStatus?.is_initialized || isLoading}
           />
           <IconButton 
             color="primary" 
             onClick={handleSendMessage}
-            disabled={!inputMessage.trim() || isLoading}
+            disabled={!inputMessage.trim() || isLoading || !aiStatus?.is_initialized}
+            title={!aiStatus?.is_initialized ? "AI service not available" : "Send message"}
           >
             <SendIcon />
           </IconButton>
