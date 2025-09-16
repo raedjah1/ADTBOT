@@ -28,6 +28,8 @@ automation:
 # AI and Intelligence Settings
 ai:
   enabled: true
+  provider: "ollama"  # ollama, openai, groq
+  model: "gemma3:4b"  # Model name for the selected provider
   element_detection_model: "advanced"
   decision_making_level: "adaptive"
   learning_enabled: true
