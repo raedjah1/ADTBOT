@@ -21,7 +21,7 @@ router = APIRouter(prefix="/api/ai", tags=["AI"])
 
 # Global AI instance
 _ai_instance: Optional[ChatAI] = None
-_logger = BotLogger()
+_logger = BotLogger().get_logger("ai_api")
 
 # Pydantic models
 class ChatMessage(BaseModel):

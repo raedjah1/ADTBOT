@@ -26,7 +26,7 @@ class AIService:
     """
     
     def __init__(self):
-        self.logger = BotLogger()
+        self.logger = BotLogger().get_logger("ai_service")
         self.config_manager = get_config_manager()
         
         # AI modules

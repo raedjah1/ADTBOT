@@ -23,6 +23,7 @@ import {
   DarkMode as DarkModeIcon,
   Assignment as RMAIcon,
   Inventory as InventoryIcon,
+  AutoAwesome as AIVisionIcon,
 } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -70,6 +71,14 @@ const menuItems = [
     icon: InventoryIcon,
     path: '/unit-receiving',
     description: 'ADT Unit Processing'
+  },
+  {
+    id: 'ai-vision',
+    label: 'AI Vision',
+    icon: AIVisionIcon,
+    path: '/ai-vision',
+    description: 'Real-time Website Analysis & Automation',
+    badge: 'NEW'
   },
 ];
 
@@ -214,7 +223,23 @@ const Sidebar = ({ backendStatus, isDarkMode, onThemeToggle }) => {
                   </ListItemIcon>
                   
                   <ListItemText
-                    primary={item.label}
+                    primary={
+                      <Box display="flex" alignItems="center" gap={1}>
+                        {item.label}
+                        {item.badge && (
+                          <Chip
+                            label={item.badge}
+                            size="small"
+                            color="primary"
+                            sx={{ 
+                              height: 20, 
+                              fontSize: '0.7rem',
+                              fontWeight: 600
+                            }}
+                          />
+                        )}
+                      </Box>
+                    }
                     secondary={item.description}
                     primaryTypographyProps={{
                       fontWeight: isActive ? 600 : 500,

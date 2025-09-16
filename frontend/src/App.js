@@ -13,6 +13,7 @@ import LiveMonitor from './pages/LiveMonitor/LiveMonitor';
 import Settings from './pages/Settings/SettingsTwo';
 import Results from './pages/Results/Results';
 import UnitReceiving from './pages/UnitReceiving';
+import AIVision from './pages/AIVision/AIVision';
 
 // Services
 import { connectWebSocket, disconnectWebSocket } from './services/websocket';
@@ -1066,6 +1067,7 @@ function App() {
                 <Route path="/settings" element={<Settings isDarkMode={isDarkMode} />} />
                 <Route path="/results" element={<Results isDarkMode={isDarkMode} />} />
                 <Route path="/unit-receiving" element={<UnitReceiving isDarkMode={isDarkMode} />} />
+                <Route path="/ai-vision" element={<AIVision isDarkMode={isDarkMode} />} />
               </Routes>
             </Box>
           </Box>

@@ -26,6 +26,7 @@ from smartwebbot.settings import settings_router
 
 # Import AI routes
 from smartwebbot.api.ai_routes import router as ai_router
+from smartwebbot.api.ai_vision_routes import router as ai_vision_router
 
 
 # Pydantic models
@@ -71,6 +72,7 @@ app.add_middleware(
 # Include settings router
 app.include_router(settings_router)
 app.include_router(ai_router)
+app.include_router(ai_vision_router)
 
 # Global state
 bot_instance: Optional[SmartWebBot] = None
