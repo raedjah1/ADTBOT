@@ -33,7 +33,9 @@ import {
   Badge,
   Tooltip,
   Fade,
-  LinearProgress
+  LinearProgress,
+  Tabs,
+  Tab
 } from '@mui/material';
 import {
   Visibility as VisionIcon,
@@ -53,8 +55,11 @@ import {
   Send as SendIcon,
   Clear as ClearIcon,
   Download as DownloadIcon,
-  Upload as UploadIcon
+  Upload as UploadIcon,
+  Chat as ChatIcon,
+  SmartToy as AIIcon
 } from '@mui/icons-material';
+import IntelligentChatInterface from '../../components/IntelligentChat/IntelligentChatInterface';
 import aiVisionService from '../../services/aiVisionService';
 import toast from 'react-hot-toast';
 
@@ -71,6 +76,12 @@ const AIVision = ({ isDarkMode = true }) => {
   const [workflow, setWorkflow] = useState(null);
   const [isServiceAvailable, setIsServiceAvailable] = useState(false);
   const [error, setError] = useState(null);
+  
+  // Tab state
+  const [activeTab, setActiveTab] = useState(0); // 0 = Vision Analysis, 1 = Intelligent Chat
+  
+  // Chat state
+  const [chatSessionId] = useState(`vision_session_${Date.now()}`);
 
   // Check service availability on mount
   useEffect(() => {
@@ -227,6 +238,32 @@ const AIVision = ({ isDarkMode = true }) => {
       </Container>
     );
   }
+  
+  // Chat handlers
+  const handleChatWorkflowExecute = (workflowResult) => {
+    // Handle workflow execution from chat
+    console.log('Chat workflow executed:', workflowResult);
+    toast.success('Workflow executed successfully!');
+    
+    // Add to execution results
+    setExecutionResults(prev => [...prev, {
+      action: 'Chat Workflow',
+      success: true,
+      message: 'Intelligent chat workflow completed',
+      timestamp: new Date().toLocaleTimeString(),
+      details: workflowResult
+    }]);
+  };
+  
+  const handleChatCredentialsRequired = (credentialResult) => {
+    // Handle credentials submission from chat
+    console.log('Chat credentials submitted:', credentialResult);
+    toast.success('Credentials submitted successfully!');
+  };
+  
+  const handleTabChange = (event, newValue) => {
+    setActiveTab(newValue);
+  };
 
   return (
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
@@ -243,8 +280,29 @@ const AIVision = ({ isDarkMode = true }) => {
         </Box>
       </Box>
 
-      {/* URL Input */}
-      <Card sx={{ mb: 3 }}>
+      {/* Tabs */}
+      <Box sx={{ borderBottom: 1, borderColor: 'divider', mb: 3 }}>
+        <Tabs value={activeTab} onChange={handleTabChange} aria-label="AI Vision tabs">
+          <Tab 
+            icon={<VisionIcon />} 
+            label="Vision Analysis" 
+            id="tab-0" 
+            aria-controls="tabpanel-0" 
+          />
+          <Tab 
+            icon={<ChatIcon />} 
+            label="Intelligent Chat" 
+            id="tab-1" 
+            aria-controls="tabpanel-1" 
+          />
+        </Tabs>
+      </Box>
+
+      {/* Tab Panel 0: Vision Analysis */}
+      {activeTab === 0 && (
+        <Box>
+          {/* URL Input */}
+          <Card sx={{ mb: 3 }}>
         <CardContent>
           <Box display="flex" gap={2} alignItems="center">
             <TextField
@@ -505,6 +563,21 @@ const AIVision = ({ isDarkMode = true }) => {
             AI is examining the page structure and elements
           </Typography>
         </Box>
+      )}
+        </Box>
+      )}
+
+      {/* Tab Panel 1: Intelligent Chat */}
+      {activeTab === 1 && (
+        <Card sx={{ height: '70vh' }}>
+          <IntelligentChatInterface
+            sessionId={chatSessionId}
+            currentUrl={url}
+            onWorkflowExecute={handleChatWorkflowExecute}
+            onCredentialsRequired={handleChatCredentialsRequired}
+            isDarkMode={isDarkMode}
+          />
+        </Card>
       )}
     </Container>
   );

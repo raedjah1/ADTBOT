@@ -1,0 +1,31 @@
+notifications:
+  email_address: ''
+  email_notifications: true
+  notification_level: important
+  phone_number: ''
+  push_notifications: true
+  sms_notifications: false
+performance:
+  cache_size: 100
+  enable_caching: true
+  enable_logging: true
+  log_level: info
+  max_concurrent_tasks: 5
+  memory_threshold: 80
+  task_timeout: 300
+plus_integration:
+  api_key: ''
+  base_url: https://plus.reconext.com
+  enabled: true
+  password: ''
+  retry_attempts: 3
+  timeout: 30
+  username: ''
+rma_processing:
+  auto_processing: true
+  batch_size: 100
+  error_retry_count: 3
+  label_generation: true
+  max_processing_time: 30
+  quality_checks: true
+  tracking_validation: true

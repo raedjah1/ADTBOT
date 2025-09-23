@@ -63,22 +63,37 @@ class AIVisionService:
     async def initialize(self) -> bool:
         """Initialize the AI vision service."""
         try:
+            self.logger.info("Initializing AI Vision Service...")
+            
+            # Initialize Web Controller first (needed for Element Detector)
+            self.logger.info("Initializing Web Controller...")
+            self._web_controller = WebController(self._config)
+            if not self._web_controller.initialize():
+                self.logger.error("Failed to initialize Web Controller")
+                return False
+            self.logger.info("Web Controller initialized successfully")
+            
             # Initialize Chat AI
+            self.logger.info("Initializing Chat AI...")
             self._chat_ai = ChatAI(self._config)
             if not self._chat_ai.initialize():
                 self.logger.error("Failed to initialize Chat AI")
                 return False
+            self.logger.info("Chat AI initialized successfully")
             
-            # Initialize Element Detector
-            self._element_detector = AIElementDetector(self._config)
-            if not self._element_detector.initialize():
-                self.logger.error("Failed to initialize Element Detector")
-                return False
-            
-            # Initialize Web Controller
-            self._web_controller = WebController(self._config)
-            if not self._web_controller.initialize():
-                self.logger.error("Failed to initialize Web Controller")
+            # Initialize Element Detector (needs driver from web controller)
+            self.logger.info("Initializing Element Detector...")
+            if self._web_controller and self._web_controller.driver:
+                self._element_detector = AIElementDetector(
+                    self._web_controller.driver, 
+                    self._config
+                )
+                if not self._element_detector.initialize():
+                    self.logger.error("Failed to initialize Element Detector")
+                    return False
+                self.logger.info("Element Detector initialized successfully")
+            else:
+                self.logger.error("Cannot initialize Element Detector: Web Controller driver not available")
                 return False
             
             self.logger.info("AI Vision Service initialized successfully")
@@ -86,6 +101,8 @@ class AIVisionService:
             
         except Exception as e:
             self.logger.error(f"Failed to initialize AI Vision Service: {e}")
+            import traceback
+            self.logger.error(f"Full traceback: {traceback.format_exc()}")
             return False
     
     async def analyze_website(self, url: str, analysis_type: str = "comprehensive") -> Dict[str, Any]:
@@ -101,6 +118,11 @@ class AIVisionService:
         """
         try:
             self.logger.info(f"Starting website analysis: {url}")
+            
+            # Check if web controller is initialized
+            if self._web_controller is None:
+                self.logger.error("Web controller is not initialized")
+                raise Exception("Web controller is not initialized. Service initialization may have failed.")
             
             # Navigate to website
             if not self._web_controller.navigate_to(url):

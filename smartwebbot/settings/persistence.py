@@ -68,14 +68,76 @@ class SettingsPersistence:
                 logger.warning("Empty settings file, using defaults")
                 return SystemSettings()
             
+            # Clean and validate loaded data
+            data = self._clean_loaded_data(data)
+            
             settings = SystemSettings(**data)
             logger.debug("Settings loaded successfully")
             return settings
             
         except Exception as e:
             logger.error(f"Failed to load settings: {e}")
-            # Return default settings if loading fails
+            # Create backup of corrupted settings and use defaults
+            if self.settings_file.exists():
+                try:
+                    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                    corrupted_file = self.backup_dir / f"corrupted_settings_{timestamp}.yaml"
+                    shutil.copy2(self.settings_file, corrupted_file)
+                    logger.info(f"Creating backup of corrupted settings and using defaults")
+                except Exception:
+                    pass
             return SystemSettings()
+    
+    def _clean_loaded_data(self, data: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Clean and validate loaded settings data.
+        
+        Args:
+            data: Raw loaded data
+            
+        Returns:
+            Dict: Cleaned data
+        """
+        if not isinstance(data, dict):
+            return {}
+        
+        # Ensure all required sections exist
+        default_sections = {
+            'plus_integration': {},
+            'rma_processing': {},
+            'notifications': {},
+            'performance': {}
+        }
+        
+        for section, default_values in default_sections.items():
+            if section not in data or not isinstance(data[section], dict):
+                data[section] = default_values
+        
+        return data
+    
+    def _clean_dict_for_yaml(self, data: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Clean dictionary to ensure YAML-safe serialization.
+        
+        Args:
+            data: Dictionary to clean
+            
+        Returns:
+            Dict: Cleaned dictionary
+        """
+        if isinstance(data, dict):
+            cleaned = {}
+            for key, value in data.items():
+                cleaned[key] = self._clean_dict_for_yaml(value)
+            return cleaned
+        elif isinstance(data, list):
+            return [self._clean_dict_for_yaml(item) for item in data]
+        elif hasattr(data, 'value'):  # Enum with value attribute
+            return data.value
+        elif hasattr(data, '__str__') and hasattr(data, '__class__') and 'Enum' in str(data.__class__):
+            return str(data)
+        else:
+            return data
     
     def save_settings(self, settings: SystemSettings) -> bool:
         """
@@ -93,10 +155,22 @@ class SettingsPersistence:
                 self._create_backup()
             
             # Convert to dict and save as YAML
-            settings_dict = settings.dict()
+            # Use by_alias=True and exclude_none=False to ensure clean serialization
+            settings_dict = settings.dict(by_alias=True, exclude_none=False)
+            
+            # Clean any enum values to ensure they're serialized as strings
+            settings_dict = self._clean_dict_for_yaml(settings_dict)
             
             with open(self.settings_file, 'w', encoding='utf-8') as f:
-                yaml.dump(settings_dict, f, default_flow_style=False, indent=2)
+                # Use safe_dump to prevent Python object serialization
+                yaml.safe_dump(
+                    settings_dict, 
+                    f, 
+                    default_flow_style=False, 
+                    indent=2,
+                    allow_unicode=True,
+                    sort_keys=False
+                )
             
             logger.info("Settings saved successfully")
             return True

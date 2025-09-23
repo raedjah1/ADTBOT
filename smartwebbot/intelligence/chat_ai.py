@@ -37,7 +37,7 @@ class ChatAI(BaseComponent):
         super().__init__("chat_ai", config)
         
         self.ai_provider = self.config.get("provider", "ollama")  # ollama, openai, groq
-        self.model_name = self.config.get("model", "llama3.2:3b")
+        self.model_name = self.config.get("model", "gemma3:4b")
         self.api_key = self.config.get("api_key")
         
         # Context for conversation

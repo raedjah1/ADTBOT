@@ -168,7 +168,7 @@ class PlusIntegration(BaseComponent):
                 return False, f"Maximum login attempts ({self.max_login_attempts}) exceeded"
             
             # Load credentials (refresh from settings)
-            self.plus_settings = self._load_plus_settings()
+            self.plus_settings = self._load_plus_settings(force_reload=True)
             
             if not self.plus_settings:
                 return False, "PLUS settings not configured"
@@ -858,12 +858,18 @@ class PlusIntegration(BaseComponent):
         # as many systems have login on the main page
         return base_url
     
-    def _load_plus_settings(self) -> Optional[Dict[str, Any]]:
+    def _load_plus_settings(self, force_reload: bool = False) -> Optional[Dict[str, Any]]:
         """Load PLUS settings from settings service."""
         try:
             if not self.settings_service:
                 self.logger.error("Settings service not initialized")
                 return None
+            
+            # Force cache clear if requested (useful when credentials are updated)
+            if force_reload:
+                self.settings_service._current_settings = None
+                self.settings_service._settings_cache_time = None
+                self.logger.info("Forced settings cache reload")
                 
             all_settings = self.settings_service.get_all_settings()
             if not all_settings:
@@ -898,6 +904,11 @@ class PlusIntegration(BaseComponent):
             import traceback
             self.logger.error(f"Full traceback: {traceback.format_exc()}")
             return None
+    
+    def reload_settings(self):
+        """Force reload of PLUS settings (useful after credentials update)."""
+        self.logger.info("Reloading PLUS settings...")
+        self.plus_settings = self._load_plus_settings(force_reload=True)
     
     def _save_session_data(self):
         """Save current session data."""

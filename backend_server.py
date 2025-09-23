@@ -23,6 +23,9 @@ from smartwebbot.utils.logger import BotLogger
 
 # Import settings system
 from smartwebbot.settings import settings_router
+from smartwebbot.api.autonomous_routes import router as autonomous_router
+# Import intelligent chat routes
+from smartwebbot.api.intelligent_chat_routes import router as intelligent_chat_router
 
 # Import AI routes
 from smartwebbot.api.ai_routes import router as ai_router
@@ -71,6 +74,11 @@ app.add_middleware(
 
 # Include settings router
 app.include_router(settings_router)
+
+# Include autonomous action router
+app.include_router(autonomous_router)
+# Include intelligent chat router
+app.include_router(intelligent_chat_router)
 app.include_router(ai_router)
 app.include_router(ai_vision_router)
 

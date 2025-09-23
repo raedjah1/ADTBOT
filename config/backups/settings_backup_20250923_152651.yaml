@@ -1,7 +1,7 @@
 plus_integration:
   base_url: https://plus.reconext.com
-  username: raed.jah
-  password: Microwave18.
+  username: test
+  password: bombo
   api_key: ''
   timeout: 30
   retry_attempts: 3

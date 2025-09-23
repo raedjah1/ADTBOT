@@ -290,12 +290,22 @@ class SettingsService:
                 "api_key": credentials.get("apiKey", credentials.get("api_key", "")),
             }
             
+            logger.info(f"Saving PLUS credentials: username='{settings_data.get('username', '')}', base_url='{settings_data.get('base_url', '')}'")
+            
             # Get current settings and update only credentials
             current_settings = self.get_all_settings()
             plus_settings = current_settings.plus_integration.dict()
             plus_settings.update(settings_data)
             
-            return self.update_plus_settings(plus_settings)
+            success = self.update_plus_settings(plus_settings)
+            
+            if success:
+                # Clear cache to ensure fresh credentials are loaded immediately
+                self._current_settings = None
+                self._settings_cache_time = None
+                logger.info("PLUS credentials saved and cache cleared for immediate use")
+            
+            return success
             
         except Exception as e:
             logger.error(f"Failed to save PLUS credentials: {e}")
