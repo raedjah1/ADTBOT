@@ -36,9 +36,17 @@ class ChatAI(BaseComponent):
         """Initialize the chat AI system."""
         super().__init__("chat_ai", config)
         
-        self.ai_provider = self.config.get("provider", "ollama")  # ollama, openai, groq
-        self.model_name = self.config.get("model", "gemma3:4b")
-        self.api_key = self.config.get("api_key")
+        # Handle both AIConfig object and dict
+        if hasattr(config, 'provider'):
+            # AIConfig object
+            self.ai_provider = getattr(config, 'provider', 'ollama')
+            self.model_name = getattr(config, 'model', 'gemma3:4b')
+            self.api_key = getattr(config, 'api_key', None)
+        else:
+            # Dict config
+            self.ai_provider = config.get("provider", "ollama") if config else "ollama"
+            self.model_name = config.get("model", "gemma3:4b") if config else "gemma3:4b"
+            self.api_key = config.get("api_key") if config else None
         
         # Context for conversation
         self.conversation_history = []

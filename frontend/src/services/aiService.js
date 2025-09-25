@@ -192,6 +192,40 @@ class AIService {
       return false;
     }
   }
+
+  /**
+   * Get current model info
+   */
+  async getCurrentModel() {
+    try {
+      const response = await fetch('/api/intelligent-chat/current-model');
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return await response.json();
+    } catch (error) {
+      console.error('Get current model failed:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Switch AI model
+   */
+  async switchAIModel(modelType) {
+    try {
+      const response = await fetch(`/api/intelligent-chat/switch-model?model_type=${modelType}`, {
+        method: 'POST',
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return await response.json();
+    } catch (error) {
+      console.error('Switch AI model failed:', error);
+      throw error;
+    }
+  }
 }
 
 // Export singleton instance

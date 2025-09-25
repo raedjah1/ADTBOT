@@ -74,7 +74,7 @@ async def initialize_intelligent_chat():
         
         # Initialize components with default config
         config = {
-            "chat_ai": {"provider": "ollama", "model": "gemma3:4b"},
+            "chat_ai": {"provider": "ollama", "model": "gemma2:2b"},  # Fast model as default
             "max_workflow_steps": 50,
             "auto_search_enabled": True
         }
@@ -451,3 +451,82 @@ async def demo_complex_command():
     )
     
     return await process_chat_command(demo_request)
+
+
+@router.post("/switch-model")
+async def switch_model(model_type: str):
+    """
+    Switch between fast and accurate models.
+    
+    Args:
+        model_type: "fast" (gemma2:2b) or "accurate" (gemma3:4b)
+    """
+    global chat_orchestrator
+    
+    try:
+        # Model mapping
+        models = {
+            "fast": "gemma2:2b",
+            "accurate": "gemma3:4b"
+        }
+        
+        if model_type not in models:
+            raise HTTPException(status_code=400, detail="Model type must be 'fast' or 'accurate'")
+        
+        selected_model = models[model_type]
+        
+        # Update the configuration
+        config = {
+            "chat_ai": {"provider": "ollama", "model": selected_model},
+            "max_workflow_steps": 50,
+            "auto_search_enabled": True
+        }
+        
+        # Reinitialize chat orchestrator with new model
+        old_orchestrator = chat_orchestrator
+        chat_orchestrator = IntelligentChatOrchestrator(config)
+        
+        if not chat_orchestrator.initialize():
+            # If initialization fails, revert
+            chat_orchestrator = old_orchestrator
+            raise HTTPException(status_code=500, detail=f"Failed to switch to {selected_model}")
+        
+        # Clean up old orchestrator
+        if old_orchestrator:
+            old_orchestrator.cleanup()
+        
+        return {
+            "success": True,
+            "message": f"Switched to {model_type} model ({selected_model})",
+            "model": selected_model,
+            "benefits": {
+                "fast": "2-3x faster responses, good for quick tasks",
+                "accurate": "More accurate responses, better for complex workflows"
+            }.get(model_type)
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Model switching error: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to switch model: {str(e)}")
+
+
+@router.get("/current-model")
+async def get_current_model():
+    """Get information about the currently active model."""
+    if not chat_orchestrator or not chat_orchestrator.chat_ai:
+        return {"model": "unknown", "status": "not_initialized"}
+    
+    current_model = chat_orchestrator.chat_ai.model_name
+    
+    model_info = {
+        "gemma2:2b": {"type": "fast", "description": "Fast responses, good for quick tasks", "size": "1.6GB"},
+        "gemma3:4b": {"type": "accurate", "description": "More accurate, better for complex tasks", "size": "3.3GB"}
+    }
+    
+    return {
+        "current_model": current_model,
+        "model_info": model_info.get(current_model, {"type": "unknown", "description": "Custom model"}),
+        "available_models": model_info
+    }

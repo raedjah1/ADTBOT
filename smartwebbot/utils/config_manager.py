@@ -50,7 +50,7 @@ class AIConfig:
     """AI and intelligence configuration."""
     enabled: bool = True
     provider: str = "ollama"  # ollama, openai, groq
-    model: str = "gemma3:4b"
+    model: str = "gemma2:2b"
     api_key: Optional[str] = None
     ai_endpoint: str = "http://localhost:11434"
     element_detection_model: str = "advanced"
@@ -449,6 +449,15 @@ class ConfigManager:
             'config_file': str(self.config_path),
             'file_exists': self.config_path.exists()
         }
+    
+    def get_ai_config(self) -> AIConfig:
+        """
+        Get AI configuration object.
+        
+        Returns:
+            AIConfig object with current AI settings
+        """
+        return self.ai
 
 
 # Global configuration manager instance

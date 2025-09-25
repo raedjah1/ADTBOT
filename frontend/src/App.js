@@ -14,6 +14,7 @@ import Settings from './pages/Settings/SettingsTwo';
 import Results from './pages/Results/Results';
 import UnitReceiving from './pages/UnitReceiving';
 import AIVision from './pages/AIVision/AIVision';
+import FloatingChatWidget from './components/AI/FloatingChatWidget';
 
 // Services
 import { connectWebSocket, disconnectWebSocket } from './services/websocket';
@@ -1072,6 +1073,9 @@ function App() {
             </Box>
           </Box>
         </Box>
+        
+        {/* Floating Chat Widget - Global */}
+        <FloatingChatWidget isDarkMode={isDarkMode} />
       </Router>
       
       {/* Premium Toast Notifications */}
