@@ -49,6 +49,10 @@ class AutomationConfig:
 class AIConfig:
     """AI and intelligence configuration."""
     enabled: bool = True
+    provider: str = "ollama"  # ollama, openai, groq
+    model: str = "gemma3:4b"
+    api_key: Optional[str] = None
+    ai_endpoint: str = "http://localhost:11434"
     element_detection_model: str = "advanced"
     decision_making_level: str = "adaptive"
     learning_enabled: bool = True

@@ -127,6 +127,23 @@ class SmartNextStepPredictor(BaseComponent):
             self.logger.error(f"Failed to initialize Smart Next Step Predictor: {e}")
             return False
     
+    def cleanup(self) -> bool:
+        """Clean up resources used by the predictor."""
+        try:
+            self.logger.info("Cleaning up Smart Next Step Predictor...")
+            
+            # Clear pattern databases
+            self.pattern_database.clear()
+            self.success_patterns.clear()
+            self.failure_patterns.clear()
+            
+            self.logger.info("Smart Next Step Predictor cleanup completed")
+            return True
+            
+        except Exception as e:
+            self.logger.error(f"Failed to cleanup Smart Next Step Predictor: {e}")
+            return False
+    
     async def predict_next_steps(
         self, 
         page_state: PageState, 

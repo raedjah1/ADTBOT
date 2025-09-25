@@ -100,16 +100,41 @@ class IntelligentChatOrchestrator(BaseComponent):
             self.logger.info("Initializing Intelligent Chat Orchestrator...")
             
             # Initialize AI components
-            self.chat_ai = ChatAI(self.config.get("chat_ai", {}))
-            self.action_planner = AutonomousActionPlanner(self.config.get("action_planner", {}))
-            self.next_step_predictor = SmartNextStepPredictor(self.config.get("next_step_predictor", {}))
+            chat_ai_config = self.config.get("chat_ai", {}) if self.config else {}
+            self.chat_ai = ChatAI(chat_ai_config)
+            
+            # Initialize web controller
+            self.web_controller = WebController()
+            
+            # Initialize action planner with required dependencies
+            # For now, we'll create a simple version that works with the current system
+            self.action_planner = self._create_simple_action_planner()
+            
+            # Initialize next step predictor (optional)
+            try:
+                from .smart_next_step_predictor import SmartNextStepPredictor
+                predictor_config = self.config.get("next_step_predictor", {}) if self.config else {}
+                # SmartNextStepPredictor requires chat_ai and web_controller
+                self.next_step_predictor = SmartNextStepPredictor(
+                    chat_ai=self.chat_ai,
+                    web_controller=self.web_controller,
+                    config=predictor_config
+                )
+            except (ImportError, TypeError) as e:
+                self.logger.warning(f"SmartNextStepPredictor not available ({e}), continuing without it")
+                self.next_step_predictor = None
             
             # Initialize components
-            if not all([
+            init_results = [
                 self.chat_ai.initialize(),
-                self.action_planner.initialize(),
-                self.next_step_predictor.initialize()
-            ]):
+                self.action_planner.initialize()
+            ]
+            
+            # Only initialize next_step_predictor if it's available
+            if self.next_step_predictor:
+                init_results.append(self.next_step_predictor.initialize())
+            
+            if not all(init_results):
                 raise Exception("Failed to initialize AI components")
             
             self.is_initialized = True
@@ -229,8 +254,22 @@ class IntelligentChatOrchestrator(BaseComponent):
             }
         }
         
-        plan = await self.action_planner.create_workflow(plan_request)
-        return plan.get("steps", [])
+        # Create a simple workflow for now
+        if not self.action_planner:
+            return []
+        
+        # Use the existing create_autonomous_workflow method if available
+        if hasattr(self.action_planner, 'create_autonomous_workflow'):
+            goal = context.user_command.intent if hasattr(context, 'user_command') and context.user_command else "unknown task"
+            workflow = await self.action_planner.create_autonomous_workflow(
+                goal=goal,
+                constraints=plan_request.get("constraints")
+            )
+            return [{"type": action.action_type, "description": action.description, 
+                    "parameters": action.parameters} for action in workflow]
+        else:
+            # Fallback to simple workflow creation
+            return await self._create_simple_workflow(context)
     
     async def _execute_workflow(self, context: ExecutionContext, execution_plan: List[Dict]) -> Dict[str, Any]:
         """Execute the workflow steps"""
@@ -240,12 +279,16 @@ class IntelligentChatOrchestrator(BaseComponent):
         
         for step in execution_plan:
             try:
-                # Predict next step for better execution
-                next_prediction = await self.next_step_predictor.predict_next_steps({
-                    "current_step": step,
-                    "context": context.workflow_state,
-                    "goal": context.user_command.intent
-                })
+                # Predict next step for better execution (if predictor is available)
+                next_prediction = None
+                if self.next_step_predictor and hasattr(self.next_step_predictor, 'predict_next_steps'):
+                    try:
+                        # Note: predict_next_steps expects PageState and UserGoal objects, not dicts
+                        # For now, we'll skip this prediction and handle it later
+                        pass
+                    except Exception as e:
+                        self.logger.warning(f"Next step prediction failed: {e}")
+                        next_prediction = None
                 
                 # Execute the step (this would integrate with existing automation)
                 step_result = await self._execute_single_step(step, context)
@@ -519,6 +562,73 @@ class IntelligentChatOrchestrator(BaseComponent):
             }
         }
     
+    def _create_simple_action_planner(self):
+        """Create a simple action planner that works without complex dependencies"""
+        
+        class SimpleActionPlanner:
+            def __init__(self):
+                self.is_initialized = False
+            
+            def initialize(self) -> bool:
+                self.is_initialized = True
+                return True
+            
+            async def create_autonomous_workflow(self, goal: str, constraints: Dict = None) -> List:
+                """Create a simple workflow based on the goal"""
+                # Simple workflow generation based on common patterns
+                workflow_steps = []
+                
+                if "instagram" in goal.lower():
+                    workflow_steps = [
+                        {"action_type": "navigate", "description": "Navigate to Instagram", 
+                         "parameters": {"url": "https://instagram.com"}},
+                        {"action_type": "login", "description": "Login to Instagram",
+                         "parameters": {"credentials_required": True}},
+                        {"action_type": "execute", "description": f"Execute: {goal}",
+                         "parameters": {"goal": goal}}
+                    ]
+                elif "facebook" in goal.lower():
+                    workflow_steps = [
+                        {"action_type": "navigate", "description": "Navigate to Facebook",
+                         "parameters": {"url": "https://facebook.com"}},
+                        {"action_type": "login", "description": "Login to Facebook",
+                         "parameters": {"credentials_required": True}},
+                        {"action_type": "execute", "description": f"Execute: {goal}",
+                         "parameters": {"goal": goal}}
+                    ]
+                else:
+                    # Generic workflow
+                    workflow_steps = [
+                        {"action_type": "analyze", "description": f"Analyze request: {goal}",
+                         "parameters": {"goal": goal}},
+                        {"action_type": "execute", "description": f"Execute: {goal}",
+                         "parameters": {"goal": goal}}
+                    ]
+                
+                # Convert to action plan objects
+                from dataclasses import dataclass
+                
+                @dataclass
+                class SimpleActionPlan:
+                    action_type: str
+                    description: str
+                    parameters: Dict[str, Any]
+                
+                return [SimpleActionPlan(**step) for step in workflow_steps]
+        
+        return SimpleActionPlanner()
+    
+    async def _create_simple_workflow(self, context) -> List[Dict[str, Any]]:
+        """Create a simple workflow when action planner is not available"""
+        goal = context.user_command.intent if hasattr(context, 'user_command') and context.user_command else "unknown"
+        
+        return [
+            {"type": "analyze", "description": f"Analyze request: {goal}", 
+             "parameters": {"goal": goal}},
+            {"type": "execute", "description": f"Execute: {goal}",
+             "parameters": {"goal": goal}}
+        ]
+
     def _load_command_patterns(self) -> Dict[str, Any]:
         """Load patterns for command recognition"""
         

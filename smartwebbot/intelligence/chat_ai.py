@@ -56,13 +56,44 @@ class ChatAI(BaseComponent):
                     self.logger.error("Ollama not installed. Install with: pip install ollama")
                     return False
                 
-                # Test connection to Ollama
+                # Import ollama here to ensure it's available in the current context
                 try:
-                    ollama.list()
-                    self.logger.info("Connected to local Ollama server")
-                except Exception as e:
-                    self.logger.error(f"Ollama server not running: {e}")
+                    import ollama as ollama_client
+                except ImportError:
+                    self.logger.error("Ollama package not available in current environment")
                     return False
+                
+                # Test connection to Ollama with retry logic
+                max_retries = 3
+                for attempt in range(max_retries):
+                    try:
+                        # Check if Ollama is available
+                        models = ollama_client.list()
+                        
+                        # Check if our model exists
+                        model_exists = any(model.model == self.model_name for model in models.models)
+                        if not model_exists:
+                            self.logger.warning(f"Model {self.model_name} not found. Available models: {[m.model for m in models.models]}")
+                            # Try to pull the model if it doesn't exist
+                            try:
+                                self.logger.info(f"Attempting to pull model: {self.model_name}")
+                                ollama_client.pull(self.model_name)
+                                self.logger.info(f"Successfully pulled model: {self.model_name}")
+                            except Exception as pull_error:
+                                self.logger.error(f"Failed to pull model {self.model_name}: {pull_error}")
+                        else:
+                            self.logger.info(f"Found model: {self.model_name}")
+                        
+                        self.logger.info("Connected to local Ollama server")
+                        break
+                    except Exception as e:
+                        if attempt < max_retries - 1:
+                            self.logger.warning(f"Ollama connection attempt {attempt + 1} failed: {e}. Retrying...")
+                            import time
+                            time.sleep(2)
+                        else:
+                            self.logger.error(f"Ollama server not running after {max_retries} attempts: {e}")
+                            return False
                     
             elif self.ai_provider == "openai":
                 if not OPENAI_AVAILABLE or not self.api_key:
@@ -132,6 +163,9 @@ class ChatAI(BaseComponent):
     async def _chat_with_ollama(self, system_prompt: str, user_message: str) -> str:
         """Chat with local Ollama LLaMA model."""
         try:
+            # Import ollama locally to ensure it's available
+            import ollama as ollama_client
+            
             messages = [
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_message}
@@ -146,7 +180,7 @@ class ChatAI(BaseComponent):
                         "content": msg["content"]
                     })
             
-            response = ollama.chat(
+            response = ollama_client.chat(
                 model=self.model_name,
                 messages=messages,
                 options={

@@ -70,6 +70,8 @@ async def initialize_intelligent_chat():
     global chat_orchestrator, credential_manager, web_search
     
     try:
+        logger.info("Starting intelligent chat components initialization...")
+        
         # Initialize components with default config
         config = {
             "chat_ai": {"provider": "ollama", "model": "gemma3:4b"},
@@ -77,22 +79,48 @@ async def initialize_intelligent_chat():
             "auto_search_enabled": True
         }
         
-        chat_orchestrator = IntelligentChatOrchestrator(config)
-        credential_manager = DynamicCredentialManager()
-        web_search = WebSearchIntegration()
+        # Initialize each component individually with better error handling
+        try:
+            chat_orchestrator = IntelligentChatOrchestrator(config)
+            chat_init_success = chat_orchestrator.initialize()
+            logger.info(f"Chat orchestrator initialization: {'SUCCESS' if chat_init_success else 'FAILED'}")
+        except Exception as e:
+            logger.error(f"Failed to initialize chat orchestrator: {e}")
+            chat_orchestrator = None
+            chat_init_success = False
         
-        # Initialize all components
-        if not all([
-            chat_orchestrator.initialize(),
-            credential_manager.initialize(),
-            web_search.initialize()
-        ]):
-            logger.error("Failed to initialize intelligent chat components")
-        else:
+        try:
+            credential_manager = DynamicCredentialManager()
+            cred_init_success = credential_manager.initialize()
+            logger.info(f"Credential manager initialization: {'SUCCESS' if cred_init_success else 'FAILED'}")
+        except Exception as e:
+            logger.error(f"Failed to initialize credential manager: {e}")
+            credential_manager = None
+            cred_init_success = False
+        
+        try:
+            web_search = WebSearchIntegration()
+            search_init_success = web_search.initialize()
+            logger.info(f"Web search initialization: {'SUCCESS' if search_init_success else 'FAILED'}")
+        except Exception as e:
+            logger.error(f"Failed to initialize web search: {e}")
+            web_search = None
+            search_init_success = False
+        
+        # Check overall initialization status
+        total_success = chat_init_success and cred_init_success and search_init_success
+        
+        if total_success:
             logger.info("Intelligent chat system initialized successfully")
+        else:
+            logger.warning("Some intelligent chat components failed to initialize, but system will continue with limited functionality")
     
     except Exception as e:
-        logger.error(f"Failed to initialize intelligent chat system: {e}")
+        logger.error(f"Critical failure in intelligent chat system initialization: {e}")
+        # Set components to None to ensure we don't try to use them
+        chat_orchestrator = None
+        credential_manager = None
+        web_search = None
 
 
 @router.post("/command", response_model=ChatCommandResponse)
@@ -106,8 +134,35 @@ async def process_chat_command(request: ChatCommandRequest):
     - "Market my business on social media"
     """
     
-    if not chat_orchestrator:
-        raise HTTPException(status_code=503, detail="Intelligent chat system not initialized")
+    if not chat_orchestrator or not chat_orchestrator.is_initialized:
+        # Try to provide a fallback response using basic AI chat
+        try:
+            from ..intelligence.chat_ai import ChatAI
+            from ..utils.config_manager import get_config_manager
+            
+            config_manager = get_config_manager()
+            config = {
+                "provider": config_manager.get("ai.provider", "ollama"),
+                "model": config_manager.get("ai.model", "gemma3:4b"),
+                "api_key": config_manager.get("ai.api_key")
+            }
+            
+            fallback_ai = ChatAI(config)
+            if fallback_ai.initialize():
+                ai_response = await fallback_ai.chat(request.message)
+                return ChatCommandResponse(
+                    response=f"(Fallback mode) {ai_response.get('response', 'I understand you want help, but the full intelligent chat system is not available right now.')}", 
+                    type="fallback",
+                    session_id=request.session_id,
+                    actions=ai_response.get('actions', []),
+                    execution_plan=None,
+                    estimated_steps=None,
+                    credential_request=None
+                )
+        except Exception as fallback_error:
+            logger.error(f"Fallback AI also failed: {fallback_error}")
+        
+        raise HTTPException(status_code=503, detail="Intelligent chat system not available. Please check server logs.")
     
     try:
         result = await chat_orchestrator.process_command(
