@@ -10,17 +10,22 @@ import asyncio
 from typing import Dict, List, Optional, Any
 from datetime import datetime
 
-try:
-    import ollama  # For local LLaMA
-    OLLAMA_AVAILABLE = True
-except ImportError:
-    OLLAMA_AVAILABLE = False
+# Dynamic import checks - don't rely on global import state
+def _check_ollama_available():
+    """Check if ollama is available at runtime."""
+    try:
+        import ollama
+        return True
+    except ImportError:
+        return False
 
-try:
-    import openai  # For OpenAI API
-    OPENAI_AVAILABLE = True
-except ImportError:
-    OPENAI_AVAILABLE = False
+def _check_openai_available():
+    """Check if openai is available at runtime."""
+    try:
+        import openai
+        return True
+    except ImportError:
+        return False
 
 from ..core.base_component import BaseComponent
 
@@ -60,56 +65,39 @@ class ChatAI(BaseComponent):
         """Initialize the AI chat system."""
         try:
             if self.ai_provider == "ollama":
-                if not OLLAMA_AVAILABLE:
+                # Dynamic check for ollama availability
+                if not _check_ollama_available():
                     self.logger.error("Ollama not installed. Install with: pip install ollama")
                     return False
                 
-                # Import ollama here to ensure it's available in the current context
+                # Import ollama dynamically
                 try:
                     import ollama as ollama_client
-                except ImportError:
-                    self.logger.error("Ollama package not available in current environment")
+                    self.logger.info("Ollama package loaded successfully in current environment")
+                except ImportError as e:
+                    self.logger.error(f"Ollama package not available in current environment: {e}")
                     return False
                 
-                # Test connection to Ollama with retry logic
-                max_retries = 3
-                for attempt in range(max_retries):
-                    try:
-                        # Check if Ollama is available
-                        models = ollama_client.list()
-                        
-                        # Check if our model exists
-                        model_exists = any(model.model == self.model_name for model in models.models)
-                        if not model_exists:
-                            self.logger.warning(f"Model {self.model_name} not found. Available models: {[m.model for m in models.models]}")
-                            # Try to pull the model if it doesn't exist
-                            try:
-                                self.logger.info(f"Attempting to pull model: {self.model_name}")
-                                ollama_client.pull(self.model_name)
-                                self.logger.info(f"Successfully pulled model: {self.model_name}")
-                            except Exception as pull_error:
-                                self.logger.error(f"Failed to pull model {self.model_name}: {pull_error}")
-                        else:
-                            self.logger.info(f"Found model: {self.model_name}")
-                        
-                        self.logger.info("Connected to local Ollama server")
-                        break
-                    except Exception as e:
-                        if attempt < max_retries - 1:
-                            self.logger.warning(f"Ollama connection attempt {attempt + 1} failed: {e}. Retrying...")
-                            import time
-                            time.sleep(2)
-                        else:
-                            self.logger.error(f"Ollama server not running after {max_retries} attempts: {e}")
-                            return False
+                # Test connection to Ollama with robust retry logic
+                if not self._test_ollama_connection_sync(ollama_client):
+                    return False
                     
             elif self.ai_provider == "openai":
-                if not OPENAI_AVAILABLE or not self.api_key:
+                if not _check_openai_available():
+                    self.logger.error("OpenAI not installed. Install with: pip install openai")
+                    return False
+                    
+                if not self.api_key:
                     self.logger.error("OpenAI API key required")
                     return False
                 
-                openai.api_key = self.api_key
-                self.logger.info("OpenAI API configured")
+                try:
+                    import openai
+                    openai.api_key = self.api_key
+                    self.logger.info("OpenAI API configured")
+                except ImportError as e:
+                    self.logger.error(f"OpenAI package not available: {e}")
+                    return False
             
             self.is_initialized = True
             return True
@@ -117,6 +105,66 @@ class ChatAI(BaseComponent):
         except Exception as e:
             self.logger.error(f"Failed to initialize chat AI: {e}")
             return False
+    
+    def _test_ollama_connection_sync(self, ollama_client) -> bool:
+        """Test Ollama connection with robust synchronous retry logic."""
+        max_attempts = 3
+        
+        for attempt in range(max_attempts):
+            try:
+                self.logger.info(f"Testing Ollama connection (attempt {attempt + 1}/{max_attempts})...")
+                
+                # Get available models
+                models_response = ollama_client.list()
+                
+                if not hasattr(models_response, 'models'):
+                    self.logger.error(f"Invalid Ollama response format: {type(models_response)}")
+                    continue
+                
+                available_models = [model.model for model in models_response.models]
+                
+                if not available_models:
+                    self.logger.warning("No models available in Ollama")
+                    continue
+                
+                self.logger.info(f"Found {len(available_models)} models: {available_models}")
+                
+                # Check if our target model is available
+                model_available = any(self.model_name in model for model in available_models)
+                
+                if model_available:
+                    self.logger.info(f"Target model {self.model_name} is available")
+                    return True
+                else:
+                    self.logger.warning(f"Model {self.model_name} not found. Available: {available_models}")
+                    # Use the first available model as fallback
+                    if available_models:
+                        original_model = self.model_name
+                        self.model_name = available_models[0]
+                        self.logger.info(f"Using fallback model: {self.model_name} (originally requested: {original_model})")
+                        return True
+                
+            except Exception as e:
+                self.logger.warning(f"Ollama connection attempt {attempt + 1} failed: {e}")
+                
+                if attempt < max_attempts - 1:
+                    self.logger.info(f"Retrying in 2 seconds...")
+                    import time
+                    time.sleep(2)
+                else:
+                    self.logger.error(f"Ollama server not accessible after {max_attempts} attempts: {e}")
+                    
+                    # Try one more time with a different approach
+                    try:
+                        self.logger.info("Attempting final connection test...")
+                        test_response = ollama_client.list()
+                        if test_response:
+                            self.logger.info("Ollama responding but model detection failed - using default initialization")
+                            return True
+                    except:
+                        pass
+        
+        return False
     
     async def chat(self, user_message: str) -> Dict[str, Any]:
         """

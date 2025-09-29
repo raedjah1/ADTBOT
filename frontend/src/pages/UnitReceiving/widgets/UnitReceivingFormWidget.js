@@ -23,6 +23,7 @@ import {
   AutoAwesome as AutoFillIcon,
   Inventory as InventoryIcon,
 } from '@mui/icons-material';
+import SmartPartLookup from '../../../components/SmartPartLookup';
 
 const UnitReceivingFormWidget = ({ onSubmit, isLoading = false }) => {
   // Form state
@@ -31,7 +32,7 @@ const UnitReceivingFormWidget = ({ onSubmit, isLoading = false }) => {
     trackingNo: '',
     flaggedBoxes: '',
     techId: '',
-    partNo: 'PG9933', // Default from PLUS
+    partNo: '', // SmartPartLookup will handle part number processing
     batteryRemoval: '',
     dockLogId: '',
     disposition: '',
@@ -75,6 +76,7 @@ const UnitReceivingFormWidget = ({ onSubmit, isLoading = false }) => {
       batteryRemoval: prev.batteryRemoval || 'YES', // Safety default
       dateCode: prev.dateCode || dateCode,
       disposition: prev.disposition || 'RECEIVED', // Standard disposition
+      // Note: partNo is handled by SmartPartLookup component
     }));
   };
 
@@ -114,7 +116,7 @@ const UnitReceivingFormWidget = ({ onSubmit, isLoading = false }) => {
       trackingNo: '',
       flaggedBoxes: '',
       techId: '',
-      partNo: 'PG9933',
+      partNo: '', // SmartPartLookup will handle default/conversion
       batteryRemoval: '',
       dockLogId: '',
       disposition: '',
@@ -215,16 +217,14 @@ const UnitReceivingFormWidget = ({ onSubmit, isLoading = false }) => {
             />
           </Grid>
 
-          {/* Part No */}
+          {/* Part No - Smart Lookup */}
           <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              label="Part Number *"
+            <SmartPartLookup
               value={formData.partNo}
-              onChange={(e) => handleInputChange('partNo', e.target.value.toUpperCase())}
+              onChange={(processedPartNo) => handleInputChange('partNo', processedPartNo)}
               error={!!validationErrors.partNo}
               helperText={validationErrors.partNo}
-              inputProps={{ style: { textTransform: 'uppercase' } }}
+              label="Part Number *"
             />
           </Grid>
 

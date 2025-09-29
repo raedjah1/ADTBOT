@@ -48,6 +48,18 @@ class TaskExecute(BaseModel):
 
 class SettingsUpdate(BaseModel):
     browser: Optional[Dict[str, Any]] = None
+
+
+class PartMappingCreate(BaseModel):
+    original: str
+    processAs: str
+    description: str
+    notes: Optional[str] = ""
+    disposition: Optional[str] = ""
+
+
+class PartMappingSearch(BaseModel):
+    query: str
     automation: Optional[Dict[str, Any]] = None
     ai: Optional[Dict[str, Any]] = None
 
@@ -652,6 +664,94 @@ async def submit_unit_receiving_form():
         
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Form submission failed: {str(e)}")
+
+
+# Part Mapping Management Endpoints
+@app.post("/api/part-mappings/search")
+async def search_part_mappings(search_data: PartMappingSearch):
+    """Search for part number mappings."""
+    try:
+        # This would typically use a database, but for now we'll use the frontend data
+        # In a real implementation, you'd have a database service
+        from smartwebbot.data.part_mapping_service import PartMappingService
+        
+        service = PartMappingService()
+        results = service.search_mappings(search_data.query)
+        
+        return {
+            "success": True,
+            "results": results,
+            "count": len(results),
+            "timestamp": datetime.now().isoformat()
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Search failed: {str(e)}")
+
+
+@app.post("/api/part-mappings/add")
+async def add_part_mapping(mapping_data: PartMappingCreate):
+    """Add a new part number mapping."""
+    try:
+        from smartwebbot.data.part_mapping_service import PartMappingService
+        
+        service = PartMappingService()
+        result = await service.add_mapping(
+            mapping_data.original,
+            mapping_data.processAs,
+            mapping_data.description,
+            mapping_data.notes,
+            mapping_data.disposition
+        )
+        
+        return {
+            "success": True,
+            "mapping": result,
+            "message": "Part mapping added successfully",
+            "timestamp": datetime.now().isoformat()
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to add mapping: {str(e)}")
+
+
+@app.get("/api/part-mappings/all")
+async def get_all_part_mappings():
+    """Get all part number mappings."""
+    try:
+        from smartwebbot.data.part_mapping_service import PartMappingService
+        
+        service = PartMappingService()
+        mappings = service.get_all_mappings()
+        
+        return {
+            "success": True,
+            "mappings": mappings,
+            "count": len(mappings),
+            "timestamp": datetime.now().isoformat()
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to get mappings: {str(e)}")
+
+
+@app.get("/api/part-mappings/stats")
+async def get_part_mapping_stats():
+    """Get statistics about part number mappings."""
+    try:
+        from smartwebbot.data.part_mapping_service import PartMappingService
+        
+        service = PartMappingService()
+        stats = service.get_mapping_stats()
+        
+        return {
+            "success": True,
+            "stats": stats,
+            "timestamp": datetime.now().isoformat()
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to get stats: {str(e)}")
 
 
 # WebSocket endpoint
