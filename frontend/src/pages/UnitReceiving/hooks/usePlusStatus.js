@@ -88,7 +88,22 @@ const usePlusStatus = () => {
           }
           // Additional success logic can be added here
         } else {
-          setStatusMessage(`✗ Navigation failed: ${navResult.message}`);
+          // Check for browser session restart
+          if (navResult.requires_browser_restart) {
+            if (navResult.session_restarted) {
+              if (navResult.restart_type === 'complete') {
+                setStatusMessage('⚠️ Browser session was completely restarted (like first startup). Click "Begin Unit Receiving" to login and continue.');
+              } else if (navResult.requires_reauth) {
+                setStatusMessage('⚠️ Browser session was restarted. You will need to login again - please click "Begin Unit Receiving" to continue.');
+              } else {
+                setStatusMessage('⚠️ Browser session was restarted. Please click "Begin Unit Receiving" again.');
+              }
+            } else {
+              setStatusMessage('✗ Browser session became invalid. Please refresh the page and try again.');
+            }
+          } else {
+            setStatusMessage(`✗ Navigation failed: ${navResult.message}`);
+          }
         }
       } catch (navError) {
         setStatusMessage('✗ Failed to navigate to Unit Receiving page. Please try again.');

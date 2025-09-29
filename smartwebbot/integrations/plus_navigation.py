@@ -231,7 +231,7 @@ class PlusNavigator:
             
             if js_result:
                 self.logger.info("SUCCESS: Search term entered using JavaScript fallback")
-                time.sleep(1)  # Reduced wait for dropdown to populate
+                time.sleep(0.3)  # Quick wait for dropdown to populate
                 self._take_screenshot("plus_search_typed.png")
                 return True
             else:
@@ -254,33 +254,68 @@ class PlusNavigator:
         """
         self.logger.info(f"=== SELECTING OPTION: {option_text} ===")
         
-        # Try XPath approach first with shorter wait
+        # Debug: Log all available options first
+        try:
+            all_options = self.web_controller.driver.find_elements(By.XPATH, "//li[@class='rcbItem']")
+            self.logger.info(f"Found {len(all_options)} available options:")
+            for i, option in enumerate(all_options[:10]):  # Limit to first 10 for readability
+                text = option.text.strip()
+                self.logger.info(f"  Option {i+1}: '{text}'")
+        except Exception as e:
+            self.logger.debug(f"Could not enumerate options: {e}")
+        
+        # Try XPath approach with exact match first
+        try:
+            option_element = WebDriverWait(self.web_controller.driver, 5).until(
+                EC.element_to_be_clickable((By.XPATH, f"//li[@class='rcbItem' and normalize-space(text())='{option_text}']"))
+            )
+            option_element.click()
+            self.logger.info(f"SUCCESS: {option_text} option clicked with exact match")
+            time.sleep(0.3)  # Quick wait for page navigation
+            self._take_screenshot("plus_option_selected.png")
+            return True
+        except Exception as e:
+            self.logger.debug(f"XPath exact match {option_text} click failed: {e}")
+        
+        # Try XPath approach with contains (fallback)
         try:
             option_element = WebDriverWait(self.web_controller.driver, 5).until(
                 EC.element_to_be_clickable((By.XPATH, f"//li[@class='rcbItem' and contains(text(), '{option_text}')]"))
             )
             option_element.click()
-            self.logger.info(f"SUCCESS: {option_text} option clicked")
-            time.sleep(1)  # Reduced wait for page navigation
+            self.logger.info(f"SUCCESS: {option_text} option clicked with contains match")
+            time.sleep(0.3)  # Quick wait for page navigation
             self._take_screenshot("plus_option_selected.png")
             return True
         except Exception as e:
-            self.logger.debug(f"XPath {option_text} click failed: {e}")
+            self.logger.debug(f"XPath contains {option_text} click failed: {e}")
         
-        # JavaScript fallback
+        # JavaScript fallback with exact match preference
         js_code = f"""
             var items = document.querySelectorAll('li.rcbItem');
+            var exactMatch = null;
+            var partialMatch = null;
+            
             for (var i = 0; i < items.length; i++) {{
-                if (items[i].textContent.includes('{option_text}')) {{
-                    items[i].click();
-                    return true;
+                var text = items[i].textContent.trim();
+                if (text === '{option_text}') {{
+                    exactMatch = items[i];
+                    break;  // Prefer exact match
+                }} else if (text.includes('{option_text}') && !partialMatch) {{
+                    partialMatch = items[i];
                 }}
+            }}
+            
+            var target = exactMatch || partialMatch;
+            if (target) {{
+                target.click();
+                return true;
             }}
             return false;
         """
         
         if self._javascript_click_fallback(js_code, option_text):
-            time.sleep(1)
+            time.sleep(0.3)  # Quick wait for page navigation
             self._take_screenshot("plus_option_selected.png")
             return True
         
@@ -362,14 +397,80 @@ class PlusPageNavigator:
     def navigate_to_unit_receiving_adt(self) -> Dict[str, Any]:
         """
         Navigate to the Unit Receiving ADT page.
+        Validates that we end up on the correct page (ScriptID=588, not 613).
         
         Returns:
             Dict: Navigation result
         """
-        return self.navigator.navigate_to_page(
-            page_name="Unit Receiving ADT",
-            menu_search_term="Unit Receiving ADT"
-        )
+        # Try with more specific search term first to avoid "Excess Unit Receiving ADT"
+        self.logger.info("Attempting navigation with specific search terms to avoid 'Excess Unit Receiving ADT'")
+        
+        # Try multiple search approaches
+        search_terms = [
+            "Unit Receiving ADT",  # Exact match should work now with our improved logic
+            "Receiving ADT",       # Alternative term
+        ]
+        
+        result = None
+        for search_term in search_terms:
+            self.logger.info(f"Trying search term: '{search_term}'")
+            result = self.navigator.navigate_to_page(
+                page_name="Unit Receiving ADT",
+                menu_search_term=search_term
+            )
+            
+            # Check if we got the right page
+            if result.get("success") and result.get("current_url"):
+                if "ScriptID=588" in result.get("current_url"):
+                    self.logger.info(f"SUCCESS with search term '{search_term}' - found correct page")
+                    break
+                elif "ScriptID=613" in result.get("current_url"):
+                    self.logger.warning(f"Search term '{search_term}' led to wrong page (ScriptID=613), trying next term")
+                    continue
+            
+            # If navigation failed, try next term
+            if not result.get("success"):
+                self.logger.warning(f"Navigation failed with search term '{search_term}', trying next term")
+                continue
+        
+        # If no result, use the last attempt
+        if result is None:
+            result = self.navigator.navigate_to_page(
+                page_name="Unit Receiving ADT", 
+                menu_search_term="Unit Receiving ADT"
+            )
+        
+        # If navigation was successful, validate the URL
+        if result.get("success"):
+            current_url = result.get("current_url", "")
+            
+            # Check for the correct ScriptID=588 (Unit Receiving ADT)
+            if "ScriptID=588" in current_url:
+                self.logger.info("SUCCESS: Successfully navigated to Unit Receiving ADT (ScriptID=588)")
+                return result
+            
+            # Check if we ended up on the wrong page (ScriptID=613 = Excess Unit Receiving ADT)
+            elif "ScriptID=613" in current_url:
+                self.logger.error("ERROR: Navigation went to wrong page: Excess Unit Receiving ADT (ScriptID=613) instead of Unit Receiving ADT (ScriptID=588)")
+                return {
+                    "success": False,
+                    "message": "Navigation went to wrong page: 'Excess Unit Receiving ADT' instead of 'Unit Receiving ADT'. Please check the search results.",
+                    "current_url": current_url,
+                    "expected_scriptid": "588",
+                    "actual_scriptid": "613"
+                }
+            
+            # Unknown page
+            else:
+                self.logger.warning(f"Navigation completed but URL doesn't contain expected ScriptID=588: {current_url}")
+                return {
+                    "success": False,
+                    "message": f"Navigation completed but ended up on unexpected page. Expected ScriptID=588, got: {current_url}",
+                    "current_url": current_url
+                }
+        
+        # Navigation failed
+        return result
     
     def navigate_to_work_order(self) -> Dict[str, Any]:
         """Navigate to Work Order page."""

@@ -145,6 +145,7 @@ const SmartPartLookup = ({
       if (autoConvert) {
         setAutoConversion(autoConvert);
         setProcessedValue(autoConvert.processAs);
+        setInputValue(autoConvert.processAs); // Auto-replace the input field with converted value
         setConversionStatus('auto');
         onChange?.(autoConvert.processAs);
         
@@ -179,7 +180,7 @@ const SmartPartLookup = ({
   const handleOptionSelect = (event, selectedOption, reason) => {
     if (selectedOption && typeof selectedOption === 'object') {
       setProcessedValue(selectedOption.processAs);
-      setInputValue(selectedOption.original);
+      setInputValue(selectedOption.processAs); // Show the processed value, not the original
       setAutoConversion(selectedOption);
       setConversionStatus('manual');
       onChange?.(selectedOption.processAs);
@@ -202,6 +203,7 @@ const SmartPartLookup = ({
       
       setAutoConversion(newMapping);
       setProcessedValue(newMapping.processAs);
+      setInputValue(newMapping.processAs); // Show the processed value in the input field
       setConversionStatus('auto');
       onChange?.(newMapping.processAs);
       setShowAddDialog(false);
@@ -235,7 +237,7 @@ const SmartPartLookup = ({
   const getStatusText = () => {
     switch (conversionStatus) {
       case 'auto':
-        return `Auto-converted to: ${processedValue}`;
+        return `✓ Field automatically updated to: ${processedValue}`;
       case 'manual':
         return `${suggestions.length} matches found - select one`;
       case 'new':
@@ -345,7 +347,7 @@ const SmartPartLookup = ({
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
               <CheckIcon color="success" sx={{ fontSize: 20 }} />
               <Typography variant="subtitle2" color="success.dark">
-                Automatic Conversion Applied
+                ✓ Field Automatically Updated
               </Typography>
             </Box>
             <Grid container spacing={2}>

@@ -987,6 +987,88 @@ class PlusIntegration(BaseComponent):
         except Exception as e:
             return False, f"Logout error: {str(e)}"
     
+    def restart_browser_session(self) -> bool:
+        """
+        Restart the browser session when InvalidSessionIdException occurs.
+        Fully reinitializes like the first startup - restarts browser, navigates to PLUS, clears login state.
+        
+        Returns:
+            bool: True if session was successfully restarted, False otherwise
+        """
+        try:
+            self.logger.warning("Browser session became invalid, attempting complete restart...")
+            
+            # Clear ALL login-related state since browser session is invalid
+            self.is_logged_in = False
+            self.login_timestamp = None
+            self.login_attempts = 0  # Reset login attempts
+            
+            # Clear any other cached state that might exist
+            if hasattr(self, 'user_logged_in'):
+                self.user_logged_in = False
+            
+            self.logger.info(f"Cleared ALL cached login state due to session restart:")
+            self.logger.info(f"  - is_logged_in: {self.is_logged_in}")
+            self.logger.info(f"  - login_timestamp: {self.login_timestamp}")
+            self.logger.info(f"  - login_attempts: {self.login_attempts}")
+            
+            # Try to restart the browser (like initial startup)
+            self.logger.info("Restarting browser (like initial startup)...")
+            success = self.web_controller.start_browser()
+            if not success:
+                self.logger.error("Failed to restart browser session")
+                return False
+            
+            self.logger.info("Browser restarted successfully")
+            
+            # Navigate back to PLUS login page (with retry logic like initial startup)
+            plus_settings = self.settings_service.get_plus_settings()
+            base_url = plus_settings.get('base_url', 'https://plus.reconext.com')
+            
+            self.logger.info(f"Navigating back to PLUS (like initial startup): {base_url}")
+            
+            # Give browser a moment to fully start
+            import time
+            time.sleep(1)
+            
+            # Navigate with retry logic
+            navigation_success = False
+            for attempt in range(3):
+                self.logger.info(f"Navigation attempt {attempt + 1}/3 to {base_url}")
+                try:
+                    if self.web_controller.navigate_to(base_url):
+                        # Verify we actually reached PLUS
+                        import time
+                        time.sleep(2)  # Wait for page to load
+                        current_url = self.web_controller.driver.current_url
+                        self.logger.info(f"After navigation, current URL: {current_url}")
+                        
+                        if "plus.reconext.com" in current_url:
+                            self.logger.info("Successfully navigated back to PLUS")
+                            navigation_success = True
+                            break
+                        else:
+                            self.logger.warning(f"Navigation didn't reach PLUS, got: {current_url}")
+                    else:
+                        self.logger.warning(f"Navigation attempt {attempt + 1} failed")
+                        
+                except Exception as nav_error:
+                    self.logger.warning(f"Navigation attempt {attempt + 1} error: {nav_error}")
+                
+                if attempt < 2:  # Don't wait after last attempt
+                    time.sleep(2)
+            
+            if not navigation_success:
+                self.logger.error("Failed to navigate back to PLUS after all attempts")
+                return False
+                
+            self.logger.info("Browser session restart completed successfully - ready for fresh login")
+            return True
+                
+        except Exception as e:
+            self.logger.error(f"Error during complete browser session restart: {e}")
+            return False
+
     async def navigate_to_unit_receiving_adt(self) -> Dict[str, Any]:
         """
         Navigate to the Unit Receiving ADT page.
@@ -1001,6 +1083,10 @@ class PlusIntegration(BaseComponent):
             
             # Step 1: Verify login status
             login_status = self.get_login_status()
+            self.logger.info(f"Current login status check:")
+            self.logger.info(f"  - is_logged_in: {login_status.get('is_logged_in')}")
+            self.logger.info(f"  - login_timestamp: {login_status.get('login_timestamp')}")
+            
             if not login_status.get('is_logged_in'):
                 self.logger.warning("User not logged in, attempting login first")
                 
@@ -1010,7 +1096,8 @@ class PlusIntegration(BaseComponent):
                     return {
                         "success": False,
                         "message": f"Login required but failed: {login_message}",
-                        "current_url": self.web_controller.driver.current_url if self.web_controller and self.web_controller.driver else None
+                        "current_url": None,  # Don't access invalid driver
+                        "requires_browser_restart": False
                     }
                 
                 self.logger.info("Login successful, proceeding with navigation")
@@ -1046,13 +1133,42 @@ class PlusIntegration(BaseComponent):
             return result
             
         except Exception as e:
+            # Import here to avoid circular dependencies
+            from selenium.common.exceptions import InvalidSessionIdException
+            
+            # Handle InvalidSessionIdException specifically
+            if isinstance(e, InvalidSessionIdException):
+                self.logger.error(f"Browser session became invalid: {e}")
+                
+                # Attempt to restart browser session
+                if self.restart_browser_session():
+                    return {
+                        "success": False,
+                        "message": "Browser session was invalid and has been completely restarted (like first startup). Please click 'Begin Unit Receiving' to login and continue.",
+                        "current_url": None,
+                        "requires_browser_restart": True,
+                        "session_restarted": True,
+                        "requires_reauth": True,
+                        "restart_type": "complete"
+                    }
+                else:
+                    return {
+                        "success": False,
+                        "message": "Browser session became invalid and could not be restarted. Please refresh the page or restart the application.",
+                        "current_url": None,
+                        "requires_browser_restart": True,
+                        "session_restarted": False
+                    }
+            
+            # Handle other exceptions
             self.logger.error(f"Error in navigate_to_unit_receiving_adt: {e}")
             import traceback
             self.logger.error(f"Traceback: {traceback.format_exc()}")
             return {
                 "success": False,
                 "message": f"Navigation error: {str(e)}",
-                "current_url": self.web_controller.driver.current_url if self.web_controller and self.web_controller.driver else None
+                "current_url": None,  # Don't access potentially invalid driver
+                "requires_browser_restart": False
             }
     
     async def fill_unit_receiving_form(self, form_data: Dict[str, Any]) -> Dict[str, Any]:
@@ -1104,13 +1220,42 @@ class PlusIntegration(BaseComponent):
             return result
             
         except Exception as e:
+            # Import here to avoid circular dependencies
+            from selenium.common.exceptions import InvalidSessionIdException
+            
+            # Handle InvalidSessionIdException specifically
+            if isinstance(e, InvalidSessionIdException):
+                self.logger.error(f"Browser session became invalid during form filling: {e}")
+                
+                # Attempt to restart browser session
+                if self.restart_browser_session():
+                    return {
+                        "success": False,
+                        "message": "Browser session was invalid during form filling and has been completely restarted (like first startup). Please click 'Begin Unit Receiving' to login and continue.",
+                        "current_url": None,
+                        "requires_browser_restart": True,
+                        "session_restarted": True,
+                        "requires_reauth": True,
+                        "restart_type": "complete"
+                    }
+                else:
+                    return {
+                        "success": False,
+                        "message": "Browser session became invalid during form filling and could not be restarted. Please refresh the page or restart the application.",
+                        "current_url": None,
+                        "requires_browser_restart": True,
+                        "session_restarted": False
+                    }
+            
+            # Handle other exceptions
             self.logger.error(f"Error in fill_unit_receiving_form: {e}")
             import traceback
             self.logger.error(f"Traceback: {traceback.format_exc()}")
             return {
                 "success": False,
                 "message": f"Form filling error: {str(e)}",
-                "current_url": self.web_controller.driver.current_url if self.web_controller and self.web_controller.driver else None
+                "current_url": None,  # Don't access potentially invalid driver
+                "requires_browser_restart": False
             }
     
     async def submit_unit_receiving_form(self) -> Dict[str, Any]:

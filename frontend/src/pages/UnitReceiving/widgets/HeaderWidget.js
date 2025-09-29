@@ -5,14 +5,20 @@ import {
   Typography,
   Chip,
   Stack,
+  IconButton,
+  Tooltip,
 } from '@mui/material';
 import {
   Inventory as InventoryIcon,
   CheckCircle as CheckIcon,
   Error as ErrorIcon,
+  Settings as SettingsIcon,
 } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 
 const HeaderWidget = ({ isDarkMode, plusStatus }) => {
+  const navigate = useNavigate();
+
   const getStatusIcon = () => {
     if (plusStatus?.is_logged_in) {
       return <CheckIcon sx={{ color: 'success.main' }} />;
@@ -70,19 +76,43 @@ const HeaderWidget = ({ isDarkMode, plusStatus }) => {
           </Typography>
         </Box>
         
-        {/* PLUS Status Indicator */}
-        <Box sx={{ textAlign: 'center' }}>
-          <Typography variant="caption" color="text.secondary" sx={{ display: 'block', mb: 1 }}>
-            PLUS Status
-          </Typography>
-          <Chip
-            icon={getStatusIcon()}
-            label={getStatusText()}
-            color={getStatusColor()}
-            variant="outlined"
-            sx={{ fontWeight: 600 }}
-          />
-        </Box>
+        {/* Settings & Status Section */}
+        <Stack direction="row" alignItems="center" spacing={2}>
+          {/* Part Mapping Settings Icon */}
+          <Tooltip title="Manage Part Number Mappings">
+            <IconButton
+              onClick={() => navigate('/settings/part-mappings')}
+              sx={{
+                p: 2,
+                borderRadius: 2,
+                background: 'rgba(124, 58, 237, 0.1)',
+                border: '1px solid rgba(124, 58, 237, 0.2)',
+                '&:hover': {
+                  background: 'rgba(124, 58, 237, 0.2)',
+                  transform: 'translateY(-2px)',
+                  boxShadow: '0 8px 16px rgba(124, 58, 237, 0.2)',
+                },
+                transition: 'all 0.3s ease',
+              }}
+            >
+              <SettingsIcon sx={{ color: '#7C3AED', fontSize: 28 }} />
+            </IconButton>
+          </Tooltip>
+
+          {/* PLUS Status Indicator */}
+          <Box sx={{ textAlign: 'center' }}>
+            <Typography variant="caption" color="text.secondary" sx={{ display: 'block', mb: 1 }}>
+              PLUS Status
+            </Typography>
+            <Chip
+              icon={getStatusIcon()}
+              label={getStatusText()}
+              color={getStatusColor()}
+              variant="outlined"
+              sx={{ fontWeight: 600 }}
+            />
+          </Box>
+        </Stack>
       </Stack>
     </Paper>
   );

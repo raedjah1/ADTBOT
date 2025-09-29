@@ -798,6 +798,26 @@ async def delete_part_mapping(original_part: str):
         raise HTTPException(status_code=500, detail=f"Failed to delete mapping: {str(e)}")
 
 
+@app.post("/api/part-mappings/reload")
+async def force_reload_all_mappings():
+    """Force reload all 121 part mappings from scratch."""
+    try:
+        from smartwebbot.data.part_mapping_service import PartMappingService
+        
+        service = PartMappingService()
+        result = service.force_reload_all_mappings()
+        
+        return {
+            "success": True,
+            "message": "All part mappings reloaded successfully",
+            "mappings_loaded": result["count"],
+            "timestamp": datetime.now().isoformat()
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to reload mappings: {str(e)}")
+
+
 # WebSocket endpoint
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):

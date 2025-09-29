@@ -73,10 +73,50 @@ const UnitReceiving = ({ isDarkMode }) => {
             window.location.reload();
           }, 2000);
         } else {
-          alert(`✗ Form submission failed: ${submitResult.message}`);
+          // Check for browser session issues
+          if (submitResult.requires_browser_restart) {
+            if (submitResult.session_restarted) {
+              if (submitResult.restart_type === 'complete') {
+                alert('⚠️ Browser session was completely restarted during form submission (like first startup). Please click "Begin Unit Receiving" to login and continue.');
+                setShowForm(false); // Hide form and return to main page
+              } else if (submitResult.requires_reauth) {
+                alert('⚠️ Browser session was restarted during form submission. You will need to login again - please click "Begin Unit Receiving" to continue.');
+                setShowForm(false); // Hide form and return to main page
+              } else {
+                alert('⚠️ Browser session was restarted during form submission. Please try submitting the form again.');
+              }
+            } else {
+              alert('✗ Browser session became invalid during form submission. Please refresh the page and try again.');
+              setTimeout(() => {
+                window.location.reload();
+              }, 3000);
+            }
+          } else {
+            alert(`✗ Form submission failed: ${submitResult.message}`);
+          }
         }
       } else {
-        alert(`✗ Form filling failed: ${result.message}`);
+        // Check for browser session issues during form filling
+        if (result.requires_browser_restart) {
+          if (result.session_restarted) {
+            if (result.restart_type === 'complete') {
+              alert('⚠️ Browser session was completely restarted during form filling (like first startup). Please click "Begin Unit Receiving" to login and continue.');
+              setShowForm(false); // Hide form and return to main page
+            } else if (result.requires_reauth) {
+              alert('⚠️ Browser session was restarted during form filling. You will need to login again - please click "Begin Unit Receiving" to continue.');
+              setShowForm(false); // Hide form and return to main page
+            } else {
+              alert('⚠️ Browser session was restarted during form filling. Please try submitting the form again.');
+            }
+          } else {
+            alert('✗ Browser session became invalid during form filling. Please refresh the page and try again.');
+            setTimeout(() => {
+              window.location.reload();
+            }, 3000);
+          }
+        } else {
+          alert(`✗ Form filling failed: ${result.message}`);
+        }
       }
     } catch (error) {
       alert('✗ Error processing unit receiving. Please try again.');

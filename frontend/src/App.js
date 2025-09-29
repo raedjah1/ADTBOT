@@ -15,6 +15,7 @@ import Results from './pages/Results/Results';
 import UnitReceiving from './pages/UnitReceiving';
 import AIVision from './pages/AIVision/AIVision';
 import FloatingChatWidget from './components/AI/FloatingChatWidget';
+import PartMappingSettings from './pages/Settings/PartMappingSettings';
 
 // Services
 import { connectWebSocket, disconnectWebSocket } from './services/websocket';
@@ -1066,6 +1067,7 @@ function App() {
                   <LiveMonitor botStatus={botStatus} />
                 } />
                 <Route path="/settings" element={<Settings isDarkMode={isDarkMode} />} />
+                <Route path="/settings/part-mappings" element={<PartMappingSettings />} />
                 <Route path="/results" element={<Results isDarkMode={isDarkMode} />} />
                 <Route path="/unit-receiving" element={<UnitReceiving isDarkMode={isDarkMode} />} />
                 <Route path="/ai-vision" element={<AIVision isDarkMode={isDarkMode} />} />
