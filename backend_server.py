@@ -754,6 +754,50 @@ async def get_part_mapping_stats():
         raise HTTPException(status_code=500, detail=f"Failed to get stats: {str(e)}")
 
 
+@app.put("/api/part-mappings/update/{original_part}")
+async def update_part_mapping(original_part: str, updates: Dict[str, Any]):
+    """Update an existing part mapping."""
+    try:
+        from smartwebbot.data.part_mapping_service import PartMappingService
+        
+        service = PartMappingService()
+        updated_mapping = service.update_mapping(original_part, updates)
+        
+        return {
+            "success": True,
+            "mapping": updated_mapping,
+            "message": f"Part mapping '{original_part}' updated successfully",
+            "timestamp": datetime.now().isoformat()
+        }
+        
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to update mapping: {str(e)}")
+
+
+@app.delete("/api/part-mappings/delete/{original_part}")
+async def delete_part_mapping(original_part: str):
+    """Delete a part mapping."""
+    try:
+        from smartwebbot.data.part_mapping_service import PartMappingService
+        
+        service = PartMappingService()
+        success = service.delete_mapping(original_part)
+        
+        if success:
+            return {
+                "success": True,
+                "message": f"Part mapping '{original_part}' deleted successfully",
+                "timestamp": datetime.now().isoformat()
+            }
+        else:
+            raise HTTPException(status_code=404, detail=f"Part mapping '{original_part}' not found")
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to delete mapping: {str(e)}")
+
+
 # WebSocket endpoint
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):

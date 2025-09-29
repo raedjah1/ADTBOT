@@ -1,0 +1,74 @@
+[
+  {
+    "original": "SA5816",
+    "processAs": "5816",
+    "description": "HONEYWELL SENSOR",
+    "notes": "",
+    "disposition": "",
+    "dateAdded": "2025-09-29T09:36:53.046387"
+  },
+  {
+    "original": "5853",
+    "processAs": "5853",
+    "description": "HONEYWELL SENSOR (DO NOT PROCESS FG-1625 AS 5853)",
+    "notes": "",
+    "disposition": "",
+    "dateAdded": "2025-09-29T09:36:53.046387"
+  },
+  {
+    "original": "PROTECTION 1",
+    "processAs": "2GIG-CP21-345E",
+    "description": "ADT KEYPAD",
+    "notes": "",
+    "disposition": "",
+    "dateAdded": "2025-09-29T09:36:53.046387"
+  },
+  {
+    "original": "tx id: 013-3285",
+    "processAs": "2GIG-DW10-345",
+    "description": "SMALL WINDOW/DOOR SENSOR",
+    "notes": "",
+    "disposition": "",
+    "dateAdded": "2025-09-29T09:36:53.046387"
+  },
+  {
+    "original": "300-11260",
+    "processAs": "300-10260",
+    "description": "RESIDEO CLASS 2 POWER SUPPLY",
+    "notes": "",
+    "disposition": "",
+    "dateAdded": "2025-09-29T09:36:53.046387"
+  },
+  {
+    "original": "BP6024",
+    "processAs": "60-670-95R",
+    "description": "UL SENSORS",
+    "notes": "",
+    "disposition": "",
+    "dateAdded": "2025-09-29T09:36:53.046387"
+  },
+  {
+    "original": "SA6150AS-VE",
+    "processAs": "6150ADT",
+    "description": "ADT KEYPAD",
+    "notes": "",
+    "disposition": "CR PROGRAM",
+    "dateAdded": "2025-09-29T09:36:53.046387"
+  },
+  {
+    "original": "SA6150RF-2",
+    "processAs": "6150RF",
+    "description": "HONEYWELL UL KEYPAD",
+    "notes": "",
+    "disposition": "SCRAP",
+    "dateAdded": "2025-09-29T09:36:53.046387"
+  },
+  {
+    "original": "PG9933",
+    "processAs": "OTHER SMOKE DETECTOR",
+    "description": "DETECTOR",
+    "notes": "ADDED 09/11",
+    "disposition": "",
+    "dateAdded": "2025-09-29T09:36:53.046387"
+  }
+]

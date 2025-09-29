@@ -2,11 +2,9 @@
 // Maps what operators see on units to what should be processed in the system
 
 export const partNumberMappings = [
-  // Basic conversions (remove prefixes, etc.)
-  { original: "SA5816", processAs: "5816", description: "HONEYWELL SENSOR", notes: "", disposition: "" },
-  { original: "5853", processAs: "5853", description: "HONEYWELL SENSOR (DO NOT PROCESS FG-1625 AS 5853)", notes: "", disposition: "" },
-  
-  // Brand/descriptor conversions
+  // Complete mapping from your reference sheet - EVERY ENTRY
+  { original: "SA5816", processAs: "5816", description: "HONEYWELL SENOR", notes: "", disposition: "" },
+  { original: "5853", processAs: "5853", description: "HONEYWELL SENOR (DO NOT PROCESS FG-1625 AS 5853)", notes: "", disposition: "" },
   { original: "PROTECTION 1", processAs: "2GIG-CP21-345E", description: "ADT KEYPAD", notes: "", disposition: "" },
   { original: "tx id: 013-3285", processAs: "2GIG-DW10-345", description: "SMALL WINDOW/DOOR SENSOR", notes: "", disposition: "" },
   { original: "2GIG-GB1", processAs: "2GIG-GB1-345", description: "HEAT SENSOR", notes: "", disposition: "" },
@@ -14,61 +12,45 @@ export const partNumberMappings = [
   { original: "2GIG-PAD1-345", processAs: "2GIG-PAD1-345", description: "2GIG NON TOUCH SECONDARY", notes: "", disposition: "" },
   { original: "2GIG-PIR1E-345", processAs: "2GIG-PIR1E-345", description: "BOX SHAPE SENSOR", notes: "", disposition: "" },
   { original: "2GIG-SMKT3-345", processAs: "2GIG-SMKT3-345", description: "smoke detector", notes: "", disposition: "" },
-  
-  // Model number corrections
   { original: "300-11260", processAs: "300-10260", description: "RESIDEO CLASS 2 POWER SUPPLY", notes: "", disposition: "" },
   { original: "3G4000RF", processAs: "3G4000RF-ADTUSA", description: "ROUTER", notes: "", disposition: "" },
-  { original: "5800PIR-RES", processAs: "5800PIR-RES", description: "HONEYWELL SENSOR", notes: "", disposition: "" },
+  { original: "5800PIR-RES", processAs: "5800PIR-RES", description: "HONEYWELL SENOR", notes: "", disposition: "" },
   { original: "60-362N", processAs: "60-362N-10-319.5", description: "UTC FIRE & SECURITY", notes: "", disposition: "" },
   { original: "BP6024", processAs: "60-670-95R", description: "UL SENSORS", notes: "", disposition: "" },
-  
-  // ADT specific conversions
-  { original: "SA6150AS-VE", processAs: "6150ADT", description: "ADT KEYPAD", notes: "", disposition: "CR PROGRAM" },
-  { original: "SA6150RF-2", processAs: "6150RF", description: "HONEYWELL UL KEYPAD", notes: "", disposition: "SCRAP" },
-  { original: "SA6160PL2", processAs: "6160PL2", description: "ADT KEYPAD", notes: "", disposition: "SCRAP" },
-  { original: "SA6160RF", processAs: "6160RFPL2", description: "ADT KEYPAD", notes: "", disposition: "SCRAP" },
-  { original: "SA6160V-4", processAs: "6160VADT", description: "ADT KEYPAD", notes: "", disposition: "CR PROGRAM" },
-  { original: "SA6160VPADT", processAs: "6160VPADT", description: "ADT (SAFEPASS) KEYPAD", notes: "", disposition: "SCRAP" },
-  { original: "SIMON XT", processAs: "80-632-3N-XT", description: "ADT KEYPAD", notes: "", disposition: "SCRAP" },
+  { original: "SA6150AS-VE", processAs: "6150ADT", description: "ADT KEYPAD", notes: "", disposition: "" },
+  { original: "SA6150RF-2", processAs: "6150RF", description: "HONEYWELL UL KEYPAD", notes: "", disposition: "" },
+  { original: "SA6160PL2", processAs: "6160PL2", description: "ADT KEYPAD", notes: "", disposition: "" },
+  { original: "SA6160RF", processAs: "6160RFPL2", description: "ADT KEYPAD", notes: "", disposition: "" },
+  { original: "SA6160V-4", processAs: "6160VADT", description: "ADT KEYPAD", notes: "", disposition: "" },
+  { original: "SA6160VPADT", processAs: "6160VPADT", description: "ADT (SAFEPASS) KEYPAD", notes: "", disposition: "" },
+  { original: "SIMON XT", processAs: "80-632-3N-XT", description: "ADT KEYPAD", notes: "", disposition: "" },
   { original: "875936B", processAs: "875936B", description: "ADT SECURITY SERVICES", notes: "", disposition: "" },
-  
-  // Camera mappings (some with unknown originals marked as ????)
   { original: "????", processAs: "A-CB7D36PI", description: "OLD MINI CAMERA - ADT CAMERA HEAD", notes: "", disposition: "" },
   { original: "????", processAs: "A-CB7D60PI", description: "OLD MINI CAMERA - ADT CAMERA HEAD", notes: "", disposition: "" },
   { original: "A-CB7T2812PI", processAs: "A-CB7T2812PI", description: "OLD ADT - SMALL HEAD CAMERA W/STAND", notes: "", disposition: "" },
   { original: "????", processAs: "A-CBVD36PI", description: "OLD MINI CAMERA - ADT CAMERA HEAD", notes: "", disposition: "" },
-  
-  // ADC series
-  { original: "ADC-SVR122", processAs: "ADC-SVR122-2T", description: "2TB Hard Drive", notes: "", disposition: "SCRAP" },
-  { original: "ADC-V724", processAs: "ADC-V724X", description: "OLD ADT CAMERA HEAD", notes: "", disposition: "SCRAP" },
-  { original: "ADC-VDB105X", processAs: "ADC-VDB105", description: "777TS032", notes: "", disposition: "SCRAP" },
+  { original: "ADC-SVR122", processAs: "ADC-SVR122-2T", description: "2TB Hard Drive", notes: "", disposition: "" },
+  { original: "ADC-V724", processAs: "ADC-V724X", description: "OLD ADT CAMERA HEAD", notes: "", disposition: "" },
+  { original: "ADC-VDB105X", processAs: "ADC-VDB105", description: "777TS032", notes: "", disposition: "" },
   { original: "ADC-VDB770", processAs: "ADC-VDB770", description: "ALARM.COM CAMERA", notes: "", disposition: "" },
-  
-  // AMADT series
   { original: "AMADT2X16LTE-3", processAs: "ADT2X16AIO-1", description: "ADT KEYPAD", notes: "", disposition: "" },
   { original: "ADT5AIO-1", processAs: "ADT5AIO-2", description: "NEED TO SET UP -1", notes: "", disposition: "" },
   { original: "AMADT7AIO-1", processAs: "ADT7AIO-1", description: "ADT KEYPAD", notes: "", disposition: "" },
   { original: "AMADT7AIO-3", processAs: "ADT7AIO-3", description: "ADT KEYPAD", notes: "", disposition: "" },
   { original: "AMADT7AIO-5", processAs: "ADT7AIO-5", description: "ADT KEYPAD", notes: "", disposition: "" },
-  
-  // Hikvision cameras
   { original: "DS-2CD2123G0", processAs: "DS-2CD2123G0-I 2.8mm", description: "HIKVISION camera", notes: "", disposition: "" },
   { original: "DS-2CD2143G2-IU", processAs: "DS-2CD2143G0-I 2.8MM", description: "HIKVISION", notes: "", disposition: "" },
   { original: "DS-7604NI-E1/4P-2T", processAs: "DS-7604NI-E1/4P-2TB", description: "VIDEO", notes: "", disposition: "" },
   { original: "DS-7604NI-Q1/4P", processAs: "DS-7604NI-Q1/4P-2TB", description: "VIDEO", notes: "", disposition: "" },
   { original: "DS-7608NI-Q2/8P-2TB", processAs: "DS-7608NI-Q2/8P-2TB", description: "VIDEO", notes: "", disposition: "" },
   { original: "DS-7608NI-Q2/8P-4TB", processAs: "DS-7608NI-Q2/8P-4TB", description: "VIDEO", notes: "", disposition: "" },
-  
-  // Sensors and misc
   { original: "EV-DW4927SS", processAs: "EV-DW4927SS", description: "SENSOR", notes: "", disposition: "" },
   { original: "EX3700", processAs: "EX3700-100NAS", description: "NETGEAR EXTENDER", notes: "", disposition: "" },
   { original: "EX6120", processAs: "EX6120-1ADNAS", description: "NETGEAR WIFI EXTENDER AC1200", notes: "", disposition: "" },
-  
-  // Google devices (identified by "Google sign")
   { original: "Google sign", processAs: "GA00426-US", description: "NEST HUB MAX - LIGHT GRAY BACK W/STAND", notes: "", disposition: "" },
   { original: "H2D", processAs: "GA00595-US", description: "Google Nest Wifi Router", notes: "", disposition: "" },
   { original: "Google sign", processAs: "GA00638-US", description: "GOOGLE NEST MINI - CHALK", notes: "", disposition: "" },
-  { original: "Google sign", processAs: "GA00639-US", description: "NEST HUB MAX (DARK GRAY)", notes: "", disposition: "" },
+  { original: "Google sign", processAs: "GA00639-US", description: "NEST HUB MAX (DARK GRAY", notes: "", disposition: "" },
   { original: "Google sign", processAs: "GA00781-US", description: "GOOGLE NEST DOORBELL MINI - CHARCOAL", notes: "", disposition: "" },
   { original: "Google sign", processAs: "GA01317-US", description: "GOOGLE NEST CAM G3AL9", notes: "", disposition: "" },
   { original: "Google sign", processAs: "GA01318-US", description: "Google Nest Doorbell (snow)", notes: "", disposition: "" },
@@ -77,38 +59,24 @@ export const partNumberMappings = [
   { original: "Google sign", processAs: "GA02076-US", description: "Google Nest Doorbell (Ash, US)", notes: "", disposition: "" },
   { original: "Google sign", processAs: "GA02411-US", description: "Google Nest w/ Flood lights", notes: "", disposition: "" },
   { original: "Google sign", processAs: "GA02767-US", description: "GOOGLE NEST DOORBELL MINI (COTTON WHITE)", notes: "", disposition: "" },
-  
-  // Netgear devices
   { original: "GS305Pv2", processAs: "GS305-300PAS", description: "NETGEAR 5-PORT ETHERNET UNMANAGED", notes: "", disposition: "" },
   { original: "HSS301", processAs: "HSS301-2ADNAS", description: "ADT NETGEAR", notes: "", disposition: "" },
   { original: "IHUB-3001B-ADT", processAs: "IHUB-3001B-ADT", description: "ROUTER", notes: "", disposition: "" },
-  
-  // IP Cameras
   { original: "IP CAMERA", processAs: "IPC-HDBW4231E-ADT36", description: "BUBBLE CAMERA", notes: "", disposition: "" },
   { original: "IPC-HFW4120E-ADT36", processAs: "IPC-HFW4120E-ADT36", description: "IP CAMERA", notes: "", disposition: "" },
-  
-  // IQ Panels
   { original: "IQPANEL4", processAs: "IQP4001", description: "OLSYS KEYPAD", notes: "", disposition: "" },
   { original: "IQPANEL4", processAs: "IQP4001BLK", description: "OLSYS KEYPAD - BLACK KEYPAD", notes: "", disposition: "" },
-  
-  // Amazon/Bosch sensors
   { original: "AMAZON SIGN", processAs: "ISC-BDL2-WP12G", description: "Amazon Sensor", notes: "", disposition: "" },
   { original: "Medium Size Amazon Sensor", processAs: "ISC-BDL2-WP12G", description: "bosch sensor", notes: "", disposition: "" },
-  
-  // Lynx series
   { original: "LYNXPLUS2", processAs: "L3000", description: "ADT KEYPAD", notes: "", disposition: "" },
   { original: "LE2077-NA", processAs: "LE2077-ADTAT", description: "ADT KEYPAD", notes: "", disposition: "" },
   { original: "LE4000RF", processAs: "LE4000RF-ADTAT", description: "ADT WIRELESS COMMUNICATOR", notes: "", disposition: "" },
   { original: "LTEL3A", processAs: "LTEL3A-ADT", description: "MEMORY BOARD", notes: "", disposition: "" },
   { original: "LYNXTOUCH2/L5000", processAs: "LTEL5A-ADT", description: "HONEYWELL KEYPAD - ON DISPLAY RACK", notes: "", disposition: "" },
   { original: "ADEMCO LYNXR-I", processAs: "LYNXR", description: "OLD ADT KEYPAD", notes: "", disposition: "" },
-  
-  // Miscellaneous devices
   { original: "MR70", processAs: "MR70S-1ADNAS", description: "NIGHTHAWK MESH WIFI 6 ROUTER", notes: "", disposition: "" },
   { original: "821LMB", processAs: "MYQ-821LMB", description: "My Q Garage Bundle box", notes: "", disposition: "" },
   { original: "NV412A-ADT", processAs: "NV412A-ADT", description: "ETHERNET BLACK BOX", notes: "", disposition: "" },
-  
-  // Other categories
   { original: "51000-601", processAs: "OTHER C02 DETECTOR", description: "DETECTOR", notes: "", disposition: "" },
   { original: "ADC-V515", processAs: "OTHER CAMERA", description: "ADT OLDER CAMERA HEAD", notes: "", disposition: "" },
   { original: "IPC216A (2.8MM)", processAs: "OTHER CAMERA", description: "BUBBLE CAMERA", notes: "", disposition: "" },
@@ -121,15 +89,11 @@ export const partNumberMappings = [
   { original: "YRD624-ZW3", processAs: "OTHER SMART LOCK", description: "SMART LOCK COMBO", notes: "", disposition: "" },
   { original: "2GIG-SMKT8-345", processAs: "OTHER SMOKE DETECTOR", description: "DETECTOR", notes: "", disposition: "" },
   { original: "SA5881CC430H", processAs: "OTHER-RECEIVER", description: "RECTANGLE WHITE BOX W/ ANTENNAS", notes: "", disposition: "" },
-  
-  // Additional devices
   { original: "PGZNG1", processAs: "PGZNG1-1ADNAS", description: "ROUTER", notes: "", disposition: "" },
-  { original: "WHITE FLAT ADT MOUNT", processAs: "PROWLTOUCH", description: "PUT ON DISPLAY RACK", notes: "", disposition: "SCRAP" },
+  { original: "WHITE FLAT ADT MOUNT", processAs: "PROWLTOUCH", description: "PUT ON DISPLAY RACK", notes: "", disposition: "" },
   { original: "QC3ADTPKC", processAs: "QC3ADT", description: "ADT KEYPAD", notes: "", disposition: "" },
   { original: "ANO-L7012R", processAs: "QNO-8010R", description: "CAMERA", notes: "", disposition: "" },
   { original: "RE524XC", processAs: "RE524X", description: "WIRELESS TRANSLATOR", notes: "", disposition: "" },
-  
-  // S40 series
   { original: "S40LR0-01-GR", processAs: "S40LR0-01-GR", description: "S40 Base Station V4 Lite, Graphite", notes: "", disposition: "" },
   { original: "S40LR0-01-PG-R", processAs: "S40LR0-01-PG-R", description: "Smart Home Hub - Pearl Gray Refurbished", notes: "", disposition: "" },
   { original: "S40LR1-01-CW", processAs: "S40LR1-01-CW", description: "Blue Lite Smart Home Hub - Chalk White", notes: "", disposition: "" },
@@ -137,50 +101,40 @@ export const partNumberMappings = [
   { original: "S40LR1-01-GR-R", processAs: "S40LR1-01-GR-R", description: "Blue Lite Smart Home Hub - Graphite-Refurbished", notes: "", disposition: "" },
   { original: "S40LR1-01-PG", processAs: "S40LR1-01-PG", description: "Blue Lite Smart Home Hub - Pearl Gray-Refurbished", notes: "", disposition: "" },
   { original: "S501R0-01", processAs: "S501R0-01-WH", description: "ADT BASE", notes: "", disposition: "" },
-  
-  // SA series sensors
   { original: "SAH5R0-29", processAs: "SAH5R0-29-WH", description: "INDOOR SIREN", notes: "", disposition: "" },
   { original: "SCW9057(G)-433", processAs: "SCW457HADT", description: "ADT KEYPAD", notes: "", disposition: "" },
   { original: "WA3000-9.13", processAs: "SFP3000PCB", description: "MEMORY BOARD", notes: "", disposition: "" },
-  
-  // SIX series
   { original: "SASIXC2WA", processAs: "SIXC2WA", description: "WIRELESS CONVERTER BOX", notes: "", disposition: "" },
   { original: "SASIXCTA", processAs: "SIXCTA", description: "SENSOR", notes: "", disposition: "" },
   { original: "SASIXFLOODA", processAs: "SIXFLOODA", description: "SENSOR", notes: "", disposition: "" },
   { original: "SIXRPTR", processAs: "SIXRPTRA", description: "REPEATER (SQUARE BOX)", notes: "", disposition: "" },
   { original: "SIXRPTRA REPEATER", processAs: "SIXRPTRA", description: "WIRELESS REPEATER RECTANGLE BOX", notes: "", disposition: "" },
   { original: "SASIXSHOCK2", processAs: "SIXSHOCK2A", description: "SENSOR", notes: "", disposition: "" },
-  
-  // SS series sensors
   { original: "SSCO5R0-29", processAs: "SSCO5R0-29-WH", description: "carbon monoxide", notes: "", disposition: "" },
-  { original: "SSH5R0-29", processAs: "SSH5R0-29-WH", description: "SENSOR", notes: "", disposition: "HOLD" },
-  { original: "SSHX5R0-29", processAs: "SSHX5R0-29-WH", description: "SENSOR", notes: "", disposition: "HOLD" },
+  { original: "SSH5R0-29", processAs: "SSH5R0-29-WH", description: "SENSOR", notes: "", disposition: "" },
+  { original: "SSHX5R0-29", processAs: "SSHX5R0-29-WH", description: "SENSOR", notes: "", disposition: "" },
   { original: "SSM5R0-29", processAs: "SSM5R0-29-WH", description: "ADT MOTION SENSOR", notes: "", disposition: "" },
   { original: "SSS5R0-29", processAs: "SSS5R0-29-WH", description: "smoke detector", notes: "", disposition: "" },
   { original: "SSSX5R0-29", processAs: "SSSX5R0-29-WH", description: "carbon monoxide", notes: "", disposition: "" },
   { original: "STS5R0-01", processAs: "STS5R0-01-WH-PRO", description: "KEYPAD", notes: "", disposition: "" },
   { original: "SW-SCM01N", processAs: "SW-SCM01N", description: "NOT SET UP IN THE SYSTEM", notes: "", disposition: "" },
-  
-  // Miscellaneous final entries
   { original: "Google sign", processAs: "T3007ES", description: "NEST LEARNING THERMOSTAT", notes: "", disposition: "" },
   { original: "TP-LINK", processAs: "TL-PA7017KIT", description: "ADAPTERS", notes: "", disposition: "" },
   { original: "TSSC SERIES - TSSC-KP", processAs: "TSSKP310021U", description: "ADT KEYPAD", notes: "", disposition: "" },
   { original: "TSSC SERIES - TSSCBASE", processAs: "TSSKP311011U", description: "ADT KEYPAD - LONG SQUARE SHAPE", notes: "", disposition: "" },
-  { original: "SECURITY UL MODEL 89X0", processAs: "WLS922L-433", description: "SENSOR", notes: "", disposition: "CR PROGRAM" },
+  { original: "SECURITY UL MODEL 89X0", processAs: "WLS922L-433", description: "SENSOR", notes: "", disposition: "" },
   { original: "AMWLTP100", processAs: "WLTP100", description: "SMALL KEYPAD", notes: "", disposition: "" },
   { original: "WN3000RPHv3", processAs: "WN3000RPH-3ADPAS", description: "NETGEAR ADAPTER Wifi Ext", notes: "", disposition: "" },
   { original: "W5500-433-ADT", processAs: "WT5500PADTHE", description: "ADT KEYPAD", notes: "", disposition: "" },
   { original: "WTK5504-433", processAs: "WTK5504ADT", description: "SMALL KEYPAD", notes: "", disposition: "" },
-  
-  // Yale smart locks
   { original: "YRD226", processAs: "YRD226-ZW2-619", description: "YALE SMART DOOR LOCK", notes: "", disposition: "" },
   { original: "YRD410-ZW3", processAs: "YRD410ZW3-619", description: "SMART LOCK COMBO", notes: "", disposition: "" },
   { original: "YRD410ZW3", processAs: "YRD410ZW3-619", description: "YALE SMART DOOR LOCK", notes: "", disposition: "" },
   
-  // Recently added items (ADDED 09/10 and 09/11)
+  // Recently added entries
   { original: "RFK5501ENG", processAs: "PK5501", description: "DSC KEYPAD", notes: "ADDED 09/10", disposition: "" },
   { original: "IQPANEL2", processAs: "QS9201-1208-840", description: "KEYPAD", notes: "ADDED 09/10", disposition: "" },
-  { original: "HONDWA01", processAs: "HONDWA01", description: "SMALL SENSORS", notes: "ADDED 09/10", disposition: "" },
+  { original: "HONDWA01", processAs: "HONDWA01", description: "SMALL SENDSORS", notes: "ADDED 09/10", disposition: "" },
   { original: "ECI-T24F2", processAs: "ECI-T24F2", description: "OTHER CAMERA", notes: "ADDED 09/10", disposition: "" },
   { original: "OC845", processAs: "OC845", description: "CAMERA", notes: "ADDED 09/10", disposition: "" },
   { original: "WTS700", processAs: "WTS700", description: "KEYPAD", notes: "ADDED 09/10", disposition: "" },
