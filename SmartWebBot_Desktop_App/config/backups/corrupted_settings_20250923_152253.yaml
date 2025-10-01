@@ -1,0 +1,33 @@
+plus_integration:
+  base_url: https://plus.reconext.com
+  username: test
+  password: bombo
+  api_key: ''
+  timeout: 30
+  retry_attempts: 3
+  enabled: true
+rma_processing:
+  auto_processing: true
+  batch_size: 100
+  tracking_validation: true
+  label_generation: true
+  quality_checks: true
+  max_processing_time: 30
+  error_retry_count: 3
+notifications:
+  email_notifications: true
+  sms_notifications: false
+  push_notifications: true
+  email_address: ''
+  phone_number: ''
+  notification_level: !!python/object/apply:smartwebbot.settings.models.NotificationLevel
+  - important
+performance:
+  enable_caching: true
+  enable_logging: true
+  log_level: !!python/object/apply:smartwebbot.settings.models.LogLevel
+  - info
+  max_concurrent_tasks: 5
+  task_timeout: 300
+  cache_size: 100
+  memory_threshold: 80

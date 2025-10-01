@@ -1,0 +1,30 @@
+# AI Model Configuration
+# Switch between models based on your needs
+
+# Available Models:
+models:
+  fast:
+    name: "gemma2:2b"
+    description: "Faster responses (~2-3x speed), good for quick tasks"
+    size: "1.6GB"
+    speed: "fast"
+    accuracy: "good"
+    
+  accurate:
+    name: "gemma3:4b" 
+    description: "More accurate responses, better for complex tasks"
+    size: "3.3GB"
+    speed: "slower"
+    accuracy: "excellent"
+
+# Current Model Selection
+current:
+  active_model: "fast"  # Options: "fast" or "accurate"
+  
+  # You can also override by setting exact model name:
+  # override_model: "gemma2:2b"
+
+# Usage:
+# - Use "fast" for quick testing and simple commands
+# - Use "accurate" for complex web automation workflows
+# - Change "active_model" above and restart server to switch

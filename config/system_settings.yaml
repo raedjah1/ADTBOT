@@ -4,7 +4,7 @@ plus_integration:
   password: Microwave18.
   api_key: ''
   timeout: 30
-  retry_attempts: 3
+  retry_attempts: 999
   enabled: true
 rma_processing:
   auto_processing: true
@@ -13,7 +13,7 @@ rma_processing:
   label_generation: true
   quality_checks: true
   max_processing_time: 30
-  error_retry_count: 3
+  error_retry_count: 999
 notifications:
   email_notifications: true
   sms_notifications: false

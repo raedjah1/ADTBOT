@@ -61,7 +61,7 @@ class RmaProcessingSettings(BaseModel):
     label_generation: bool = Field(default=True, description="Enable automatic label generation")
     quality_checks: bool = Field(default=True, description="Enable quality checks")
     max_processing_time: int = Field(default=30, ge=1, le=120, description="Max processing time in minutes")
-    error_retry_count: int = Field(default=3, ge=0, le=10, description="Number of retries on error")
+    error_retry_count: int = Field(default=999, ge=0, le=9999, description="Number of retries on error (999=unlimited)")
     
     class Config:
         json_schema_extra = {

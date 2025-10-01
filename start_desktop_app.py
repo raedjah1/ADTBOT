@@ -108,7 +108,7 @@ def start_frontend():
 
 def main():
     """Main launcher function."""
-    print("🤖 SmartWebBot Desktop App Launcher")
+    print("SmartWebBot Desktop App Launcher")
     print("=" * 50)
     
     # Check Node.js

@@ -1,0 +1,52 @@
+╔════════════════════════════════════════╗
+║  SmartWebBot - Quick Start Guide     ║
+╚════════════════════════════════════════╝
+
+STEP 1: Install Prerequisites
+==============================
+
+Before installing SmartWebBot, install these:
+
+1. Python 3.8+
+   → https://www.python.org/downloads/
+   ⚠ Check "Add Python to PATH" during install!
+
+2. Node.js LTS
+   → https://nodejs.org/
+   ⚠ Use default installation settings
+
+STEP 2: Install SmartWebBot
+============================
+
+1. Extract the ZIP file
+2. Double-click: INSTALL.bat
+3. Wait for installation to finish
+
+STEP 3: Launch SmartWebBot
+===========================
+
+→ Double-click the "SmartWebBot" shortcut on your desktop
+
+The app will:
+- Start the backend server
+- Start the frontend
+- Open your browser automatically
+
+STEP 4: Start Automating!
+==========================
+
+Go to: http://localhost:3000
+
+Try these features:
+→ Dashboard: See system status
+→ Task Builder: Create automation tasks
+→ AI Assistant: Get help from AI
+→ Live Monitor: Watch bot in action
+
+════════════════════════════════════════
+
+Need Help?
+- API Docs: http://localhost:8000/docs
+- Check README.txt for details
+
+════════════════════════════════════════
